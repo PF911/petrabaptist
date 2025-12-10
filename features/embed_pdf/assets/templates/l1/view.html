@@ -1,0 +1,35 @@
+<ion-view sb-page-background
+          class="module-embedpdf embedpdf-view">
+
+    <ion-nav-title>{{ pdf.title }}</ion-nav-title>
+
+    <ion-nav-buttons side="secondary">
+        <button ng-if="pdf.allow_download"
+                ng-click="download()"
+                class="button button-clear header-item">
+            <i class="icon ion-ios-cloud-download-outline"></i>
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content scroll="false"
+                 class="has-footer-fixed">
+        <div class="text-center"
+             style="margin-top: 20px;"
+             ng-if="isLoading">
+            <ion-spinner icon="android"
+                         class="spinner-custom"></ion-spinner>
+            <p>{{ ::'Loading...' | translate:'embed_pdf' }}</p>
+        </div>
+
+        <div id="viewerContainer"></div>
+    </ion-content>
+
+    <ion-footer-bar ng-if="!isLoading"
+                    class="bar bar-footer">
+        <button ng-repeat="button in opts.buttons"
+                ng-click="button.action()"
+                ng-bind-html="button.label | trusted_html"
+                ng-class="button.class">
+        </button>
+    </ion-footer-bar>
+</ion-view>

@@ -1,0 +1,64 @@
+<ion-view sb-page-background
+          class="cabride cabride-view cabride-my-rides">
+    <ion-nav-title>{{ pageTitle }}</ion-nav-title>
+
+    <ion-nav-buttons side="secondary">
+        <button ng-click="refresh()"
+                class="button button-clear header-item">
+            <i class="icon ion-sb-refresh"></i>
+        </button>
+
+        <button ng-if="!isTaxiLayout()"
+                ng-click="openMenu()"
+                class="button button-clear header-item cabride toggle-taxi-menu">
+            <i class="icon ion-sb-more"></i>
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content class="has-footer">
+        <div ng-if="isLoading"
+             class="loader">
+            <ion-spinner class="spinner-custom"></ion-spinner>
+        </div>
+
+        <div ng-if="!isLoading">
+            <div ng-show="filtered.length == 0"
+                 class="list">
+                <div class="item item-custom text-center">
+                    <span ng-if="filterName == 'inprogress'">{{ ::"You have no rides in progress" | translate:"cabride" }}</span>
+                    <span ng-if="filterName == 'torate'">{{ ::"You have no rides to rate" | translate:"cabride" }}</span>
+                    <span ng-if="filterName == 'archived'">{{ ::"You have no rides archived" | translate:"cabride" }}</span>
+                </div>
+            </div>
+
+            <div ng-if="filtered.length > 0"
+                 class="list">
+                <client-request request="request"
+                                ng-repeat="request in filtered"></client-request>
+            </div>
+        </div>
+    </ion-content>
+
+    <div class="tabs tabs-icon-top">
+        <a ng-click="statusFilter('inprogress')"
+           ng-class="{'cr-tab-active': filterName == 'inprogress'}"
+           class="tab-item">
+            <i class="icon ion-clock"></i>
+            {{ ::"In progress" | translate:"cabride" }}
+        </a>
+        <a ng-click="statusFilter('torate')"
+           ng-class="{'cr-tab-active': filterName == 'torate'}"
+           class="tab-item">
+            <i class="icon ion-android-star-outline"></i>
+            {{ ::"To rate" | translate:"cabride" }}
+            <span ng-if="toRate.length > 0"
+                  class="badge badge-positive badge-positive-custom">{{ toRate.length }}</span>
+        </a>
+        <a ng-click="statusFilter('archived')"
+           ng-class="{'cr-tab-active': filterName == 'archived'}"
+           class="tab-item">
+            <i class="icon ion-archive"></i>
+            {{ ::"Archived" | translate:"cabride" }}
+        </a>
+    </div>
+</ion-view>

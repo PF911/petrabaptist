@@ -1,0 +1,87 @@
+<ion-view class="community-view commu-signup">
+    <ion-nav-title>
+        <div ng-bind-html="page_title | trusted_html"></div>
+    </ion-nav-title> 
+    <ion-content>
+        <div class="list head-anim">
+            <div class="head-bg">
+                <lottie-player id="particles" src="https://assets6.lottiefiles.com/private_files/lf30_ln2embei.json"  background="transparent"  speed="1"   loop  autoplay></lottie-player>
+            </div>
+            <div class="head-msg">
+                <lottie-player id="tick-mark" src="https://assets3.lottiefiles.com/packages/lf20_y2hxPc.json"  background="transparent"  speed="1"   loop  autoplay></lottie-player>
+                <div class="msg-box text-center">
+                    <h4 ng-if="!label_settings.lang_success_title">{{ ::"awesome"| translate:"community" }}</h4>
+                    <h4 ng-if="label_settings.lang_success_title">{{label_settings.lang_success_title}}</h4>
+                    <h6 ng-if="!label_settings.lang_success_msg">{{ ::"Your profile created successfully"| translate:"community" }} </h6>
+                    <h6 ng-if="label_settings.lang_success_msg">{{ label_settings.lang_success_msg }}</h6>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="card my-profile-card sign-up success-card">
+            <div class="row no-padding">
+                <div class="my-pic-box">
+                    <div class="my-img" style="background-image: url('{{profileImagePath()}}')"></div>
+                </div>
+                <div class="user-welcome">
+                    <span>{{ ::"welcome"| translate:"community" }}</span>
+                    <h4>{{customer.firstname}} {{customer.lastname}}</h4>
+                </div>
+            </div>
+            <div class = "list points">
+                <label class = "item no-brd">
+                    <span class="titile"><i class="icon ion-checkmark-circled"></i> 
+                        <i ng-if="!label_settings.lang_be_yourself_title">{{ ::"Be yourself."| translate:"community" }}</i>
+                        <i ng-if="label_settings.lang_be_yourself_title">{{label_settings.lang_be_yourself_title}}</i>
+                    </span>
+                    <span class="value-txt">
+                        <i ng-if="!label_settings.lang_be_yourself_desc">{{ ::"Make sure your photos, age and bio are true to who you are."| translate:"community" }}</i>
+                        <i ng-if="label_settings.lang_be_yourself_desc">{{label_settings.lang_be_yourself_desc}}</i>
+                    </span>  
+                </label>
+                <label class = "item no-brd">
+                    <span class="titile"><i class="icon ion-checkmark-circled"></i> 
+                        <i ng-if="!label_settings.lang_stay_safe_title">{{ ::"Stay safe."| translate:"community" }}</i>
+                        <i ng-if="label_settings.lang_stay_safe_title">{{label_settings.lang_stay_safe_title}}</i>
+                    </span>
+                    <span class="value-txt">
+                        <i ng-if="!label_settings.lang_stay_safe_desc">{{ ::"Don't be too quick to give out personal information."| translate:"community" }}</i>
+                        <i ng-if="label_settings.lang_stay_safe_desc">{{label_settings.lang_stay_safe_desc}}</i>
+                    </span>  
+                </label> 
+                <label class = "item no-brd">
+                    <span class="titile"><i class="icon ion-checkmark-circled"></i> 
+                        <i ng-if="!label_settings.lang_play_cool_title">{{ ::"Play it cool."| translate:"community" }}</i>
+                        <i ng-if="label_settings.lang_play_cool_title">{{label_settings.lang_play_cool_title}}</i>
+                    </span>
+                    <span class="value-txt">
+                        <i ng-if="!label_settings.lang_play_cool_desc">{{ ::"Respect others and treat them as you would like to be treated."| translate:"community" }}</i>
+                        <i ng-if="label_settings.lang_play_cool_desc">{{label_settings.lang_play_cool_desc}}</i>
+                    </span>  
+                </label>
+                <label class = "item no-brd">
+                    <span class="titile"><i class="icon ion-checkmark-circled"></i> 
+                        <i ng-if="!label_settings.lang_be_proactive_title">{{ ::"Be proactive."| translate:"community" }}</i>
+                        <i ng-if="label_settings.lang_be_proactive_title">{{label_settings.lang_be_proactive_title}}</i>
+                    </span>
+                    <span class="value-txt">
+                        <i ng-if="!label_settings.lang_be_proactive_desc">{{ ::"Always report bad behavior."| translate:"community" }}</i>
+                        <i ng-if="label_settings.lang_be_proactive_desc">{{label_settings.lang_be_proactive_desc}}</i>
+                    </span>  
+                </label> 
+
+
+
+
+                <button class="button button-full" ng-click="showMatch()">
+                    <i ng-if="!label_settings.lang_find_match">{{ ::"Find My Match"| translate:"community" }}</i>
+                    <i ng-if="label_settings.lang_find_match">{{label_settings.lang_find_match}}</i>
+                </button>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

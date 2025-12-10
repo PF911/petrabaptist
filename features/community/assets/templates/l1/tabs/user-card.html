@@ -1,0 +1,63 @@
+
+<div id="swipe_effect_{{$index}}" style="display: none;">
+    <lottie-player src="./features/community/assets/templates/images/lottie/liked.json"  background="transparent"  speed="1" loop autoplay></lottie-player>  
+</div>
+<div class="img-box">
+    <div class="fav-btn">
+        <i class="icon-fav" ng-if='!matching_profile.myFavourite' ng-click="markFavourite($index)"></i> 
+        <lottie-player  ng-if='matching_profile.myFavourite' class="fav-btn-svg" ng-click="markFavourite($index)" src="./features/community/assets/templates/images/lottie/favorite.json"  background="transparent"  speed="1"  loop autoplay></lottie-player>
+    </div>
+
+    <div class = "profile-default" ng-if="!matching_profile.picture && !matching_profile.images.length" style="background-image: url('./features/community/assets/templates/images/profile-placeholder.svg')">
+        <span>
+            <i ng-if="!label_settings.lang_pic_not_uploaded">{{ ::"Profile pic not uploaded"| translate:"community" }}</i>
+            <i ng-if="label_settings.lang_pic_not_uploaded">{{label_settings.lang_pic_not_uploaded}}</i>
+        </span>  
+    </div>
+    <div class = "user-full-img"  ng-if='matching_profile.picture' style="background-image: url('{{ profileImagePath(matching_profile.picture)}}')"></div>
+    <!-- If profile pic not found then show image type field data (from metadata) if any-->
+    <div class = "user-full-img"  ng-if='!matching_profile.picture && matching_profile.images[0]' style="background-image: url('{{ matching_profile.images[0]}}')"></div>
+
+</div> 
+<div class="info-box">
+    <div class="info-container">
+        <div class="row no-padding">
+            <div class="col no-padding">
+                <span class="match-chip"><strong>{{matching_profile.match_percentage}}%</strong> 
+                    <i ng-if="!label_settings.lang_matched">{{ ::"Matched"| translate:"community" }}</i>
+                    <i ng-if="label_settings.lang_matched">{{label_settings.lang_matched}}</i>
+                </span>  
+            </div> 
+        </div> 
+        <div class="row padd-hori-10">
+            <div class="col user-name">
+                <h2>{{ matching_profile.name}} </h2>
+                <span class="age"><i ng-if="matching_profile.age">{{matching_profile.age}}</i> <i ng-if="matching_profile.gender">| {{matching_profile.gender}}</i></span>  
+            </div> 
+        </div> 
+        <div class="row padd-hori-10">
+            <div class="col">
+                <p class="m-0 pro-desc" ng-show="matching_profile.desc">{{ matching_profile.desc}}</p>
+            </div> 
+        </div> 
+        <div class="row padd-hori-10">
+            <div class="col col-70 col-center">
+                <span class="d-block" ng-show="matching_profile.distance"><i class="icon ion-location"></i> {{ matching_profile.distance}} {{ matching_profile.location_short}}</span>
+                <span class="d-block"><i class="icon ion-ios-heart"></i> {{ matching_profile.total_likes}} {{ ::"User like this profile"| translate:"community" }}</span>
+            </div> 
+            <div class="col col-30 text-center col-center">
+                <button class="button button-small button-full btn-view-profile" ng-click='viewProfile($index)'>
+                    <i ng-if="!label_settings.lang_view_profile">{{ ::"View Profile"| translate:"community" }}</i>
+                    <i ng-if="label_settings.lang_view_profile">{{label_settings.lang_view_profile}}</i>
+                </button>
+            </div> 
+        </div>
+
+        <community-profile-actions></community-profile-actions>
+    </div>
+</div>  
+
+
+
+
+

@@ -1,0 +1,41 @@
+<ion-view sb-page-background cache-view="false">
+    <ion-nav-title>{{ page_title}}</ion-nav-title>
+    <ion-content scroll="false" class="maps">
+
+        <div class="loader" ng-show="is_loading">
+            <ion-spinner class="spinner-custom"></ion-spinner>
+        </div>
+        <div style="width: 100%;">
+            <div class="text-center col-center" style="width: 20%; margin: 0 auto;">
+                <div class="qr-scanner1">
+                    <a ng-click="getScanProductQr()">
+                        <i class="icon ion-qr-scanner"></i>
+                    </a>
+                </div>
+            </div>
+            <div style="width: 80%; margin: 0 auto;">
+                <label class="item item-input" style="width:70%; float: left; padding-top: 6px; padding-bottom: 6px;">
+                    <input type="text"
+                           id="search"
+                           name="search"
+                           ng-model="searchText"
+                           placeholder="{{ ::'Search'| translate:'commerce_pro' }}" />
+
+
+                </label>
+                <button class="button button-positive button-positive-custom" style="width: 30%;"
+                        ng-click="mapSearch(searchText)" style="min-height: 46px;">{{ ::'Search'| translate:'commerce_pro' }}
+                </button>
+            </div>
+        </div>
+
+        <div id="nearby-store-google-maps"
+             class="map-canvas"
+             stores-nearby-maps
+             map="map"
+             config="map_config"
+             ng-if="map_config"
+             data-tap-disabled="true"></div>
+
+    </ion-content>
+</ion-view>

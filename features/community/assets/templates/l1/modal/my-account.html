@@ -1,0 +1,93 @@
+<ion-modal-view sb-page-background
+                ng-controller="CommunityModalController"
+                class="community-view commu-signup">
+
+    <ion-header-bar class="bar-custom">
+        <div class="buttons">
+            <button class="button button-clear"
+                    ng-click="close()">
+                <i class="icon ion-android-arrow-back"></i>
+            </button>
+        </div>
+        <h1 class="title">
+
+        </h1>
+
+    </ion-header-bar>
+
+    <ion-content class="has-footer-fixed">
+        <div class="card my-profile-card sign-up">
+            <div class="row no-padding">
+                <div class="my-pic-box" ng-click="editProfilePicture()">
+                    <div class="my-img" ng-show='user.image' style="background-image: url('{{user.image}}')"></div>
+                    <img src="{{ temp_image}}" ng-if='temp_image' />
+                </div>
+            </div>
+            <div class = "list">
+                <label class = "item item-input item-select" ng-if="myAccount.settings.extra_civility_required">
+                    <span class="input-label">{{ ::'Civility'| translate:'customer' }}</span>
+                    <select ng-model="user.civility">
+                        <option value="">{{ ::'Select'| translate:'customer' }}</option>
+                        <option value="mr">{{ ::'Mr'| translate:'customer' }}</option>
+                        <option value="ms">{{ ::'Ms'| translate:'customer' }}</option>
+                    </select>
+
+                </label>
+                <label class = "item item-input item-floating-label">
+                    <span class="for-place-holder input-label">{{ ::"First name"| translate:"community" }}</span>
+                    <input type = "text" placeholder = '{{ ::"First name"| translate:"community" }}' ng-model="user.firstname" />
+                </label>
+
+                <label class = "item item-input item-floating-label">
+                    <span class="for-place-holder input-label">{{ ::"Last Name"| translate:"community" }}</span>
+                    <input type = "text" placeholder = '{{ ::"Last Name"| translate:"community" }}' ng-model="user.lastname" />
+                </label>
+                <label class = "item item-input item-floating-label">
+                    <span class="for-place-holder input-label">{{ ::"Email"| translate:"community" }}</span>
+                    <input type = "email" placeholder = '{{ ::"Email"| translate:"community" }}' ng-model="user.email" />
+                </label>
+                <label ng-if="myAccount.settings.extra_birthdate_required"
+                       class="item item-input item-floating-label"
+                       sb-datetime-picker
+                       headers="true"
+                       format="'DD/MM/YYYY'"
+                       title="i18n.localBirthdateTitle"
+                       model="user.birthdate">
+                    <div class="input-label">
+                        {{ ::'Birthdate'| translate:'customer' }}
+                    </div>
+                    <input type="text"
+                           class="text-right"
+                           style="cursor: pointer !important;"
+                           ng-model="user.birthdate"
+                           readonly="readonly" />
+                </label>
+                <label class = "item item-input item-floating-label" ng-if="myAccount.settings.extra_nickname_required">
+                    <span class="for-place-holder input-label"> {{ ::'Nickname'| translate:'customer' }}</span>
+                    <input type = "text" placeholder = "{{ ::'Nickname'| translate:'customer' }}" ng-model="user.nickname" />
+                </label>
+                <label class = "item item-input item-floating-label" ng-if="myAccount.settings.extra_mobile_required">
+                    <span class="for-place-holder input-label">{{ ::'Mobile'| translate:'customer' }}</span>
+                    <input type = "text" placeholder = "{{ ::'Mobile'| translate:'customer' }}" ng-model="user.mobile" />
+                </label>
+                <!--<label class = "item item-input item-floating-label">
+                    <span class="for-place-holder input-label">Password</span>
+                    <input type = "Password" placeholder = "Password" ng-model="user.password" minlength="6" />
+                </label>-->
+                <button class="button button-full" ng-click="save()">
+                    <i ng-if="!label_settings.lang_save">{{ ::"SAVE"| translate:"community" }}</i>
+                    <i ng-if="label_settings.lang_save">{{label_settings.lang_save}}</i>
+                </button>
+            </div>
+        </div>
+
+    </ion-content>
+
+    <!--<button class="post-button button button-assertive button-assertive-custom button-full"
+            ng-click="sendPost();">
+        <span ng-if="$root.journals_label_settings.post">{{$root.journals_label_settings.post}}</span>
+        <span ng-if="!$root.journals_label_settings.post">{{ ::"Post"| translate:"journals" }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <i class="icon ion-ios-paperplane"></i>
+    </button>-->
+
+</ion-modal-view>

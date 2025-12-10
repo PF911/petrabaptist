@@ -1,0 +1,117 @@
+<ion-view sb-page-background
+          class="community-view commu-my-profile menu-at-bottom">
+    <ion-nav-title>
+        <span ng-bind-html="pageTitle | trusted_html"></span>
+    </ion-nav-title>
+
+    <!-- <ion-nav-title ng-if="$root.journals_label_settings.journals" ng-bind-html="$root.journals_label_settings.journals | trusted_html"></ion-nav-title>
+    <ion-nav-title ng-if="!$root.journals_label_settings.journals" ng-bind-html="pageTitle | trusted_html"></ion-nav-title> -->
+
+    <ion-nav-buttons side="secondary">
+        
+        <button ng-click="goToHome()" title='{{ ::"Home"| translate:"community" }}'
+                class="button button-clear header-item">
+             <i class="icon ion-home"></i>    
+        </button>
+        <button ng-click="search()" title='{{ ::"Search"| translate:"community" }}'
+                class="button button-clear header-item">
+             <i class="icon-search"></i>    
+        </button>
+        <button ng-click="showGroups()" title='{{ ::"Groups"| translate:"community" }}'
+                class="button button-clear header-item">
+             <i class="icon ion-ios-people m-0"></i>    
+        </button>
+    </ion-nav-buttons>
+
+    <!--<ion-header-bar class="bar-subheader">
+        <div class="button-bar" ng-if="settingsIsLoaded && displaySubHeader()">
+            <button class="button button-custom button-positive button-positive-custom"
+                    ng-click="showTab('match')"
+                    ng-class="classTab('match')"
+                    ng-bind-html="displayIcon('match') | trusted_html">
+            </button>
+            <button class="button button-custom button-positive button-positive-custom"
+                    ng-click="showTab('favourite')"
+                    ng-class="classTab('favourite')"
+                    ng-bind-html="displayIcon('favourite') | trusted_html">
+            </button>
+            <button class="button button-custom button-positive button-positive-custom"
+                    ng-click="showTab('chat')"
+                    ng-class="classTab('chat')"
+                    ng-bind-html="displayIcon('chat') | trusted_html">
+            </button>
+            <button class="button button-custom button-positive button-positive-custom icon-custom"
+                    ng-if="displayProfile()"
+                    ng-click="showTab('profile')"
+                    ng-class="classTab('profile')"
+                    ng-bind-html="displayIcon('profile') | trusted_html">
+            </button>
+            
+        </div>
+    </ion-header-bar>-->
+
+     <div class = "bar bar-footer no-padding cummunity-menu">
+        <div class="row">
+            <div class="col text-center"  ng-click="showTab('match')" ng-class="classTab('match')" ng-show="isEnabled('enable_find_match')">
+                <i class="icon-match"></i>
+                <span class="menu-name">
+                    <i ng-if="!label_settings.lang_tab_match">{{ ::"Find Match"| translate:"community" }}</i>
+                    <i ng-if="label_settings.lang_tab_match">{{label_settings.lang_tab_match}}</i>
+                </span>
+            </div> 
+            <div class="col text-center" ng-click="showTab('favourite')" ng-class="classTab('favourite')" ng-show="isEnabled('enable_favourite')">
+                <i class="icon-fav"></i>
+                <span class="menu-name">
+                    <i ng-if="!label_settings.lang_tab_favourite">{{ ::"Favourite"| translate:"community" }}</i>
+                    <i ng-if="label_settings.lang_tab_favourite">{{label_settings.lang_tab_favourite}}</i>
+                </span>
+
+            </div>
+            <!--<div class="col text-center" ng-click="showTab('groups')" ng-class="classTab('groups')">
+                <i class="icon-group"></i>
+                <span class="menu-name">
+                   <i ng-if="!label_settings.lang_tab_group">{{ ::"Groups"| translate:"community" }}</i>
+                   <i ng-if="label_settings.lang_tab_group">{{label_settings.lang_tab_group}}</i>
+                </span>
+
+            </div> -->
+            <div class="col text-center relative" ng-click="showTab('chat')" ng-class="classTab('chat')">
+                <i class="icon-chat"></i>
+                <span class="menu-name">
+                    <i ng-if="!label_settings.lang_tab_chat">{{ ::"Chat"| translate:"community" }}</i>
+                    <i ng-if="label_settings.lang_tab_chat">{{label_settings.lang_tab_chat}}</i>
+                    <i ng-if="unread_messages_count" class="unread-msg">{{ unread_messages_count }}</i>
+                </span>
+
+            </div> 
+            <div class="col text-center" ng-click="showTab('profile')" ng-class="classTab('profile')">
+                <i class="icon-profile"></i>
+                <span class="menu-name">
+                    <i ng-if="!label_settings.lang_tab_profile">{{ ::"My Profile"| translate:"community" }}</i>
+                    <i ng-if="label_settings.lang_tab_profile">{{label_settings.lang_tab_profile}}</i>
+                </span>
+
+            </div> 
+        </div>
+
+    </div>
+
+
+
+    <div
+         ng-include="'./features/community/assets/templates/l1/tabs/' + currentTab + '.html'"></div>
+
+   
+
+</ion-view>
+
+
+
+
+
+
+
+
+
+
+

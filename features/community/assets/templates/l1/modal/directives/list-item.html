@@ -1,0 +1,65 @@
+<div class="card liked-card">
+    <div class="row no-padding">
+        <div class="col col-30 no-padding col-center" ng-click="viewProfile({{user.id}})">
+            <div class="fav-img" style="background-image: url('{{ customerImagePath()}}')">
+
+            </div>   
+        </div>
+        <div class="col-70 fav-info col-center">
+            <div class="row">
+                <div class="col user-name no-padding">
+                    <h2>{{ user.name}}</h2>
+                    <span class="age"><i ng-if="user.age">{{user.age}}</i> <i ng-if="user.gender">| {{user.gender}}</i></span>  
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col col-80 no-padding">
+                    <div class="row padd-vert-5">
+                        <div class="col no-padding">
+                            <span class="d-block font-12" ng-show="user.distance"><i class="icon ion-location"></i> {{ user.distance }} {{ user.location_short }}</span>
+                            <span class="d-block font-12" ng-if="listType == 'match'">
+                                <i class="icon ion-ios-heart"></i>
+                                <i ng-if='!user.i_accepted'>{{ ::"You liked"| translate:"community" }} </i>
+                                <i ng-if='user.i_accepted'>{{ ::"You accepted"| translate:"community" }}</i>
+                                <span class="chip-time" ng-if="listType !== 'blocked'">{{ actionDate() }}</span> </span>
+                            <span class="d-block font-12" ng-if="listType === 'blocked'">
+                                <i class="icon ion-locked"></i>
+                                <i ng-if="!label_settings.lang_blocked">{{ ::"Blocked"| translate:"community" }} </i>
+                                <i ng-if="label_settings.lang_blocked">{{label_settings.lang_blocked}}</i>
+                            </span>   
+                                
+                        </div> 
+
+                    </div> 
+                </div>
+                <div class="col col-20 no-padding">
+                    <div class="card-btn card-unblock" ng-if="listType === 'blocked'" ng-click="unblockProfile()">
+                        <span><i class="icon ion-unlocked"></i>
+                            <i ng-if="!label_settings.lang_unblock">{{ ::"Unblock"| translate:"community" }}</i>
+                            <i ng-if="label_settings.lang_unblock">{{label_settings.lang_unblock}}</i>
+                        </span>  
+                    </div>
+                    <div class="card-btn card-dislike" ng-if="listType === 'liked'" ng-click="dislikeProfile()">
+                        <span><i class="icon ion-thumbsdown"></i>
+                            <i ng-if="!label_settings.lang_dislike">{{ ::"Dislike"| translate:"community" }}</i>
+                            <i ng-if="label_settings.lang_dislike">{{label_settings.lang_dislike}}</i>
+                        </span>  
+                    </div>
+                    <div class="card-btn card-chat" ng-if="listType === 'match'" ng-click="startConversation()">
+                        <span><i class="icon ion-chatbubbles"></i>
+                            <i ng-if="!label_settings.lang_chat">{{ ::"Chat"| translate:"community" }}</i>
+                            <i ng-if="label_settings.lang_chat">{{label_settings.lang_chat}}</i>
+                        </span>  
+                    </div>
+                    <div class="card-btn card-unblock" ng-if="listType === 'favourite'" ng-click="removeFavourite()">
+                        <span><i class="icon ion-android-delete"></i>
+                            <i ng-if="!label_settings.lang_remove">{{ ::"Remove"| translate:"community" }}</i>
+                            <i ng-if="label_settings.lang_remove">{{label_settings.lang_remove}}</i>
+                        </span>  
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+    </div>  
+</div>

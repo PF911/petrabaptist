@@ -1,0 +1,51 @@
+<ion-view sb-page-background
+          class="mcommerce-view mcommerce-sales-history">
+    <ion-nav-title>{{ page_title}}</ion-nav-title>
+
+    <ion-content>
+        <input type="text" style="width: 100%;" ng-keypress="onSearchTerm($event)" ng-keyup="onSearchTerm($event)" placeholder="{{ ::'Search by order numbers'| translate:'commerce_pro' }}"/>
+        <div class="list">
+            <div class="item item-text-wrap item-custom"
+                 ng-repeat="order in orders"
+                 ng-click="showDetails(order.order_id)">
+                <h2>
+                    <strong>{{ ::'Order N°'| translate:'commerce_pro' }}: {{ order.number}}</strong>
+                    <span class="pull-right"><i class="ion-android-warning"
+                                                ng-if="order.status == '1'"> </i>{{ order.status_label | translate:'commerce_pro' }}</span>
+                    <!--{{ order.status_label }}<span class="pull-right">{{ order.total }}</span>-->
+                </h2>
+                <p>
+                    <strong>{{ ::'Order Total'| translate:'commerce_pro' }}: </strong> <span class="pull-right">{{ order.total}}</span>
+                </p>
+                <p>
+                    {{ order.date}}
+                </p>
+
+                <div class="item item-custom item-icon-left"
+                     ng-repeat="line in order.lines">
+                    <p>
+                        <strong><span ng-bind-html="line.title"></span> </strong> <span class="pull-right">{{ line.qty}}</span>
+                    </p>
+                </div>
+
+                <p>
+                    <strong>{{ ::'Admin Notes'| translate:'commerce_pro' }}:</strong> <span ng-bind-html="order.admin_notes"></span>
+                </p>
+
+            </div>
+
+            <div class="item item-text-wrap item-custom"
+                 ng-if="!orders.length">
+                {{ ::'No items found'| translate:'commerce_pro' }}
+            </div>
+        </div>
+
+        <ion-infinite-scroll ng-if="can_load_older_posts"
+                             on-infinite="loadMore()"
+                             immediate-check="false"
+                             distance="10%"
+                             class="spinner-custom">
+        </ion-infinite-scroll>
+
+    </ion-content>
+</ion-view>

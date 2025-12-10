@@ -1,0 +1,30 @@
+<div class="item-text-wrap custom-list no-padding">
+    <div class="custom-passion" ng-show="profile_data.custom_keywords.length">
+        <ul class = "list passion-list ">
+            <li ng-repeat=" custom_keyword in profile_data.custom_keywords" 
+                ng-class="{'selected': custom_keyword.is_selected}"
+                ng-click = "toggleCustomKeyword($index)"
+             >{{ custom_keyword.keyword }}</li>
+        </ul>
+    </div>
+    <div class = "item item-input-inset padd-vert-10" ng-show="addCustomAreaVisible">
+        <label class = "item item-input-wrapper no-padding">     
+            <input class="add-input" type = "text" placeholder = '{{ ::"Add Custom Keyword"| translate:"community" }}' ng-model="custom_keyword" />
+        </label>
+        <button class = "button btn-add" ng-click="saveCustomKeyword()">
+            <i ng-if="!label_settings.lang_add">{{ ::"Add"| translate:"community" }}</i>
+             <i ng-if="label_settings.lang_add">{{label_settings.lang_add}}</i>
+        </button>
+    </div>
+    <div class="item text-center" ng-show="!addCustomAreaVisible">
+        <span>
+            <i ng-if="!label_settings.lang_not_found_yet">{{ ::"Not found yet?"| translate:"community" }}</i>
+             <i ng-if="label_settings.lang_not_found_yet">{{label_settings.lang_not_found_yet}}</i>
+            <span class="note-txt" ng-click='openAddCustomArea()' > 
+                <i ng-if="!label_settings.lang_add_custom_key">{{ ::"Add Custom Keyword"| translate:"community" }}</i>
+                 <i ng-if="label_settings.lang_add_custom_key">{{label_settings.lang_add_custom_key}}</i>
+            </span>
+                
+        </span>  
+    </div>
+</div>

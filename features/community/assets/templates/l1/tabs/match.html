@@ -1,0 +1,85 @@
+<ion-content class="has-footer " ng-controller="CommunityMatchController">
+    <div class="list search-anim" ng-show="isLoading">
+        <div class="fab-button">
+            <div class="ripple">
+            </div>
+            <div class="ripple ripple-2" style="animation-delay: 0.6s;">
+            </div>
+            <div class="fab" id="fab">
+                <div class="my-img" style='background-image: url("{{customerImage}}")'>
+                </div>
+            </div>
+            <span class="find-txt">
+                <i ng-if="!label_settings.lang_finding_people">{{ ::"Finding people near you.."| translate:"community" }}</i>
+                <i ng-if="label_settings.lang_finding_people">{{label_settings.lang_finding_people}}</i>
+            </span>
+        </div>
+
+        <lottie-player class="map-svg" src="./features/community/assets/templates/images/lottie/map.json"  background="transparent"  speed="1"    loop autoplay></lottie-player>
+    </div>   
+
+
+    <div class="new-join" ng-if="!isLoading">
+        <div class="list" ng-show="collection.length > 0">
+            <span>
+                <i ng-if="!label_settings.lang_recently_join">{{ ::"Recently Join"| translate:"community" }}</i>
+                <i ng-if="label_settings.lang_recently_join">{{label_settings.lang_recently_join}}</i>
+            </span>
+            <ion-scroll direction="x" scrollbar-x="false"  class="user-list-scroll">
+                <div class="user-list scroll-cust">
+                    <div class="user-box" ng-repeat="user in collection track by user.id"  ng-click='viewRecentlyJoinProfile($index)'>
+                        <div class="user-image" ng-if="user.picture || !user.images[0]" style="background-image: url('{{ profileImagePath(user.picture)}}')"></div>
+                        <div class="user-image" ng-if="!user.picture && user.images[0]" style="background-image: url('{{ user.images[0]}}')"></div>
+                    </div> 
+                </div>
+            </ion-scroll>
+
+        </div>  
+    </div>
+    <div id="viewport" ng-if="!isLoading">
+
+        <div class="list no-data text-center" ng-if="!matching_profiles.length">
+           <lottie-player class="no-data-svg" src="./features/community/assets/templates/images/lottie/no-data.json"  background="transparent"  speed="1"  loop autoplay></lottie-player>
+          <span> 
+              <i ng-if="!label_settings.lang_no_match_found">{{ ::"Sorry, no match found"| translate:"community" }}</i>
+              <i ng-if="label_settings.lang_no_match_found">{{label_settings.lang_no_match_found}}</i>
+          </span>
+        </div>
+        <ul class="stack" swing-stack swing-options="options" ng-show="community_settings.enable_swipe_mode === '1'">
+            <li
+                swing-card
+                swing-on-throwout="throwout($index, eventName, eventObject)"
+                swing-on-throwoutleft="throwoutleft($index, eventName, eventObject)"
+                swing-on-throwoutright="throwoutright($index, eventName, eventObject)"
+                swing-on-throwoutup="throwoutup($index,eventName,  eventObject)"
+                swing-on-throwin="throwin($index, eventName, eventObject)"
+                swing-on-dragstart="dragstart($index, eventName, eventObject)"
+                swing-on-dragmove="dragmove($index, eventName, eventObject)"
+                swing-on-dragend="dragend($index,eventName, eventObject)"
+                ng-repeat="matching_profile in matching_profiles" ng-class="matching_profile.id">
+
+
+                <div class="user-info-card" 
+                     ng-show="!matching_profile.iLiked && !matching_profile.iDisliked" 
+                     ng-include="'./features/community/assets/templates/l1/tabs/user-card.html'">
+                </div>
+
+            </li>
+        </ul>
+        
+        <div ng-show="community_settings.enable_swipe_mode !== '1'" 
+             ng-repeat="matching_profile in matching_profiles" >
+            <div class="user-info-card" 
+                 ng-show="!matching_profile.iLiked && !matching_profile.iDisliked" 
+                 ng-include="'./features/community/assets/templates/l1/tabs/user-card.html'"></div>
+        </div>
+    </div>
+
+
+
+
+
+</ion-content>
+
+
+

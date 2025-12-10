@@ -1,0 +1,189 @@
+<ion-modal-view sb-page-background
+                ng-controller="CommunityModalController"
+                class="community-view">
+
+    <ion-header-bar class="bar-custom">
+        <div class="buttons">
+            <button class="button button-clear"
+                    ng-click="close()">
+                <i class="icon ion-android-arrow-back"></i>
+            </button>
+        </div>
+        <h1 class="title">
+            <i ng-if="!label_settings.lang_view_profile">{{ ::"View Profile"| translate:"community" }}</i>
+            <i ng-if="label_settings.lang_view_profile">{{label_settings.lang_view_profile}}</i> - {{ matching_profile.name }}
+        </h1>
+
+    </ion-header-bar>
+
+    <ion-content class="profile-detail">
+
+        <div class="user-info-card">
+            <div class="img-box">
+                <div class = "profile-default" ng-if="!matching_profile.picture && !matching_profile.images.length" style="background-image: url('./features/community/assets/templates/images/profile-placeholder.svg')">
+                    <span>
+                        <i ng-if="!label_settings.lang_pic_not_uploaded">{{ ::"Profile pic not uploaded"| translate:"community" }}</i>
+                        <i ng-if="label_settings.lang_pic_not_uploaded">{{label_settings.lang_pic_not_uploaded}}</i>
+                    </span>  
+                </div>
+                <ion-slide-box ng-if="matching_profile.picture || matching_profile.images[0]">
+
+                    <ion-slide ng-if='matching_profile.picture'>
+                        <div class = "user-full-img" style="background-image: url('{{ profileImagePath(matching_profile.picture) }}')"></div>
+                    </ion-slide>
+                    <ion-slide ng-repeat="image in matching_profile.images track by user.id" ng-if='image'>
+                        <div class = "user-full-img" style="background-image: url('{{ image }}')"></div>
+                    </ion-slide>
+
+
+                </ion-slide-box>
+            </div> 
+            <div class="info-box">
+                <div class="row no-padding">
+                    <div class="col no-padding">
+                        <span class="match-chip" ng-if="matching_profile.match_percentage"><strong>{{matching_profile.match_percentage}}%</strong> 
+                            <i ng-if="!label_settings.lang_matched">{{ ::"Matched"| translate:"community" }}</i>
+                            <i ng-if="label_settings.lang_matched">{{label_settings.lang_matched}}</i>
+                        </span>  
+                    </div> 
+                </div> 
+                <div class="row padd-hori-10">
+                    <div class="col user-name">
+                        <h2>{{ matching_profile.name}}</h2>
+                        <span class="age"><i ng-if="matching_profile.age">{{matching_profile.age}}</i> <i ng-if="matching_profile.gender">| {{matching_profile.gender}}</i></span>  
+                    </div> 
+                </div> 
+                <div class="row padd-hori-10">
+                    <div class="col">
+                        <p class="m-0" ng-show="matching_profile.desc">{{ matching_profile.desc}}</p>
+                    </div> 
+                </div> 
+
+                <div class="row padd-hori-10">
+                    <div class="col col-70 col-center">
+                        <span class="d-block" ng-show="matching_profile.distance"><i class="icon ion-location"></i> {{ matching_profile.distance }} {{ matching_profile.location_short }}</span>
+                        <span class="d-block"><i class="icon ion-ios-heart"></i> {{ matching_profile.total_likes}} 
+                            <i ng-if="!label_settings.lang_user_liked">{{ ::"User liked this profile"| translate:"community" }}</i>
+                            <i ng-if="label_settings.lang_user_liked">{{label_settings.lang_user_liked}}</i>
+                        </span>
+                    </div> 
+                    <div class="col col-30 text-center col-center">
+                        <button class="button button-small button-full btn-view-profile" ng-click="viewGroup()"><i class="icon ion-ios-people m-0"></i> 
+                            <i ng-if="!label_settings.lang_group">{{ ::"Group"| translate:"community" }}</i>
+                            <i ng-if="label_settings.lang_group">{{label_settings.lang_group}}</i>
+                        </button>
+                    </div> 
+                </div>
+
+            </div>  
+        </div>
+
+        <div class = "card look-card list" ng-if="community_settings.enable_looking_for == '1'">
+            <div class = "item item-divider card-header" ng-if="matching_profile.looking_for_data.fields.length">
+                {{ matching_profile.looking_for_data.section}}
+            </div>
+
+            <div class = "item item-text-wrap no-brd" ng-if="matching_profile.looking_for_data.fields.length">
+                <div class="list print-card">
+                    <div ng-repeat="field in matching_profile.looking_for_data.fields" ng-switch on="field.type" >
+                        <!--<div class = "item">
+                            <label>{{ field}}:</label>
+                            <span class = "print-value pull-right">{{ val }}</span>
+                        </div> -->
+                    <div class = "item no-bg" ng-switch-when="texte">
+                        <label>{{ field.name}}:</label>
+                        <span class = "print-value pull-right">{{field.val}}</span>
+                    </div> 
+                    <div class = "item no-bg" ng-switch-when="nombre">
+                        <label>{{ field.name}}:</label>
+                        <span class = "print-value pull-right">{{field.val}}</span>
+                    </div> 
+                    <div class = "item no-bg" ng-switch-when="email">
+                        <label>{{ field.name}}:</label>
+                        <span class = "print-value pull-right">{{field.val}}</span>
+                    </div> 
+                    <div class = "item no-bg" ng-switch-when="telephone">
+                        <label>{{ field.name}}:</label>
+                        <span class = "print-value pull-right">{{field.val}}</span>
+                    </div> 
+                    <div class = "item no-bg" ng-switch-when="textarea">
+                        <label class="d-block mb-8">{{ field.name}}:</label>
+                        <span class="my-description">{{field.val}}</span>
+                    </div> 
+                    <div class = "item no-bg" ng-switch-when="birthday">
+                        <label>{{ field.name}}:</label>
+                        <span class = "print-value pull-right">{{field.val}}</span>
+                    </div> 
+                    <div class = "item no-bg" ng-switch-when="anniversary">
+                        <label>{{ field.name}}:</label>
+                        <span class = "print-value pull-right">{{field.val}}</span>
+                    </div> 
+                    <div class = "item no-bg" ng-switch-when="date">
+                        <label>{{ field.name}}:</label>
+                        <span class = "print-value pull-right">{{field.val}}</span>
+                    </div> 
+                    <div class = "item no-bg" ng-switch-when="select">
+                        <label>{{ field.name}}:</label>
+                        <span class = "print-value pull-right" >{{field.val}}</span>
+                        <span class = "print-value pull-right" ng-if="!field.val" >All</span>
+                    </div> 
+                    <div class = "item no-bg" ng-switch-when="radio">
+                        <label>{{ field.name}}:</label>
+                        <span class = "print-value pull-right">{{field.val}}</span>
+                    </div> 
+                    <div class = "item no-bg" ng-switch-when="range">
+                        <label>{{ field.name}}:</label>
+                        <span class = "print-value pull-right">{{field.val}}</span>
+                    </div> 
+                    <div class = "item no-bg" ng-switch-when="rangeslider">
+                        <label>{{ field.name}}:</label>
+                        <span class = "print-value pull-right">{{field.val}}</span>
+                    </div> 
+                    <div class = "item item-text-wrap no-padding no-bg" ng-switch-when="checkbox">
+                        <label>{{ field.name}}:</label>
+                        <ul class = "list passion-list">
+                            <li ng-repeat="option in field.val" class="selected">{{option}}</li>
+
+                        </ul>
+                    </div>
+                        
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class = "item card-footer">
+                <community-profile-actions></community-profile-actions>
+            </div>
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <button class="button-full button m-0 del-profile" ng-click="reportProfile()">
+                    <i ng-if="!label_settings.lang_report_profile">{{ ::"Report This Profile"| translate:"community" }}</i>
+                    <i ng-if="label_settings.lang_report_profile">{{label_settings.lang_report_profile}}</i>
+                </button>
+            </div>
+            <div class="col">
+                <button class="button-full button m-0 log-out" ng-click="blockProfile()">
+                    <i ng-if="!label_settings.lang_block_profile">{{ ::"Block This Profile"| translate:"community" }}</i>
+                    <i ng-if="label_settings.lang_block_profile">{{label_settings.lang_block_profile}}</i>
+                </button>
+            </div>
+        </div>
+
+
+
+
+    </ion-content>
+
+</ion-modal-view>
+
+
+
+
+

@@ -1,0 +1,59 @@
+<ion-item ng-class="{'card' : getCardDesign()}"
+          class="item-custom" ng-show="post.is_visible">
+    
+    <div class="item-avatar post-author">
+        <img ng-src="{{ customerImagePath() }}" ng-click="showProfile()" />
+        <h2 ng-click="showProfile()">
+            {{ customerName() }}
+            
+        </h2>
+        <p class="post-date" style="font-size: 11px;">
+            <span ng-class="{'link': 
+                        hasFollowers()
+            }" ng-click="goToFollowersOrFriendsList('followers')" ng-if="followEnable()" >
+                <span ng-show="settings.additionalSettings.follow_text" >{{ settings.additionalSettings.follow_text }}</span>
+                <span ng-if="!settings.additionalSettings.follow_text">{{ ::"Favorites" | translate:"messaging" }}</span>
+                ({{ post.followers_count }})
+            </span>
+            
+        </p>
+    </div>
+    <div class="post-body" style="padding: 0px !important;">
+        &nbsp;
+    </div>
+    
+    <div class="post-actions">
+        <div class="row">
+            <div class="text-center"
+                 ng-class="{
+                    'col-30': canFollow() && canBlock(),
+                    'col-50': (canFollow() && !canBlock()) || (canBlock() && !canFollow()),
+                    'col-100': !canFollow() && !canBlock()
+                 }"
+                 ng-click="openChatWindow()">
+                <i class="icon ion-sb-comment post-action-icon"></i> 
+                <span ng-show="settings.additionalSettings.chat_text" >{{ settings.additionalSettings.chat_text }}</span>
+                <span ng-if="!settings.additionalSettings.chat_text">{{ ::"Chat" | translate:"socialnetworks" }}</span>
+            </div>
+            <div class="text-center" 
+                 ng-class="{
+                    'col-30': canBlock(),
+                    'col-50': !canBlock()
+                 }"
+                 ng-click="followCustomer()"  ng-if="canFollow()" >
+                <i class="ionicons icon ion-star"></i>
+                <span ng-show="settings.additionalSettings.follow_text" >{{ settings.additionalSettings.follow_text }}</span>
+                <span ng-if="!settings.additionalSettings.follow_text">{{ ::"Favorites" | translate:"messaging" }}</span>
+            </div>
+            <div class="text-center" 
+                 ng-class="{
+                    'col-30': canFollow(),
+                    'col-50': !canFollow()
+                 }"
+                 ng-click="blockUser()" ng-if="canBlock()">
+                <i class="ion-android-remove-circle"></i>
+                <span>{{ ::"Block" | translate:"messaging" }}</span>
+            </div>
+        </div>
+    </div>
+</ion-item>

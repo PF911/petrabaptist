@@ -1,0 +1,58 @@
+<ion-view sb-page-background
+          class="appointmentpro appointmentpro-appointment">
+
+    <ion-nav-title>{{ ::"Appointments" | translate:"appointmentpro" }}</ion-nav-title>
+  
+    <ion-content class="has-header"
+                 id="item-content"
+                 scrollbar-y="false"
+                 overflow-scroll="false"
+                 delegate-handle="mainScroll">
+
+        <div class="loader"
+             ng-show="is_loading">
+            <ion-spinner icon="android"
+                         class="spinner-custom"></ion-spinner>
+        </div>
+
+        
+    <div class="card"
+                  ng-if="!is_loading && payout.bookings.length > 0" ng-repeat="(key, value) in payout.bookings" ng-click="bookingDetailsById(value.appointment_id)">
+        <div class="item item-divider item-divider-custom remove-border">
+           #{{value.appointment_id}}
+           <span class="pull-right">
+               <b>{{value.status}}</b>
+           </span>           
+        </div>
+
+        <div class="item item-custom remove-border">
+
+          <h2 ng-if="value.is_class">{{ value.service_name }}</h2>
+          <h2 ng-if="!value.is_class"><i class="icon ion-location icon-active-custom"></i> {{value.location_name}}</h2>
+          <p ng-if="value.is_class"><i class="icon ion-location icon-active-custom"></i> {{value.location_name}}</p>
+          <p ng-if="value.is_class"><i class="icon ion-person-stalker icon-active-custom"></i> {{value.booked_seat_class}} {{ ::"Member" | translate:"appointmentpro" }}</p>
+          <p><i class="icon ion-pricetag icon-active-custom"></i> {{value.amount_with_currency}} (<span class="icon-active-custom">{{value.payment_status}}</span>)</p>
+           <div class="row text-center">
+              <div class="col-50">
+                  <h2>{{value.created_at}}</h2>
+                  <p>{{ ::"Date of request" | translate:"appointmentpro" }}</p>
+              </div>
+              <div class="col-50">
+                  <h2>{{value.booking_date}} {{value.start_time}}</h2>
+                  <p>{{ ::"Date of Appointment" | translate:"appointmentpro" }}</p>
+              </div>
+          </div>          
+        </div>
+
+   </div>
+
+   <div class="list" ng-if="!is_loading && payout.bookings.length == 0" >
+      <div class="item item-custom remove-border" >
+        <p class="text-center">
+          {{ ::"You do not have any class scheduled" | translate:"appointmentpro" }}!
+        </p>
+      </div> 
+   </div>
+ 
+ </ion-content>
+</ion-view>

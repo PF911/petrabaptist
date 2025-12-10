@@ -1,0 +1,73 @@
+<ion-view class="community-view commu-welcome">
+    <!--  <ion-nav-title>
+         <div ng-bind-html="page_title | trusted_html"></div>
+     </ion-nav-title>
+    -->
+
+
+
+    <ion-content class="has-footer">
+       <lottie-player class="home-banner" src="./features/community/assets/templates/images/lottie/home-splash.json"  background="transparent"  speed="1"   loop autoplay></lottie-player>  
+
+    </ion-content>
+
+    <div class="bar bar-footer no-padding footer-login" ng-if="!is_loading">
+        <div class="app-name">
+            <h2>{{ ::"Community"| translate:"community" }}</h2>
+        </div>
+        <div class="row txt-header">
+            <div class="icon-location"></div>
+            <div class="col text-center" ng-if="!is_login_view">
+
+                <h3 class="m-0 bold" ng-if="!label_settings.lang_home_title" >{{ ::"Find Your"| translate:"community" }} <span>{{ ::"Match"| translate:"community" }}</span> {{ ::"Here"| translate:"community" }}</h3>
+                <h3 class="m-0 bold" ng-if="label_settings.lang_home_title" >{{ label_settings.lang_home_title }}</h3>
+                
+                <p ng-if="!label_settings.lang_home_subtitle">{{ ::"Join us and socialize with"| translate:"community" }}
+                    <br>{{ ::"Million of people"| translate:"community" }}</p>
+                <p ng-if="label_settings.lang_home_subtitle">{{ label_settings.lang_home_subtitle}}</p>
+                <div class="row">
+                    <div class="col">
+                        <button class="button button-full" ng-click="startSignup()">
+                            <i ng-if="!label_settings.lang_signup">{{ ::"Let's Start"| translate:"community" }}</i>
+                            <i ng-if="label_settings.lang_signup">{{label_settings.lang_signup}}</i>
+                        </button>
+                        <button class="button button-full btn-login" ng-click="showLoginForm()">
+                            <i ng-if="!label_settings.lang_login_link">{{ ::"already have an account?"| translate:"community" }}</i>
+                            <i ng-if="label_settings.lang_login_link">{{label_settings.lang_login_link}}</i>
+                        </button>  
+                    </div>
+                </div>
+
+            </div> 
+            <div class="col text-center commu-login sign-up" ng-if="is_login_view">
+                <h3 class="m-0 bold" ><i class="btn-back icon ion-ios-arrow-thin-left" ng-click="showHome()"></i> 
+                    <i ng-if="!label_settings.lang_login_title">{{ ::"Login Here"| translate:"community" }}</i>
+                    <i ng-if="label_settings.lang_login_title">{{label_settings.lang_login_title}}</i>
+                </h3>
+                <div class = "list">
+                    <label class = "item item-input item-floating-label">
+                        <span class="for-place-holder input-label">{{ ::"Email"| translate:"community" }}</span>
+                        <input type = "text" placeholder = '{{ ::"Email"| translate:"community" }}' ng-model="user.email" />
+                    </label>
+
+                    <label class = "item item-input item-floating-label">
+                        <span class="for-place-holder input-label">{{ ::"Password"| translate:"community" }}</span>
+                        <input type = "password" placeholder = '{{ ::"Password"| translate:"community" }}' ng-model="user.password" />
+                    </label>
+
+                    <button class="button button-full" ng-click="login()">
+                        <i ng-if="!label_settings.lang_login">{{ ::"Login"| translate:"community" }}</i>
+                        <i ng-if="label_settings.lang_login">{{label_settings.lang_login}}</i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+</ion-view>

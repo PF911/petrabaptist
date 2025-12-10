@@ -1,0 +1,123 @@
+<div class="section-fields">
+    <div class = "item item-divider card-header">
+        {{ section.name}}
+    </div>
+    <div ng-repeat="field in section.fields" ng-switch on="field.type" class="list">
+        <label class="item item-input item-floating-label" ng-switch-when="textarea">
+            <span class="input-label for-label for-place-holder">
+                {{ field.name}}		                    
+            </span>
+            <textarea rows="3" placeholder="{{ field.name}}" ng-model="formData[field.id]"></textarea>
+        </label>
+
+        <label class="item item-input item-floating-label" ng-switch-when="texte">
+            <span class="for-place-holder input-label">
+                {{ field.name}}		                    
+            </span>
+            <input type="text" placeholder="{{ field.name}}" ng-model="formData[field.id]" />
+        </label>
+        <label class="item item-input item-floating-label" ng-switch-when="nombre">
+            <span class="for-place-holder input-label">
+                {{ field.name}}		                    
+            </span>
+            <input type="number"  placeholder="{{ field.name}}" ng-model="formData[field.id]" />
+        </label>
+        
+        <label class="item item-input item-floating-label" ng-switch-when="email">
+            <span class="for-place-holder input-label">
+                {{ field.name}}		                    
+            </span>
+            <input type="email" placeholder="{{ field.name}}" ng-model="formData[field.id]" />
+        </label>
+        
+        <label class="item item-input item-floating-label" ng-switch-when="telephone">
+            <span class="for-place-holder input-label">
+                {{ field.name}}		                    
+            </span>
+            <intlpn ng-model="formData[field.id]" default-country="{{country}}" placeholder="{{ field.name}}" class="checkbox-custom" ></intlpn>
+        </label>
+
+        <label class="item item-input no-bg" ng-switch-when="birthday"><!--<label class="item item-input item-floating-label" ng-switch-when="birthday">-->
+            <span class="for-place-holder input-label">{{ field.name}}</span>
+            <input type="date" placeholder="{{ field.name}}" date="formData[field.id]"  ng-model="formData[field.id]"  max="{{max_bday_date}}" />
+        </label>
+        
+        <label class="item item-input" ng-switch-when="date">
+            <span class="for-place-holder input-label">{{ field.name}}</span>
+            <input type="datetime-local" placeholder="{{ field.name}}" date="formData[field.id]"  ng-model="formData[field.id]"  />
+        </label>
+        
+        <label class="item item-input" ng-switch-when="anniversary">
+            <span class="for-place-holder input-label">{{ field.name}}</span>
+            <input type="date" placeholder="{{ field.name}}" date="formData[field.id]"  ng-model="formData[field.id]"  max="{{present_date}}" />
+        </label>
+
+        <label class = "item item-input item-select" ng-switch-when="select">
+            <span class="input-label">
+                {{ field.name}}
+            </span>
+            <select 
+                ng-if="section.id != community_settings.search_section_id" 
+                ng-model="formData[field.id]" 
+                ng-options="option.id as option.name for option in field.options">
+                <option value="">Select</option>
+            </select>
+            <select 
+                ng-if="section.id == community_settings.search_section_id" 
+                ng-model="formData[field.id]" 
+                ng-options="option.id as option.name for option in field.options">
+                <option value="">All</option>
+            </select>
+        </label> 
+
+        <div class="item item-input d-block no-bg" ng-switch-when="image">
+
+            <div class="item item-image item-input" ng-if="preview_src[field.id]">
+                <img ng-src="{{ preview_src[field.id]}}" width="100%" />
+            </div>
+
+            <div class="item item-icon-left item-img-upload" ng-click="takePicture(field)">
+                <i class="icon ion-image"></i>
+                {{ "Add Image" | translate }}
+            </div>
+
+        </div>
+
+        <div ng-switch-when="radio">
+            <div class="item item-divider">
+                {{ field.name}}
+            </div>
+            <ion-radio name="radio_{{ field.id}}" class="item item-radio no-bg" ng-repeat="option in field.options" ng-model="formData[field.id]" ng-value="option.id">{{ option.name}}</ion-radio>
+        </div>
+        <div ng-switch-when="checkbox" class="">
+            <div class = "padding">
+                <label class="d-block padd-vert-5">{{ field.name}}</label>
+                <ion-checkbox  ng-repeat="option in field.options" ng-value="option.id" ng-model="formData[field.id][option.id]" ng-class="{'item-checked':formData[field.id][option.id]}">{{ option.name}}</ion-checkbox>
+            </div>
+        </div>
+        <label class="item item-input no-bg" ng-switch-when="range">
+            <div class="input-label for-label">
+                {{ field.name}}	<span class="range-value">{{formData[field.id]}}</span>	                    
+            </div>
+            <div class="range">
+                <span>{{sliderRanges[field.id].min}}</span>
+                <input type="range" placeholder="{{ field.name}}" ng-model="formData[field.id]" min="{{sliderRanges[field.id].min}}" max="{{sliderRanges[field.id].max}}">
+                <span>{{sliderRanges[field.id].max}}</span>
+            </div>
+        </label>
+
+        <label class="item item-range item-input no-bg" ng-switch-when="rangeslider">
+            <div class="input-label for-label">
+                {{ field.name}} 
+            </div>
+            <section class="range-slider">
+               <span class="rangeValues range-value">{{ formData[field.id].min}} - {{ formData[field.id].max}}</span>
+               <span class="value-min-max pull-left">{{sliderRanges[field.id].min}}</span>
+                <input value="{{ formData[field.id].min}}" min="{{sliderRanges[field.id].min}}" max="{{sliderRanges[field.id].max}}" ng-model="formData[field.id].min" step="1" type="range" oninput=" var parent = this.parentNode; var slides = parent.getElementsByTagName('input');  var slide1 = parseFloat( slides[0].value ); var slide2 = parseFloat( slides[1].value );if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp; } var displayElement = parent.getElementsByClassName('rangeValues')[0]; displayElement.innerHTML = slide1 + ' - ' + slide2; ">
+                <input value="{{ formData[field.id].max}}" min="{{sliderRanges[field.id].min}}" max="{{sliderRanges[field.id].max}}" ng-model="formData[field.id].max"  step="1" type="range" oninput=" var parent = this.parentNode; var slides = parent.getElementsByTagName('input');  var slide1 = parseFloat( slides[0].value ); var slide2 = parseFloat( slides[1].value );if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp; } var displayElement = parent.getElementsByClassName('rangeValues')[0]; displayElement.innerHTML = slide1 + ' - ' + slide2; ">
+                <span class="value-min-max pull-right">{{sliderRanges[field.id].max}}</span>
+            </section>
+        </label>
+
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<ion-modal-view sb-page-background
+                code="tabbar_account" ng-controller ="storetInfoModalController"
+                class="customer-view customer-layout1 module-commercepro">
+
+    <ion-header-bar class="bar-custom">
+        <div class="buttons">
+            <button class="button button-clear"
+                    ng-click="closeModal()">
+                <i class="icon ion-sb-close-modal"></i>
+            </button>
+        </div>
+        <h1 class="title">Store Information</h1>
+    </ion-header-bar>
+
+    <ion-content>
+        <div class="card">
+            <div class="item item-body item-custom">
+                <iframe srcdoc="{{store.description}}" width="100%" height="100%"  frameborder="0"></iframe> 
+            </div>
+        </div> 
+    </ion-content>
+</ion-modal-view>

@@ -1,0 +1,24 @@
+<div class="row action-bar" ng-if="isProfileActionsEnabled()">
+    <div class="col text-center no-padding" ng-if="community_settings.enable_profile_like === '1'">
+        <button class="button button-clear button-full button-assertive m-0" ng-class="{'btn-disabled': matching_profile.iDisliked}" ng-click="!matching_profile.iDisliked ? userAction('dislike', {{matching_profile.id}}) : ''"> <i class="icon ion-thumbsdown"></i>
+            <i ng-if="!matching_profile.iDisliked && !label_settings.lang_dislike">{{ ::"Dislike"| translate:"community" }}</i>
+            <i ng-if="!matching_profile.iDisliked && label_settings.lang_dislike">{{label_settings.lang_dislike}}</i>
+            <i ng-if="matching_profile.iDisliked && !label_settings.lang_disliked">{{ ::"Disliked"| translate:"community" }}</i>
+            <i ng-if="matching_profile.iDisliked && label_settings.lang_disliked">{{label_settings.lang_disliked}}</i>
+        </button>
+    </div> 
+    <div class="col text-center no-padding" ng-if="community_settings.enable_messaging === '1'">
+        <button class="button button-clear button-full button-royal m-0" ng-click="openChatWindow()"><i class="icon ion-ios-chatbubble"></i> 
+            <i ng-if="!label_settings.lang_chat">{{ ::"Chat"| translate:"community" }}</i>
+            <i ng-if="label_settings.lang_chat">{{label_settings.lang_chat}}</i>
+        </button>
+    </div> 
+    <div class="col text-center no-padding" ng-if="community_settings.enable_profile_like === '1'">
+        <button class="button button-clear button-full button-balanced m-0"  ng-class="{'btn-disabled': matching_profile.iLiked}" ng-click="!matching_profile.iLiked ? userAction('like', {{matching_profile.id}}) : ''"><i class="icon ion-thumbsup"></i> 
+            <i ng-if="!matching_profile.iLiked && !label_settings.lang_like">{{ ::"Like"| translate:"community" }}</i>
+            <i ng-if="!matching_profile.iLiked && label_settings.lang_like">{{label_settings.lang_like}}</i>
+            <i ng-if="matching_profile.iLiked && !label_settings.lang_liked">{{ ::"Liked"| translate:"community" }}</i>
+            <i ng-if="matching_profile.iLiked && label_settings.lang_liked">{{label_settings.lang_liked}}</i>
+        </button>
+    </div> 
+</div>

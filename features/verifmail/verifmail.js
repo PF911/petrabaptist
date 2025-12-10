@@ -1,0 +1,1 @@
+ Features.register({"name":"Verifmail","code":"verifmail","version":"1.0.0","category":"_service","model":null,"desktop_uri":null,"routes":[],"icons":[],"files":["js\/factory\/verifmail.js"],"compile":true,"only_once":false,"load_on_start":true,"on_start_factory":"Verifmail","es5_compliant":true}, ['./features/verifmail/verifmail.bundle.min.js']); 

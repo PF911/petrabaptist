@@ -1,0 +1,73 @@
+<ion-content class="has-footer " ng-controller="CommunityFavouriteController" delegate-handle="mainScroll">
+    
+    <div class="card-loader" ng-show="isLoading">
+        <lottie-player  src="./features/community/assets/templates/images/lottie/card-loader.json"  background="transparent"  speed="1"  style="width: 100%; height: auto;"  loop autoplay></lottie-player>
+    </div>
+    <div class="list no-data text-center" ng-if="!isLoading && !collection.length">
+      <!--   <div class="no-data-img"> </div> -->
+         <lottie-player class="no-data-svg" src="./features/community/assets/templates/images/lottie/no-data.json"  background="transparent"  speed="1"  loop autoplay></lottie-player>
+        <span> {{ ::"No items found"| translate:"community" }}</span>
+    </div>
+
+    <div class="list fav-list" ng-if='!isLoading && collection.length'>
+       <!-- <div class="card liked-card" ng-repeat="user in collection">
+            <div class="row no-padding">
+                <div class="col col-30 no-padding col-center">
+                    <div class="fav-img" style="background-image: url('{{ profileImagePath(user.image)}}')">
+
+                    </div>   
+                </div>
+                <div class="col-70 fav-info col-center">
+                    <div class="row">
+                        <div class="col user-name no-padding">
+                            <h2>{{ user.name}}</h2>
+                            <span class="age"><i ng-if="user.age">{{user.age}}</i> <i ng-if="user.gender">| {{user.gender}}</i></span>  
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col col-80 no-padding">
+                            <div class="row padd-vert-5">
+                                <div class="col no-padding">
+                                    <span class="d-block font-12"><i class="icon ion-location"></i> 12 KM (Brooklyn, NY)</span>
+                                    <span class="d-block font-12"><i class="icon ion-ios-heart"></i>
+                                        <i ng-if='!user.is_accepted'>Liked </i>
+                                        <i ng-if='user.is_accepted'>You accepted</i>
+                                        <span class="chip-time">2 min ago</span> </span>
+                                </div> 
+
+                            </div> 
+                        </div>
+                        <div class="col col-20 no-padding">
+                            <div class="card-btn card-dislike" ng-if='!user.is_accepted'>
+                                <span><i class="icon ion-thumbsdown"></i>Dislike</span>  
+                            </div>
+                            <div class="card-btn card-chat" ng-if='user.is_accepted'>
+                                <span><i class="icon ion-chatbubbles"></i></i>Chat</span>  
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+
+            </div>   
+        </div>-->
+
+       <community-list-item ng-if="collection.length > 0"
+                                       ng-repeat="user in collection track by user.id"></community-list-item>
+       
+       
+    </div>  
+
+    <ion-infinite-scroll ng-if="!isLoading && hasMore"
+                         on-infinite="loadMore()"
+                         immediate-check="false"
+                         distance="20%"
+                         class="spinner-custom">
+    </ion-infinite-scroll>
+
+
+
+</ion-content>
+
+
+
+

@@ -1,0 +1,33 @@
+<ion-view sb-page-background
+          class="mcommerce-view mcommerce-sales-shipping-offers" ng-show="shippingOffers.length">
+    <ion-nav-title ng-show="shippingOffers.length">{{ page_title}}</ion-nav-title>
+    <ion-nav-buttons side="secondary">
+        <button ng-click="right_button.action()"
+                class="button button-clear header-item"
+                ng-if="right_button">
+            <span class="back-text" >
+                <span class="default-title">{{ right_button.label}}</span>
+            </span>
+            <i class="icon"
+               ng-class="right_button.icon"></i>
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+        <ion-list>
+            <ion-item class="item-divider item-divider-custom"
+                      style="margin-top: 15px;">
+                <h2>{{ ::'Choose a shipping method'| translate:'commerce_pro' }}</h2>
+            </ion-item>
+            <ion-radio class="radio-custom"
+                       ng-model="cart.shippingMethodId"
+                       ng-value="offer.product.id"
+                       ng-repeat="offer in shippingOffers"
+                       ng-click="selectShippingMethod(cart, offer);right_button.action()">{{ offer.product.name}}:{{ offer.total_price.amount}} <span class="left" ng-if="offer.delivery === '1'"> delivery in {{offer.delivery}} day</span> <span ng-if="offer.delivery != '1'" class="left"> delivery in {{offer.delivery}} days</span>
+            </ion-radio>
+        </ion-list>
+    </ion-content>
+</ion-view>
+
+
+

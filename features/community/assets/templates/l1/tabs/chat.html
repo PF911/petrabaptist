@@ -1,0 +1,52 @@
+<ion-content class="scroll-content community-chat chat-bg" sb-page-background1 ng-controller="CommunityChatHistoryController">
+   
+    <div class="card-loader" ng-show="isLoading">
+        <lottie-player  src="./features/community/assets/templates/images/lottie/chat-loader.json"  background="transparent"  speed="1"  style="width: 150px; height: 300px; margin: auto;"  loop autoplay></lottie-player>
+    </div>
+    <div class="scroll">
+
+
+        <ion-list class="list-posts disable-user-behavior">
+            <div class="list m-0"  ng-if="!isLoading && collection.length > 0" ng-repeat="user in collection track by user.id">
+
+                <ion-item ng-class="{'card' : getCardDesign()}" class="item-custom1">
+
+                    <div class="item-avatar post-author" ng-click="openChat({{user.conversation_id}}, {{user.id}})">
+                        <img ng-src="{{ customerImagePath(user.image)}}"/>
+                        <div>
+                            <h2>
+                                {{ user.customer_name}} <i ng-if="user.message_read === '0'" class="icon ion-chatboxes" style="color:#1fa20a" ></i>
+                                <div class="message_date">{{ messageDate(user.message_date)}}</div>
+
+
+                            </h2>
+                        </div>
+                        <p class="post-date" style="font-size: 11px;">
+                            <span  ng-if="user.message_read === '1'">{{ user.message}}</span>
+                            <b ng-if="user.message_read === '0'">{{ user.message}}</b>
+                        </p>
+                    </div>
+                </ion-item>
+            </div>
+        </ion-list>
+
+        <ion-list ng-if="!isLoading && !collection.length">
+            <div class="list no-data text-center">
+                  <lottie-player class="no-data-svg" src="./features/community/assets/templates/images/lottie/no-data.json"  background="transparent"  speed="1"  loop autoplay></lottie-player>
+                <span class="font-18" ng-if="!label_settings.lang_no_conversation">{{ ::"You have no conversation yet."| translate:"socialnetworks" }}</span>
+                <span class="font-18" ng-if="label_settings.lang_no_conversation">{{ label_settings.lang_no_conversation}}</span>
+            </div>
+        </ion-list>
+
+        <ion-infinite-scroll ng-if="!isLoading && hasMore"
+                             on-infinite="loadMore()"
+                             immediate-check="false"
+                             distance="20%"
+                             class="spinner-custom">
+        </ion-infinite-scroll>
+    </div>
+
+    <style type="text/css" data-feature="fanwall2">
+      
+    </style>  
+</ion-content>

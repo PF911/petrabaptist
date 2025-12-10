@@ -1,0 +1,213 @@
+<ion-view class="module-places places places-view l1"
+          sb-page-background>
+    <ion-nav-title>{{ page_title }}</ion-nav-title>
+    <ion-nav-buttons side="secondary">
+        <button ng-show="social_sharing_active"
+                class="button button-clear"
+                ng-click="share()">
+            <i class="icon ion-android-share-alt button-share"></i>
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <div class="loader"
+             ng-show="is_loading">
+            <ion-spinner class="spinner-custom"></ion-spinner>
+        </div>
+
+        <div class="list place-header"
+             ng-if="place.show_image && !is_loading">
+            <div class="item item-image cover-place"
+                 ng-if="place.picture && place.show_image"
+                 ng-style="{'background-image':'url(' + place.picture + ')'}">
+                <img class="image-placeholder"
+                     ng-src="{{ blankImage }}" />
+                <div class="place-title"
+                     ng-if="place.show_titles || place.show_subtitle">
+                    <span ng-if="place.show_titles"
+                          class="span-title">{{ place.title }}</span>
+                    <br />
+                    <span ng-if="place.show_subtitle"
+                          class="span-subtitle">{{ place.subtitle }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="place-blocks place-blocks-portrait">
+            <div class="place-block"
+                 ng-repeat="block in blocks"
+                 ng-if="!is_loading">
+
+                <div ng-switch
+                     on="block.type">
+                    <div ng-switch-when="text"
+                         class="card">
+                        <div sb-cms-text
+                             block="block"></div>
+                    </div>
+                    <div ng-switch-when="image"
+                         class="card">
+                        <div sb-place-image
+                             origin="places"
+                             block="block"
+                             gallery="gallery"></div>
+                    </div>
+                    <div ng-switch-when="slider"
+                         class="card">
+                        <div sb-cms-slider
+                             block="block"
+                             gallery="gallery"></div>
+                    </div>
+                    <div ng-switch-when="video">
+                        <div sb-cms-video
+                             block="block"></div>
+                    </div>
+                    <div ng-switch-when="address"
+                         class="card">
+                        <div sb-cms-address
+                             block="block"></div>
+                    </div>
+                    <div ng-switch-when="button"
+                         class="card">
+                        <div sb-cms-button
+                             block="block"></div>
+                    </div>
+                    <div ng-switch-when="file"
+                         class="card">
+                        <div sb-cms-file
+                             block="block"></div>
+                    </div>
+                    <div ng-switch-when="cover"
+                         class="card no-shadow">
+                        <div sb-cms-cover
+                             block="block"></div>
+                    </div>
+                    <div ng-switch-when="source"
+                         class="card no-shadow">
+                        <div sb-cms-source
+                             block="block"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="place-blocks place-blocks-landscape"
+             ng-repeat="blocks in blockChunks">
+            <div class="place-block"
+                 ng-repeat="block in blocks"
+                 ng-if="!is_loading">
+
+                <div ng-switch
+                     on="block.type">
+                    <div ng-switch-when="text"
+                         class="card">
+                        <div sb-cms-text
+                             block="block"></div>
+                    </div>
+                    <div ng-switch-when="image"
+                         class="card">
+                        <div sb-place-image
+                             origin="places"
+                             block="block"
+                             gallery="gallery"></div>
+                    </div>
+                    <div ng-switch-when="slider"
+                         class="card">
+                        <div sb-cms-slider
+                             block="block"
+                             gallery="gallery"></div>
+                    </div>
+                    <div ng-switch-when="video">
+                        <div sb-cms-video
+                             block="block"></div>
+                    </div>
+                    <div ng-switch-when="address"
+                         class="card">
+                        <div sb-cms-address
+                             block="block"
+                             on-show-map="onShowMap(address)"></div>
+                    </div>
+                    <div ng-switch-when="button"
+                         class="card">
+                        <div sb-cms-button
+                             block="block"></div>
+                    </div>
+                    <div ng-switch-when="file"
+                         class="card">
+                        <div sb-cms-file
+                             block="block"></div>
+                    </div>
+                    <div ng-switch-when="cover"
+                         class="card no-shadow">
+                        <div sb-cms-cover
+                             block="block"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div ng-if="notes_are_enabled "
+             class="place-notes-block">
+
+            <div class="card"
+                 style="margin-bottom: 0;">
+                <ion-item class="item-divider item-divider-custom">{{ "Private notes" | translate:"places" }}</ion-item>
+            </div>
+
+            <div ng-if="isLoggedIn()">
+                <!-- Form section -->
+                <div class="card"
+                     style="margin-bottom: 0;">
+                    <ion-item class="item-input item-custom note-textare-custom">
+                        <textarea placeholder="{{ ::'Write a note...' | translate:'places' }}"
+                                  rows="7"
+                                  ng-model="form.note"></textarea>
+                    </ion-item>
+                </div>
+
+                <div class="padding">
+                    <button class="button button-assertive button-assertive-custom button-block"
+                            ng-click="sendNote()">
+                        {{ ::'Save note' | translate:'places' }}&nbsp;&nbsp;&nbsp;&nbsp;
+                        <i class="icon ion-ios-paperplane"></i>
+                    </button>
+                </div>
+
+                <!-- Notes section -->
+                <div ng-if="localData.notes"
+                     ng-repeat="note in localData.notes"
+                     class="card">
+
+                    <div class="item item-text-wrap item-custom sb-cms-text">
+                        <div class="assertive assertive-custom"
+                             style="position: absolute; right: 6px;top: 6px; z-index: 1000;"
+                             ng-click="deleteNote(note.id)">
+                            <i class="icon ion-trash-a"
+                               style="font-size: 26px;"></i>
+                        </div>
+                        <div class="content"
+                             style="padding-right: 20px;"
+                             ng-bind-html="note.content | trusted_html"></div>
+                        <div class="subcontent text-right" style="font-size: 12px; font-style: italic; margin-top: 10px">
+                            <i>{{ note.mtDate | moment_calendar }}</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="!isLoggedIn()">
+                <div class="card"
+                     ng-click="login()">
+                    <ion-item class="item-custom item-icon-left">
+                        <i class="icon ion-person"></i>
+                        <p>{{ "Login or signup to use notes!" | translate:"places" }}</p>
+                    </ion-item>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+
+</ion-view>

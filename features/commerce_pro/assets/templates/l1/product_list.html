@@ -1,0 +1,422 @@
+<div ng-controller="CommerceProPListController">
+    <ion-content ng-class="{ 'has-subheader has-bigger-subheader' : settings.showSearch }" class="new-design">
+
+        <div class="loader"
+             ng-show="getState() == 'LOADING'">
+            <ion-spinner class="spinner-custom"></ion-spinner>
+        </div>
+
+        <ion-refresher ng-if="use_pull_refresh"
+                       class="spinner-custom"
+                       pulling-text="{{ ::'Pull to refresh...'| translate:'commerce_pro' }}"
+                       on-refresh="pullToRefresh()">
+        </ion-refresher>
+
+
+
+        <div class="list"
+             ng-class="{'card' : card_design}"
+             ng-show="getState() == 'RESULTS' || collection.length">
+
+            <!-- CommercePro only -->
+            <!--<div ng-if="is_cart_enable" class="button-bar"
+                 ng-if="use_button_header">
+                <a class="button button-custom icon-left ion-clipboard"
+                   ng-click="openHistory()">{{ ::'Order history'| translate:'commerce_pro' }}</a>
+                <a class="button button-custom icon-left ion-ios-cart"
+                   ng-click="openCart()">
+                    <span>{{ ::'My cart'| translate:'commerce_pro' }}</span>
+                    <span class="badge badge-positive badge-positive-custom">{{ cartItems}}</span>
+                </a>
+            </div>-->
+
+            <!--            <div ng-show="show_search && collection.length > 0">
+                            <label class="item item-input">
+                                <input type="text"
+                                       id="search"
+                                       name="search"
+                                       ng-model="filter_search"
+                                       placeholder="{{ ::'Search'| translate:'commerce_pro' }}" />
+                            </label>
+                        </div>-->
+
+
+            <div ng-show="show_search && collection.length > 0">
+
+                <div class="row">
+                    <div class="col col-10 text-center col-center">
+                        <div class="qr-scanner1">
+                            <a ng-click="getScanProductQr()">
+                                <i class="icon ion-qr-scanner"></i>
+                            </a>
+                        </div>
+                    </div> 
+                    <div class="col col-90 text-center col-center">
+                        <div>
+                            <label class="item item-input p-0 pl-10 brd-rad-50">
+                                <input type="text"
+                                       id="search"
+                                       name="search"
+                                       ng-model="filter_search"
+                                       placeholder="{{ ::'Search'| translate:'commerce_pro' }}" />
+                            </label>
+                        </div>
+                    </div> 
+
+                </div>           
+            </div>
+        </div>
+
+
+
+        <div ng-if="cover.picture || cover.title" class="list"
+             ng-class="{'card' : card_design}"
+             ng-show="!is_loading && cover">
+
+            <div ng-click="showItem(cover)">
+                <div class="item item-image item-custom"
+                     ng-if="cover.picture">
+                    <img ng-src="{{ cover.picture}}" />
+                </div>
+                <div class="item item-custom">
+                    <h2>{{ cover.title}}</h2>
+                    <p>{{ cover.subtitle}}</p>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="list">
+            <div class="item item-custom"
+                 ng-click="showItem(item)"
+                 ng-if="(!cover || !(cover.id)) || (cover.id != item.id)"
+                 ng-repeat="item in collection| filter:filter_search"
+                 ng-class="{'item-thumbnail-left': (item.thumbnail.length || item.picture), 'item-center': (!item.subtitle && !item.message)}">
+    
+                <img ng-src="{{ item.thumbnail}}"
+                     ng-if="item.thumbnail.length" />
+                <img ng-src="{{ item.picture}}"
+                     ng-if="item.picture && !item.thumbnail.length" />
+                <h2>{{ item.title ? item.title : "" }}</h2>
+                <p class="three-lines"
+                   ng-if="item.wfPrice && !price_hide_flag"
+                   ng-bind-html="item.wfPrice"></p>
+                <p ng-if="!item.subtitle && item.message">{{ item.message}}</p>
+                
+                <div class="clear"></div>
+            </div>
+        </div>-->
+
+        <div class="list p-0 m-0 product-list all" >
+
+            <div  class="card stor-list"   ng-click="showItem(item)"
+                  ng-if="(!cover || !(cover.id)) || (cover.id != item.id)"
+                  ng-repeat="item in collection| filter:filter_search"
+                  ng-class="{'item-thumbnail-left1': (item.thumbnail.length || item.picture), 'item-center1': (!item.subtitle && !item.message)}">
+
+                <div class="item item-cards item-custom p-0">
+                    <div class="row p-0 card-bg">
+                       <div class="col-30 text-center" ng-if="!is_product_pic_hide">
+                            <div class="store-img" style="background-image:url({{ item.thumbnail}})" ng-if="item.thumbnail.length && !is_product_pic_hide"></div>
+                            <div class="store-img" style="background-image:url({{ item.picture}})" ng-if="item.picture && !item.thumbnail.length && !is_product_pic_hide"></div>
+                            <div class="store-img" style="background-image:url(./features/commerce_pro/assets/templates/images/shop-placeholder.jpg)" ng-if="!item.picture && !item.thumbnail.length && !is_product_pic_hide"></div> 
+                        </div> 
+                        <div ng-class="{'col-100 col-center margin-left':is_product_pic_hide}" class="col-70 col-center">
+                            <div class="row">
+                                <div class="col-80">
+                                    <h2 class="relative">{{ item.title ? item.title : '' }}
+                                      <div class="rating-sec" ng-if="is_review && item.rating.is_rated">
+                                            <span ng-if="item.rating.is_rated">
+                                          <span class="item item-divider item-divider-custom rat-box">{{item.rating.rating}} <i class="icon ion-ios-star"></i></span>
+                                      </span>
+                                       </div>
+                                    </h2>
+                                    
+                                    <span ng-if="item.is_sku_enable" style="float:right">SKU:{{item.sku}}</span>
+                                    <!--<h2>{{ item.title ? item.title : '' }}</h2>-->
+                                    <div class="price-data">
+                                        <p class="three-lines m0"
+                                           ng-if="item.wfPrice && !price_hide_flag && !taxes_in_price"
+                                           ng-bind-html="item.wfPrice"></p>
+
+                                        <p class="three-lines m0"
+                                           ng-if="item.wfPrice && !price_hide_flag && taxes_in_price"
+                                           ng-bind-html="item.formattedPriceInclTax"></p>
+                                        <span class="line-through" ng-if="labels.enable_sale_price == '1' && item.sale_price > 0"></span>
+
+                                    </div>
+                                    <p ng-if=" !is_product_pic_hide && labels.enable_sale_price == '1' && !price_hide_flag && item.sale_price > 0" class="sale_price">{{ item.sale_price_formatted}}</p>
+                                    <div class="no-image-saleprice m0" ng-if="is_product_pic_hide && labels.enable_sale_price == '1' && !price_hide_flag && item.sale_price > 0"
+                                         ng-bind-html="item.sale_price_formatted"></div>
+                                    <p ng-if="!item.subtitle && item.message" class="m0">{{ item.message}}</p>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="col-20 col-center">
+                                    <div class="col p-0 col-top text-center">
+                                        <img class="icon-right mb-10" src="./features/commerce_pro/assets/templates/images/arrow-right.svg">
+                                    </div>
+                                </div>
+
+                            </div>   
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="list"
+             ng-class="{'card': card_design}"
+             ng-if="(getState() == 'NO_RESULTS')">
+            <div class="item text-center item-custom">
+                {{ ::'No items found'| translate:'commerce_pro' }}
+            </div>
+        </div>
+
+        <ion-infinite-scroll ng-if="load_more"
+                             on-infinite="loadMore()"
+                             immediate-check="false"
+                             distance="10%"
+                             class="spinner-custom">
+        </ion-infinite-scroll>
+
+        <style type="text/css" ng-if="is_back_btn_visible">
+            /*.header-item{
+                display: none!important;
+            }*/
+        </style>
+
+        <style type="text/css">
+            .margin-left{
+                margin-left: 15px;
+            }
+            label.html-custom-search {
+                border-radius: 3px;
+                padding-left: 10px;
+                padding-top: 3px;
+                margin-right: 6px;
+            }
+
+            .product-list{
+                z-index: 0;
+            }
+
+            /* START: New design CSS */
+
+            .new-design .store-img{
+                display: inline-block;
+
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                vertical-align: middle;
+                margin: auto;
+                height: 70px;
+                width: 100%;
+            }
+            .new-design .stor-list{
+                margin: 10px!important;
+            }
+            .new-design .p-0{padding: 0px!important;}
+
+            .new-design .card-bg {background-color: #fff;margin: 5px 0px 5px 5px!important;}
+            .new-design .card-bg p, .new-design .card-bg h2{color: #000!important;}
+
+            .product-list p.sale_price{
+                position: absolute;
+                left: 0px;
+                bottom: 6px;
+                background-color: #41ad0b !important;
+                color: #fff!important;
+                padding: 0px 8px;
+                border-bottom-right-radius: 10px;
+                border-top-right-radius: 10px;
+                border: 1px solid #286f05 !important;
+                border-left: none;
+            }
+
+            .product-list .no-image-saleprice{
+                display: inline-block;
+                margin-left: 8px;
+                font-weight: bold;
+                color: #369a04!important;
+            }
+
+            .product-list .price-data{
+                position: relative;
+                display: inline-block;
+                line-height: 11px;
+            }
+            .product-list .m0{
+                margin: 0;
+            }
+
+            .product-list .line-through{
+                height: 1.3pt;
+                width: 100%;
+                background-color: red;
+                position: absolute;
+                bottom: 5px;
+                display: block;
+            }
+
+            /* END: New design CSS */
+
+        </style>
+        <style type="text/css">
+            .folder-layout.folder-l6 {
+                margin-top: 15px;
+            }
+
+            .folder-layout.folder-l6.card {
+                box-shadow: none;
+            }
+
+            .folder-layout.folder-l6 .folder-l6-row {
+                padding: 0;
+                display: flex;
+                margin-bottom: 48px;
+                overflow: visible;
+            }
+
+            .folder-layout.folder-l6 .folder-l6-col {
+                padding: 0;
+                width: 33%;
+            }
+
+            .folder-layout.folder-l6 .folder-l6-row div.folder-l6-col {
+                margin: 0 6px;
+                padding: 0;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: 50%;
+                overflow: visible;
+            }
+
+            .folder-layout.folder-l6 .folder-l6-row div.folder-l6-col img {
+                width: 100%;
+            }
+
+            .folder-layout.folder-l6 .folder-l6-row div.folder-l6-col.single,
+            .folder-layout.folder-l6 .folder-l6-row div.folder-l6-col.double {
+                flex: 0 1 calc(33% - 12px);
+            }
+
+            .folder-layout.folder-l6 .folder-l6-row div.folder-l6-col,
+            .folder-layout.folder-l6.card .folder-l6-row div.folder-l6-col {
+                border-radius: 50%;
+            }
+
+            .folder-layout.folder-l6.card .folder-l6-row div.folder-l6-col:nth-child(1) {
+                margin: 0 6px 0 0;
+            }
+
+            .folder-layout.folder-l6.card .folder-l6-row div.folder-l6-col:nth-child(2) {
+                margin: 0 6px 0 6px;
+            }
+
+            .folder-layout.folder-l6.card .folder-l6-row div.folder-l6-col:nth-child(3) {
+                margin: 0 0 0 6px;
+            }
+
+            .folder-layout.folder-l6 .folder-title {
+                position: absolute;
+                bottom: -24px;
+                width: 100%;
+                text-align: center;
+                font-size: 14px;
+                padding: 0 10px;
+            }
+
+            .folder-layout.folder-l6 .folder-subtitle {
+                position: absolute;
+                bottom: -40px;
+                width: 100%;
+                text-align: center;
+                font-size: 13px;
+                padding: 0 10px;
+            }
+
+            .rating-sec .rat-box{
+                background-color: #00adff;
+                padding: 1px 5px;
+                color: #fff;
+                border-radius: 0px 0px 4px 0px!important;
+                font-size: 15px;
+                min-height: auto!important;
+            }
+            .rating-sec .rat-box i{
+                margin: 0px!important;
+                padding-left: 0px;
+            }
+            .rating-sec {
+              position: absolute;
+               top: 0px;
+                  display: inline-block;
+                 right: 0px;
+            }
+            .relative{
+                position: relative;
+            }
+            ion-view[state="commercepro-category-list"] .category-list,ion-view[state="commercepro-category-list"] .product-list {margin-bottom: 100px; } 
+            ion-view[state="commercepro-subcategory-list"] .category-list, ion-view[state="commercepro-category-list"] .product-list {margin-bottom: 100px; }
+
+
+
+
+        </style>
+
+
+    </ion-content>
+    <ion-slide-box auto-play = "1" does-continue = "1" ng-show="$root.show_commercepro_banner && labels.banner_img1_url && labels.banner_img2_url && labels.banner_img3_url">
+        <ion-slide>
+            <div class="row">
+                <div clas="col for-w" style=" padding: 5px 0px 10px 6px;">
+                    <div class = "box box1">
+                        <div class="offer-slider">
+                            <img src="{{ labels.banner_img1_url}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </ion-slide>
+
+        <ion-slide>
+            <div class="row">
+                <div clas="col" style=" padding: 5px 0px 10px 6px;">
+                    <div class = "box box1">
+                        <div class="offer-slider">
+                            <img src="{{ labels.banner_img2_url}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-slide>
+
+        <ion-slide>
+            <div class="row">
+                <div clas="col" style=" padding: 5px 0px 10px 6px;">
+                    <div class = "box box1">
+                        <div class="offer-slider">
+                            <img src="{{ labels.banner_img3_url}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-slide>
+
+    </ion-slide-box> 
+    <span class="banner-close-btn" ng-show="$root.show_commercepro_banner && labels.banner_img1_url && labels.banner_img2_url && labels.banner_img3_url" ng-click="closeBanner()"><img src="./features/commerce_pro/assets/templates/images/close.svg">{{ ::'close'| translate:'commerce_pro' }}</span>
+
+    <div style="position: absolute; bottom: 0px; width: 100%; display: inline-block;" class="bar-custom bar" ng-if="is_cart_enable">
+        <div style="text-align: center; float: left; ">
+            <a class="button icon-left ion-clipboard" ng-click="openHistory()" style="border: none;">
+                {{ ::'Order history'| translate:'commerce_pro' }}</a>
+        </div>
+        <div style="text-align: center; float: right; ">
+            <a class="button icon-left ion-ios-cart" ng-click="openCart()" style="border: none;">
+                <span>{{ ::'My cart'| translate:'commerce_pro' }}</span>
+                <span class="badge badge-positive badge-positive-custom">{{ cartItems}}</span>
+            </a>
+        </div>
+    </div>
+</div>

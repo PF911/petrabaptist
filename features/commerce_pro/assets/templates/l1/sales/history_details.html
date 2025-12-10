@@ -1,0 +1,130 @@
+<ion-view sb-page-background
+          class="mcommerce-view mcommerce-sales-history-details">
+    <ion-nav-title>{{ page_title}}</ion-nav-title>
+
+    <ion-content>
+
+        <div class="list">
+            <div class="item item-divider item-divider-custom item-custom">
+                <h2>
+                    <strong>{{ ::'Order N°'| translate:'commerce_pro' }}: {{ order.details.number}}</strong>
+                    <span class="pull-right" style="color: black;"><i class="ion-android-warning"
+                                                                      ng-if="order.details.status === '1'"> </i>{{ order.details.status_label | translate:'commerce_pro' }}</span>
+                </h2>
+                <!--                <h2 ng-if="order.settings.price_hide_flag === '1'">
+                                    <strong>{{ ::'Order N°'| translate:'commerce_pro' }}: {{ order.details.number}}</strong>
+                                    <span class="pull-right" style="color: black;"><i class="ion-android-warning"
+                                                                                      ng-if="order.details.status === '1'"> </i>{{ order.details.status_label}}</span>
+                                </h2>-->
+                <!--<h2 ng-if="order.settings.price_hide_flag == '0'"><strong>{{ ::'Order N°'| translate:'commerce_pro' }}: {{ order.details.number}}</strong></h2>-->
+            </div>
+            <div class="item item-custom" ng-if="order.details.delivery_code != 'on_location' && order.settings.price_hide_flag == '0' && order.details.booking_data.length < 1">
+                {{ ::'Delivery Method'| translate:'commerce_pro' }}: {{ order.details.delivery_method}}
+
+            </div>
+
+            <div class="item item-custom" ng-if="order.details.delivery_code === 'on_location' && order.settings.price_hide_flag == '0' && order.details.booking_data.length < 1">
+
+                {{ label_array['on_location'] !== 'undefined' && label_array['on_location'] != '' ? label_array['on_location']:'Table Service'| translate:'commerce_pro' }}: 
+                <p class="pull-right">{{ label_array['table_no'] !== 'undefined' && label_array['table_no'] !='' ? label_array['table_no']:'Table No' }}: {{ order.details.submitted_number}}</p>
+            </div>
+            <div class="hide-if-disabled" ng-if="order.settings.price_hide_flag == '0'">
+                <div class="item item-custom" ng-if="order.details.delivery_code === 'home_delivery'" >
+                    {{ ::'Delivery Time'| translate:'commerce_pro' }}: <p class="pull-right">{{ order.details.delivery_time}}</p>
+                </div>
+                <div class="item item-custom" ng-if="order.details.delivery_code === 'in_store' || order.details.delivery_code === 'carry_out'">
+                    {{ ::'Pickup Time'| translate:'commerce_pro' }}: <p class="pull-right">{{ order.details.pickup_time}}</p>
+                </div>
+                <!--<div class="item item-custom" ng-if="order.details.delivery_code === 'on_location'">
+                    {{ label_array['table_no'] !== 'undefined' && label_array['table_no'] !='' ? label_array['table_no']:'Table No' }}: {{ order.details.submitted_number}}
+                </div>-->
+                <div class="item item-custom">
+                    {{ ::'Payment Method'| translate:'commerce_pro' }}: <p class="pull-right">{{ order.details.payment_method}}</p>
+                </div>
+                <!--                <div class="item item-custom">
+                                    {{ ::'Status'| translate:'commerce_pro' }}: {{ order.details.status_label}}
+                                </div>-->
+                <div class="item item-custom"
+                     ng-if="order.details.discount">
+                    {{ ::'Discount used'| translate:'commerce_pro' }}: <p class="pull-right">{{ order.details.discount}}</p>
+                </div>
+                <div class="item item-divider item-divider-custom item-custom">
+                    <h2><strong>{{ ::'Order Details'| translate:'commerce_pro' }}</strong></h2>
+                </div>
+            </div>
+            <div class="item item-custom item-icon-left"
+                 ng-repeat="line in order.lines">
+                <i class="icon ion-pricetag"></i>
+                <h2 ng-bind-html="line.title"></h2>
+                <p>{{ ::'Qty'| translate:'commerce_pro' }}: {{ line.qty}}</p>
+                <p ng-if="order.settings.price_hide_flag == '0'" class="text-right"><strong>{{ line.total}}</strong></p>
+            </div>
+            <div class="hide-if-disabled" ng-if="order.details.booking_data">
+                <div class="item item-divider item-divider-custom item-custom">
+                    <h2><strong>{{ ::'Booking Details'| translate:'commerce_pro' }}</strong></h2>
+                </div>
+                <div class="item item-custom" ng-if="label != 'product_id' && label != 'accommodations' && val" ng-repeat="(label, val) in order.details.booking_data">
+                    <span ng-show="label == 'check_in'">{{ ::'Check In'| translate:'commerce_pro' }}</span>
+                    <span ng-show="label == 'check_out'">{{ ::'Check Out'| translate:'commerce_pro' }}</span>
+                    <span ng-show="label == 'store_age_rates'">{{ ::'Special Age Rates'| translate:'commerce_pro' }}</span>
+                    <span ng-show="label == 'booking_slot'">{{ ::'Booking Slot'| translate:'commerce_pro' }}</span>
+                    <span ng-show="label == 'seasonal_rates'">{{ ::'Seasonal Rates'| translate:'commerce_pro' }}</span>
+                    <span ng-show="label != 'seasonal_rates' && label != 'store_age_rates' && label != 'booking_slot' && label != 'check_in' && label != 'check_out'">{{ label}}</span>
+                    <span class="pull-right">
+                        {{ val}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="hide-if-disabled" ng-if="order.settings.price_hide_flag == '0'">
+                <div class="item item-divider item-divider-custom item-custom">
+                    <h2><strong>{{ ::'Order Total'| translate:'commerce_pro' }}</strong></h2>
+                </div>
+                <div class="item item-custom">
+                    {{ ::'Subtotal'| translate:'commerce_pro' }}: <span class="pull-right">{{ order.details.subtotal}}</span>
+                </div>
+                <div class="item item-custom">
+                    {{ ::'Total tax'| translate:'commerce_pro' }}: <span class="pull-right">{{ order.details.total_tax}}</span>
+                </div>
+                <div class="item item-custom"
+                     ng-if="order.details.discount">
+                    {{ ::'Discount amount'| translate:'commerce_pro' }}: <span class="pull-right">{{ order.details.discount_total}}</span>
+                </div>
+                <div class="item item-custom"
+                     ng-if="order.details.additional_charge !== '0'">
+                    {{ ::label_array['additional_charge_label'] !== 'undefined' && label_array['additional_charge_label'] != '' ? label_array['additional_charge_label'] : 'Additional charge'| translate:'commerce_pro' }}: <span class="pull-right">{{ order.details.additional_charge}}</span>
+                </div>
+                <div class="item item-custom"
+                     ng-if="order.details.tip">
+                    {{ ::'Gratuity'| translate:'commerce_pro' }}: <span class="pull-right">{{ order.details.tip}}</span>
+                </div>
+                <div class="item item-custom">
+                    {{ ::'Total'| translate:'commerce_pro' }}: <span class="pull-right">{{ order.details.total}}</span>
+                </div>
+            </div>
+
+            <div class="item item-custom">
+                {{ ::'Customer Notes'| translate:'commerce_pro' }}: <p class="pull-right">{{ order.details.note}}</p>
+            </div>
+            <div class="item item-custom">
+                {{ ::'Admin Notes'| translate:'commerce_pro' }}: 
+                <p ng-if="order.details.admin_notes" ng-bind-html="order.details.admin_notes"></p>
+                <p ng-if="!order.details.admin_notes">{{ ::'Reviewing order'| translate:'commerce_pro' }}</p>
+            </div>
+        </div>
+        <div class="row p-0" ng-if="order.details.booking_data.length < 1">
+            <div class="col">
+                <button ng-click="orderAgain(order.details)" class="button button-positive button-positive-custom button-full">
+                    {{ ::'Order Again'| translate:'commerce_pro' }}
+                </button>
+            </div>
+        </div>
+        <div class="row p-0" ng-if='order.is_review'>
+            <div class="col">
+                <button ng-click="writeReview(order.details)" class="button button-positive button-positive-custom button-full">
+                    {{ ::'Write Review'| translate:'commerce_pro' }}
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

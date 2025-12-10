@@ -1,0 +1,67 @@
+<ion-list ng-if='!showing_members'>
+            <ion-item ng-repeat="group in groups track by group.id" ng-click="showMembers($index, {{group.can_see_profiles}})" class="card m-10 no-padding" >
+               <div class="row group-card">
+                    <div class="col col-60">
+                      <h2 class="font-22"> {{ group.name}} </h2> 
+                      <span class="grp-status close" ng-show="group.is_private">{{ ::"Private"| translate:"community" }}</span>
+                      <span class="grp-status open" ng-show="!group.is_private">{{ ::"Public"| translate:"community" }}</span>
+                      <span class="font-12 d-block">{{ ::"Created On"| translate:"community" }}: {{ group.created_at }}</span>
+                    </div>
+                     <div class="col col-30 col-center">
+                        <h2 class="font-30"> {{ group.total_members }}  </h2> 
+                        <span>{{ ::"Member(s)"| translate:"community" }}</span> 
+                    </div>
+                     <div class="col col-10 col-center text-center no-padding">
+                        <i class="icon font-34 ion-chevron-right"></i>
+                    </div>
+                </div>
+            </ion-item>
+
+            <div class="card-loader" ng-show="isLoading">
+                <lottie-player  src="./features/community/assets/templates/images/lottie/card-loader.json"  background="transparent"  speed="1"  style="width: 100%; height: auto;"  loop autoplay></lottie-player>
+            </div>
+            <div class="list no-data text-center" ng-if="!isLoading && !groups.length">
+                <lottie-player class="no-data-svg" src="./features/community/assets/templates/images/lottie/no-data.json"  background="transparent"  speed="1"  loop autoplay></lottie-player>
+                <span> {{ ::"No group found." | translate:"community" }}</span>
+            </div>
+
+        </ion-list>
+
+        <div ng-if='showing_members'>
+           <!--  <div ng-click="backToList()">Back to groups</div>
+            <div class="list m-0">
+                <div class = "item item-icon-left group-name">
+                    <i class = "icon ion-person-stalker"></i>    
+                    </div> 
+            </div> -->
+            <div class="list m-0">
+                 <div class="row group-card" ng-click="backToList()">
+                    <div class="col col-10 col-center text-center no-padding">
+                        <i class="icon font-34 ion-chevron-left"></i>
+                    </div>
+                    <div class="col col-60">
+                      <h2 class="font-22"> {{ group_info.name}} </h2> 
+                      <span class="grp-status close" ng-show="group_info.is_private">{{ ::"Private"| translate:"community" }}</span>
+                      <span class="grp-status open" ng-show="!group_info.is_private">{{ ::"Public"| translate:"community" }}</span>
+                      <span class="font-12 d-block">{{ ::"Created On"| translate:"community" }}: {{ group_info.created_at }}</span>
+                    </div>
+                     <div class="col col-30 col-center">
+                        <h2 class="font-30"> {{ group_info.total_members }}  </h2> 
+                        <span>{{ ::"Member(s)"| translate:"community" }}</span> 
+                    </div>
+                     
+                </div> 
+            </div>
+            <div class="list member-list">
+                <div class="join-bar" ng-if="!group_info.can_chat">
+                    <button class="button button-full icon ion-person-add btn-del" ng-click="join()">{{ ::"join this group"| translate:"community" }}</button>
+                </div>
+                <div class = "item" ng-repeat="member in group_info.members">
+                    <div class="list-box" ng-click="viewProfile({{member.id}})">
+                        <span class="member-img" style="background-image: url('{{ profileImagePath(member.image) }}')"></span>
+                        <P>{{ member.name}}</P>
+                    </div>
+                </div>
+
+            </div>   
+        </div>

@@ -1,0 +1,55 @@
+<ion-view sb-page-background
+          class="module-embedpdf embedpdf-view">
+
+    <ion-nav-title>{{ pageTitle }}</ion-nav-title>
+
+    <ion-content>
+
+        <div ng-if="settings.enable_search">
+            <input ng-show="!isLoading"
+                   type="text"
+                   class="epdf-search"
+                   placeholder="{{ ::'Search, filter...' | translate:'embed_pdf' }}"
+                   ng-model="search.title" />
+            <i ng-click="search.title = ''"
+               ng-class="{'active': search.title!= ''}"
+               class="clear-search icon ion-sb-clear"></i>
+        </div>
+
+        <div class="document-list"
+             ng-if="!isLoading && collection.length > 0">
+
+            <div ng-repeat="pdf in collection | filter:search track by $index"
+                 ng-click="openPdf(pdf.id)"
+                 class="document">
+                <div style="background-image: url({{ imageSrc(pdf.cover) }})"
+                     class="document-image">
+                    <img alt="pdf.title"
+                         src="./features/embed_pdf/assets/images/placeholder_document.png"/>
+                </div>
+                <p>{{ pdf.title }}</p>
+            </div>
+        </div>
+
+        <div class="list">
+            <div ng-if="!isLoading && collection.length === 0"
+                 class="padding">
+                <div class="card">
+                    <div class="item item-custom item-text-wrap">
+                        {{ ::'No documents found.' | translate:'embed_pdf' }}
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="isLoading" class="text-center"
+                 style="margin-top: 20px;">
+                <ion-spinner icon="android"
+                             class="spinner-custom"></ion-spinner>
+                <p>{{ ::'Loading...' | translate:'embed_pdf' }}</p>
+            </div>
+        </div>
+
+        <div style="height: 40px;"></div>
+    </ion-content>
+
+</ion-view>

@@ -1,0 +1,31 @@
+<ion-modal-view sb-page-background
+                ng-controller="CommunityModalController"
+                class="community-view">
+
+    <ion-header-bar class="bar-custom">
+        <div class="buttons">
+            <button class="button button-clear"
+                    ng-click="close()">
+                <i class="icon ion-android-arrow-back"></i>
+            </button>
+        </div>
+        <h1 class="title">{{ pageTitle }}</h1>
+    </ion-header-bar>
+
+    <ion-content>
+        <div class="card-loader" ng-show="isLoading">
+            <lottie-player  src="./features/community/assets/templates/images/lottie/card-loader.json"  background="transparent"  speed="1"  style="width: 100%; height: auto;"  loop autoplay></lottie-player>
+        </div>
+        <div class="list no-data text-center" ng-if="!isLoading && !collection.length">
+             <lottie-player class="no-data-svg" src="./features/community/assets/templates/images/lottie/no-data.json"  background="transparent"  speed="1"  loop autoplay></lottie-player>
+            <span> {{ "No items found" | translate }}</span>
+        </div>
+
+        <ion-list ng-if="!isLoading" class="list fav-list">
+            <community-list-item ng-if="collection.length > 0"
+                                       ng-repeat="user in collection track by user.id"></community-list-item>
+
+        </ion-list>
+    </ion-content>
+
+</ion-modal-view>

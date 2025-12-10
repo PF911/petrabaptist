@@ -1,0 +1,62 @@
+<ion-view class="has-background-image">
+    <ion-nav-title ><div>{{ author['firstname'] }} {{ author['lastname'] }}</div></ion-nav-title>
+<ion-content class="messaging-profile"
+             ng-class="{'has-subheader': displaySubHeader()}"
+             >
+
+    <div ng-if="!isLoading">
+        <div class="customer-image">
+            <img ng-src="{{ customerImagePath() }}"
+                 class="general-custom-border"
+                 alt="profile-picture" />
+        </div>
+        <div class="customer-fullname">
+            {{ customerFullname() }} 
+            <sup style="font-style: italic;" ng-show="isPrivate">{{ ::"Private" | translate:"socialnetworks" }}</sup>
+            <sup style="font-style: italic;" ng-show="!isPrivate">{{ ::"Public" | translate:"socialnetworks" }}</sup>
+            </br>
+            <a style="font-size: 12px;" ng-click="toggleProfile()">{{ ::"Switch to" | translate:"socialnetworks" }} 
+                <b ng-show="isPrivate">{{ ::"Public" | translate:"socialnetworks" }}</b> 
+                <b ng-show="!isPrivate">{{ ::"Private" | translate:"socialnetworks" }}</b> 
+                {{ ::"Profile" | translate:"socialnetworks" }}
+            </a>
+        </div>
+        <div class="customer-actions mtb-10">
+            <button class="button button-small button-positive button-positive-custom"
+                    ng-click="editProfile()">
+                <i class="ion ion-edit"></i>
+                {{ ::"Edit profile" | translate:"socialnetworks" }}
+            </button>
+        </div>
+        <div class="mtb-10">
+            <ion-toggle ng-change="toggleBtn()" class="meds-toggle toggle-custom"
+                        toggle-class="toggle-energized"
+                        ng-model="notification.disabled"
+                        ng-checked="notification.disabled">
+                <div class="toggle-text">{{ ::"Disable Notification"| translate:"socialnetworks" }}</div>
+            </ion-toggle>
+        </div>
+
+    </div>
+    <style type="text/css">
+        .messaging-profile .customer-image{
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .messaging-profile .customer-image img{
+            margin: 0 auto;
+            width: 10em;
+            border-radius: 5em;
+            border: 0.4em solid white;
+            display: block;
+        }
+        .messaging-profile .customer-fullname, .messaging-profile .customer-actions{
+            text-align: center;
+        }
+        .messaging-profile .mtb-10{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</ion-content>
+    </ion-view>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Petra Baptist Church</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  /* gradient background */
+  .page-background {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+    z-index: 0;
+  }
+
+  .app-frame {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* top logo */
+  .logo-bar {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    padding-top: 10px;
+    z-index: 50;
+  }
+
+  .logo-bar img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+  }
+
+  /* main iframe area */
+  .content-area {
+    position: absolute;
+    top: 90px;
+    bottom: 160px; /* lifted to clear footer */
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    background: white;
+  }
+
+  /* footer banner */
+  .footer-banner {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    background: #1d4f7a; /* solid color for clarity */
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 100;
+  }
+
+  .banner-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 4px 0;
+  }
+
+  .banner-row div {
+    background: rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    white-space: nowrap;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  }
+
+  .banner-row div:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  @media (max-width: 480px) {
+    .banner-row div {
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+  }
+</style>
+
+<script>
+  function goHome(){ window.location.href = "index.html"; }
+</script>
+</head>
+
+<body>
+  <div class="page-background"></div>
+
+  <div class="app-frame">
+
+    <!-- Top Logo -->
+    <div class="logo-bar">
+      <img src="img/logo2.png" alt="Petra Baptist Church Logo">
+    </div>
+
+    <!-- Main Content Area (iframe or embedded media) -->
+    <div class="content-area">
+      <!-- Example content: replace or edit per page -->
+      <iframe src="https://example.com" title="Embedded Content"></iframe>
+    </div>
+
+ <!-- 3-Row Footer Menu -->
+    <div class="footer-banner">
+
+      <!-- Row 1 -->
+      <div class="banner-row">
+        <div onclick="goHome()">Home</div>
+        <div onclick="window.location.href='sermons.html'">Sermons</div>
+        <div onclick="window.location.href='prayer.html'">Prayer</div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="banner-row">
+        <div onclick="window.location.href='bibles.html'">Bibles</div>
+        <div onclick="window.location.href='contact.html'">Contact</div>
+        <div onclick="window.location.href='facebook.html'">Facebook</div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="banner-row">
+        <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+        <div onclick="window.location.href='events.html'">Events</div>
+      </div>
+
+    </div>
+
+  </div>
+</body>
+</html>

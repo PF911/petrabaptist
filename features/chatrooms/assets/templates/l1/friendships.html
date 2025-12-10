@@ -1,0 +1,115 @@
+<ion-modal-view sb-page-background
+                class="chatrooms chatrooms-friendships"
+                ng-controller="ChatroomsManageFriendsViewController">
+
+    <ion-header-bar class="bar-custom">
+        <button class="button button-clear"
+                ng-click="closeFriendsModal()">
+            <i ng-class="backButtonIcon()"></i>
+        </button>
+        <h1 class="title">{{ ::'Friends & blocked' | translate:'chatrooms' }}</h1>
+    </ion-header-bar>
+
+    <ion-content class="homepage-custom"
+                 has-bouncing="false">
+
+        <div class="loader"
+             ng-show="is_loading">
+            <ion-spinner class="spinner spinner-custom"></ion-spinner>
+        </div>
+
+        <div class="chatrooms-spacer"></div>
+
+        <div class="list"
+             ng-class="{'card': getCardDesign()}"
+             ng-if="!is_loading && has_friends">
+            <div class="item item-divider item-divider-custom">
+                {{ ::'Friends' | translate:'chatrooms' }}
+            </div>
+            <ion-item class="item item-custom item-icon-right"
+                      ng-click="showCustomer(friend.id)"
+                      ng-repeat="(friend_id, friend) in friends track by friend.id">
+                <p class="friend">
+                    <span class="status-bubble"
+                          ng-class="{'online': friend.online}"></span> {{ friend.nickname }}
+                </p>
+                <i class="icon ion-ios-arrow-right"></i>
+            </ion-item>
+        </div>
+
+        <div ng-if="has_requests"
+             class="chatrooms-spacer"></div>
+
+        <div class="list"
+             ng-class="{'card': getCardDesign()}"
+             ng-if="!is_loading && has_requests">
+            <div class="item item-divider item-divider-custom">
+                {{ ::'Friend requests' | translate:'chatrooms' }}
+            </div>
+            <ion-item class="item item-custom item-icon-right"
+                      ng-click="showCustomer(request_friend.id)"
+                      ng-repeat="(request_friend_id, request_friend) in requests track by request_friend.id">
+                {{ request_friend.nickname }}
+                <i class="icon ion-ios-arrow-right"></i>
+            </ion-item>
+        </div>
+
+        <div ng-if="has_pending_requests"
+             class="chatrooms-spacer"></div>
+
+        <div class="list"
+             ng-class="{'card': getCardDesign()}"
+             ng-if="!is_loading && has_pending_requests">
+            <div class="item item-divider item-divider-custom">
+                {{ ::'Your pending requests' | translate:'chatrooms' }}
+            </div>
+            <ion-item class="item item-custom item-icon-right"
+                      ng-click="showCustomer(request_friend.id)"
+                      ng-repeat="(request_friend_id, request_friend) in pending_requests track by request_friend.id">
+                {{ request_friend.nickname }}
+                <i class="icon ion-ios-arrow-right"></i>
+            </ion-item>
+        </div>
+
+        <div ng-if="has_blocked"
+             class="chatrooms-spacer"></div>
+
+        <div class="list"
+             ng-class="{'card': getCardDesign()}"
+             ng-if="!is_loading && has_blocked">
+            <div class="item item-divider item-divider-custom">
+                {{ ::'Blocked friend requests' | translate:'chatrooms' }}
+            </div>
+            <ion-item class="item item-custom item-icon-right"
+                      ng-click="showCustomer(blocked_pal.id)"
+                      ng-repeat="(blocked_id, blocked_pal) in blocked track by blocked_pal.id">
+                {{ blocked_pal.nickname }}
+                <i class="icon ion-ios-arrow-right"></i>
+            </ion-item>
+        </div>
+
+        <div ng-class="{'padding': getCardDesign()}">
+            <button class="icon-left ion-android-person-add button button-balanced button-balanced-custom"
+                    ng-class="{'button-block': getCardDesign(), 'button-full': !getCardDesign()}"
+                    ng-click="addFriend()">{{ ::'Add a friend' | translate:'chatrooms' }}
+            </button>
+        </div>
+
+        <div ng-if="has_blocked_users"
+             class="chatrooms-spacer"></div>
+
+        <div class="list"
+             ng-class="{'card': getCardDesign()}"
+             ng-if="!is_loading && has_blocked_users">
+            <div class="item item-divider item-divider-custom">
+                {{ ::'Blocked users' | translate:'chatrooms' }}
+            </div>
+            <ion-item class="item item-custom item-icon-right"
+                      ng-click="showCustomer(blocked_user.id)"
+                      ng-repeat="(blocked_user_id, blocked_user) in blocked_users track by blocked_user.id">
+                {{ blocked_user.nickname }}
+                <i class="icon ion-ios-arrow-right"></i>
+            </ion-item>
+        </div>
+    </ion-content>
+</ion-modal-view>

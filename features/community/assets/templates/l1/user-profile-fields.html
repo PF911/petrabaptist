@@ -1,0 +1,32 @@
+<ion-view class="community-view commu-signup">
+    <ion-nav-title>
+        <div ng-bind-html="page_title | trusted_html"></div>
+    </ion-nav-title>
+
+
+
+
+    <ion-content delegate-handle="mainScroll">
+
+        <div ng-repeat="section in sections" class="card sign-up profile list" ng-show="sections" ng-if="section.id == visible_section_id">
+            
+            <community-section-item></community-section-item>
+            
+            <button class="button button-full" ng-click="post()">
+                <i ng-if="!label_settings.lang_continue">{{ ::"CONTINUE"| translate:"community" }}</i>
+                <i ng-if="label_settings.lang_continue">{{label_settings.lang_continue}}</i>
+            </button>
+
+        </div>
+
+
+    </ion-content>
+
+
+
+
+
+</ion-view>
+
+
+

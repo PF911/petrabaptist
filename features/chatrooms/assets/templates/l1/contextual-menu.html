@@ -1,0 +1,50 @@
+<ion-content class="chatrooms chatrooms-contextual-menu"
+             has-bouncing="false"
+             ng-controller="ChatroomsContextualMenuController">
+  <ion-list>
+      <ion-item ng-if="localChatroom"
+                class="item-custom">
+          <h2>
+              <b># {{ localChatroom.name }}</b>
+          </h2>
+      </ion-item>
+
+      <ion-item class="item-divider item-divider-custom">
+          {{ ::'Active users' | translate:'chatrooms' }}
+      </ion-item>
+
+      <ion-item class="item-custom item-custom-user-list"
+                ng-repeat="person in users.allowed track by person.customer_id"
+                ng-click="showCustomer(person.customer_id)"
+                ng-if="person.nickname.trim().length > 0 && !inBlockList(person.customer_id)">
+          <div class="row friend online">
+              <h3>
+                <span class="status-bubble"></span>
+                {{ person.nickname }}
+              </h3>
+          </div>
+      </ion-item>
+
+      <div ng-if="users.blocked.length > 0">
+          <ion-item style="margin-top: 20px;"
+                    class="item-divider item-divider-custom">
+              {{ ::'Blocked users' | translate:'chatrooms' }}
+          </ion-item>
+
+          <ion-item class="item-custom item-custom-user-list"
+                    ng-repeat="person in users.blocked track by person.customer_id"
+                    ng-click="showCustomer(person.customer_id)"
+                    ng-if="person.nickname.trim().length > 0">
+              <div class="row friend online">
+                  <h3 style="font-style: italic; opacity: 0.7;">
+                      <span class="status-bubble"
+                            style="border: 2px solid #ff6a00; background-color: white !important;"></span>
+                      {{ person.nickname }}
+                  </h3>
+              </div>
+          </ion-item>
+      </div>
+
+
+  </ion-list>
+</ion-content>

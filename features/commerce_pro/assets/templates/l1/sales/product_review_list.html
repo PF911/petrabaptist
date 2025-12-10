@@ -1,0 +1,84 @@
+<ion-view sb-page-background
+          class="mcommerce-view mcommerce-sales-history">
+    <ion-nav-title>{{ page_title}}</ion-nav-title>
+
+    <ion-content>
+        <div class="list">
+            <div class="item item-text-wrap item-custom"
+                 ng-repeat="review in reviews">
+                <div class="row no-padding">
+                    <div class="col col-60 no-padding">
+                        <p class="font-18"><i class="icon ion-ios-person"></i><b>{{review.customer}}</b></p>
+                        <p><b>{{review.created_at}}</b></p>    
+                    </div>
+                    <div class="col no-padding col-top text-right rat-body">
+                        <rating ng-model="review.rating" max="5"  style="float:right" readonly="true"></rating>
+                    </div>    
+                </div>
+
+                <!--   <span>{{rating_count}}</span> -->
+                <div class="row no-padding">
+                    <div class="col no-padding">
+                        <p class="review-txt" ng-bind-html="review.review"></p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="item item-text-wrap item-custom"
+                 ng-if="!reviews.length">
+                {{ ::'No items found'| translate:'commerce_pro' }}
+            </div>
+        </div>
+
+        <ion-infinite-scroll ng-if="can_load_older_reviews"
+                             on-infinite="loadMore()"
+                             immediate-check="false"
+                             distance="10%"
+                             class="spinner-custom">
+        </ion-infinite-scroll>
+
+    </ion-content>
+</ion-view>
+
+<style type="text/css">
+     .ion-ios-star{
+                color: goldenrod!important;
+            }
+    label.no-bottom-border.item.item-checkbox {
+        background-color: transparent;
+        padding: 15px 30px 15px 20px;
+    }
+    .my-custom-stars .button .material-icons {
+        font-size: 50px; 
+    }
+
+    .my-custom-stars .star-button.star-on .material-icons {
+        color: #003399; 
+    }
+
+    .my-custom-stars .star-button.star-off .material-icons {
+        color: #99ccff; 
+    }
+
+   .rat-body ul.rating li {
+              display: inline-block!important;
+              padding: 0px!important;
+            }
+          .rat-body ul.rating li i{
+            color: #eb9b03!important;
+            font-size: 21px!important;
+            margin: 2px!important;
+         }
+
+    .review-txt{
+        background-color: #f0f0f0!important;
+        padding: 10px;
+        border-radius: 4px;
+        margin-top: 10px;
+        color: #000;
+        font-weight: bold; 
+    } 
+
+
+</style>

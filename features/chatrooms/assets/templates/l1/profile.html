@@ -1,0 +1,109 @@
+<ion-modal-view sb-page-background
+                class="chatrooms chatrooms-profile">
+
+    <ion-header-bar class="bar-custom">
+        <button class="button button-clear"
+                ng-click="closeProfileModal()">
+            <i ng-class="backButtonIcon()"></i>
+        </button>
+        <h1 class="title">{{ ::'Profile' | translate:'chatrooms' }}</h1>
+    </ion-header-bar>
+
+    <ion-content class="homepage-custom"
+                 has-bouncing="false">
+        <div class="loader"
+             ng-show="profile_loading">
+            <ion-spinner class="spinner spinner-custom"></ion-spinner>
+        </div>
+        <div ng-show="!profile_loading">
+
+            <div class="list"
+                 ng-class="{'card': getCardDesign()}"
+                 ng-if="profile_data.is_you">
+                <div class="item item-custom text-center">
+                    {{ ::'This is a preview of your profile!' | translate:'chatrooms' }}
+                </div>
+            </div>
+
+            <section class="avatar text-center padding">
+                <div>
+                    <img width="150"
+                         height="150"
+                         ng-src="{{ profile_avatar }}"
+                         class="profile-avatar stable-bg stable-border" />
+                </div>
+            </section>
+
+            <section class="name_bio">
+                <div class="padding text-center">
+                    <p>
+                        <b>{{ profile_customer.nickname }}</b>
+                    </p>
+                </div>
+                <div class="padding"
+                     ng-if="profile_customer.bio">
+                    <p>
+                        <b>{{ ::'Bio' | translate:'chatrooms' }}</b>
+                    </p>
+                    <p>
+                        {{ profile_customer.bio }}
+                    </p>
+                </div>
+
+                <div ng-if="!profile_data.is_you"
+                     ng-class="{'padding': getCardDesign()}">
+                    <button ng-if="!inBlockList(profile_customer.id) && !profile_data.is_blocked && profile_data.is_friend"
+                            ng-click="actionProfile('unfriend');"
+                            ng-class="{'button-block': getCardDesign(), 'button-full': !getCardDesign()}"
+                            class="icon-left ion-android-remove-circle button button-assertive button-assertive-custom">
+                        {{ ::'Remove from friends' | translate:'chatrooms' }}
+                    </button>
+                    <button ng-if="!inBlockList(profile_customer.id) && !profile_data.is_blocked && !profile_data.is_friend && profile_data.is_requested"
+                            ng-click="actionProfile('unfriend');"
+                            ng-class="{'button-block': getCardDesign(), 'button-full': !getCardDesign()}"
+                            class="icon-left ion-android-remove-circle button button-energized button-energized-custom">
+                        {{ ::'Cancel friend request' | translate:'chatrooms' }}
+                    </button>
+                    <button ng-if="!inBlockList(profile_customer.id) && !profile_data.is_blocked && !profile_data.is_friend && !profile_data.is_requested && !profile_data.is_pending_acceptation"
+                            ng-click="actionProfile('friend');"
+                            ng-class="{'button-block': getCardDesign(), 'button-full': !getCardDesign()}"
+                            class="icon-left ion-android-person-add button button-balanced button-balanced-custom">
+                        {{ ::'Request as friend' | translate:'chatrooms' }}
+                    </button>
+                    <button ng-if="!inBlockList(profile_customer.id) && !profile_data.is_blocked && profile_data.is_pending_acceptation && !profile_data.is_friend"
+                            ng-click="actionProfile('friend');"
+                            ng-class="{'button-block': getCardDesign(), 'button-full': !getCardDesign()}"
+                            class="icon-left ion-android-checkmark-circle button button-balanced button-balanced-custom">
+                        {{ ::'Accept as friend' | translate:'chatrooms' }}
+                    </button>
+                    <button ng-if="!inBlockList(profile_customer.id) && profile_data.is_blocked"
+                            ng-click="actionProfile('unblock');"
+                            ng-class="{'button-block': getCardDesign(), 'button-full': !getCardDesign()}"
+                            class="icon-left ion-android-checkmark-circle button button-balanced button-balanced-custom">
+                        {{ ::'Unblock friend requests' | translate:'chatrooms' }}
+                    </button>
+                    <button ng-if="!inBlockList(profile_customer.id) && !profile_data.is_blocked && !profile_data.is_friend"
+                            ng-click="actionProfile('block');"
+                            ng-class="{'button-block': getCardDesign(), 'button-full': !getCardDesign()}"
+                            class="icon-left ion-android-remove-circle button button-assertive button-assertive-custom">
+                        {{ ::'Block friend requests' | translate:'chatrooms' }}
+                    </button>
+                    <button ng-if="!inBlockList(profile_customer.id)"
+                            ng-click="actionProfile('block_user');"
+                            ng-class="{'button-block': getCardDesign(), 'button-full': !getCardDesign()}"
+                            class="icon-left ion-android-remove-circle button button-assertive button-assertive-custom">
+                        {{ ::'Block user & messages' | translate:'chatrooms' }}
+                    </button>
+                    <button ng-if="inBlockList(profile_customer.id)"
+                            ng-click="actionProfile('unblock_user');"
+                            ng-class="{'button-block': getCardDesign(), 'button-full': !getCardDesign()}"
+                            class="icon-left ion-android-checkmark-circle button button-balanced button-balanced-custom">
+                        {{ ::'Unblock user & messages' | translate:'chatrooms' }}
+                    </button>
+                </div>
+
+            </section>
+
+        </div>
+    </ion-content>
+</ion-modal-view>

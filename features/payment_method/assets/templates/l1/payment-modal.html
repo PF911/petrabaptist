@@ -1,0 +1,56 @@
+<ion-modal-view class="payment-method payment-method-modal"
+                ng-controller="PaymentModalController"
+                sb-page-background>
+
+    <ion-header-bar class="bar-custom">
+        <div class="buttons">
+            <button class="button button-clear"
+                    ng-click="closeModal()">
+                <i class="icon ion-android-arrow-back"></i>
+            </button>
+        </div>
+        <h1 class="title">{{ ::options.title | translate:"payment_method" }}</h1>
+    </ion-header-bar>
+
+    <ion-content>
+        <div class="list list-item">
+
+            <div class="loader"
+                 ng-show="isLoading">
+                <ion-spinner class="spinner-custom"></ion-spinner>
+            </div>
+
+            <div ng-show="!isLoading">
+
+                <div ng-if="options.display.recap"
+                     ng-bind-html="options.payment.recap | trusted_html"></div>
+
+                <div class="payment-amount"
+                     ng-if="options.display.amount">
+                    <div class="item item-divider item-divider-custom text-center"
+                         ng-bind-html="options.labels.amount | trusted_html">
+                    </div>
+                    <div class="item item-custom item-text-wrap">
+                        <p class="text-center"
+                           style="font-size: 26px; margin-top: 8px;">{{ ::options.payment.formattedAmount }}</p>
+                        <p ng-if="options.labels.amountExtra"
+                           class="text-center"
+                           style="margin-top: 15px;">{{ ::options.labels.amountExtra }}</p>
+                    </div>
+                    <div style="margin-bottom: 20px;"></div>
+                </div>
+
+                <div ng-repeat="paymentGateway in paymentGateways">
+                    <div ng-if="methodIsAllowed(paymentGateway.shortName)">
+                        <div ng-include="'' + paymentGateway.templateUrl + ''"></div>
+                        <div style="margin-bottom: 20px;"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </ion-content>
+
+</ion-modal-view>
+
