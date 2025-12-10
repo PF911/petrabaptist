@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Events — Petra Baptist Church</title>
+<title>Events – Petra Baptist Church</title>
 
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -24,7 +24,6 @@
     position:relative;
   }
 
-  /* Top nav */
   .top-nav{
     background:rgba(29,79,122,0.95);
     padding:12px 16px;
@@ -54,8 +53,7 @@
     font-weight:bold;
   }
 
-  /* Browser area */
-  .browser-content{flex:1;position:relative;}
+  .browser-content{flex:1;position:relative;background:white;}
   iframe{
     width:100%;
     height:100%;
@@ -68,14 +66,37 @@
     background:white;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     z-index:50;
+    transition:opacity 0.3s;
   }
+  .loading-overlay.hidden{opacity:0;pointer-events:none;}
   .spinner{
     width:50px;height:50px;border:4px solid #e0e0e0;border-top:4px solid #2e6aa9;
     border-radius:50%;animation:spin 1s linear infinite;
   }
   @keyframes spin{100%{transform:rotate(360deg)}}
+  .loading-text{margin-top:12px;color:#2e6aa9;font-size:14px;}
 
-  /* Footer */
+  .error-message{
+    background:#fff3cd;
+    border:2px solid #ffc107;
+    color:#856404;
+    padding:20px;
+    margin:20px;
+    border-radius:8px;
+    text-align:center;
+  }
+  .error-message button{
+    margin-top:15px;
+    background:#2e6aa9;
+    color:white;
+    border:none;
+    padding:12px 24px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+  }
+
   .footer-menu{
     background:#1d4f7a;
     padding:12px 8px;
@@ -100,28 +121,32 @@
 <body>
 <div class="app-frame">
 
-  <!-- NAV -->
   <div class="top-nav">
     <button class="back-button" onclick="goHome()">←</button>
     <div class="nav-title">Events</div>
-    <button class="nav-button" onclick="refreshPage()">↻</button>
+    <button class="nav-button" onclick="openExternal()">⧉</button>
   </div>
 
-  <!-- CONTENT -->
   <div class="browser-content">
     <div id="loadingOverlay" class="loading-overlay">
       <div class="spinner"></div>
-      <p style="color:#2e6aa9;margin-top:12px;">Loading Events...</p>
+      <p class="loading-text">Loading Events...</p>
+    </div>
+
+    <div id="errorMessage" style="display:none;" class="error-message">
+      <h3>Unable to Load Events</h3>
+      <p>The events page cannot be displayed in an embedded view.</p>
+      <button onclick="openExternal()">Open in Browser</button>
     </div>
 
     <iframe
       id="eventsFrame"
       src="https://petrabaptist.com/events"
-      onload="hideLoading()">
+      onload="handleLoad()"
+      onerror="handleError()">
     </iframe>
   </div>
 
-  <!-- FOOTER -->
   <div class="footer-menu">
     <button class="menu-item" onclick="goHome()">Home</button>
     <button class="menu-item" onclick="navigate('sermons.html')">Sermons</button>
@@ -132,18 +157,47 @@
 </div>
 
 <script>
+  const eventsUrl = 'https://petrabaptist.com/events';
+  let loadTimeout;
+
   function goHome(){window.location.href='index.html';}
   function navigate(p){window.location.href=p;}
 
-  function refreshPage(){
-    const f=document.getElementById('eventsFrame');
-    document.getElementById('loadingOverlay').style.opacity='1';
-    f.src=f.src;
+  function handleLoad(){
+    clearTimeout(loadTimeout);
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.classList.add('hidden');
   }
 
-  function hideLoading(){
-    document.getElementById('loadingOverlay').style.opacity='0';
+  function handleError(){
+    clearTimeout(loadTimeout);
+    showError();
   }
+
+  function showError(){
+    const overlay = document.getElementById('loadingOverlay');
+    const error = document.getElementById('errorMessage');
+    const frame = document.getElementById('eventsFrame');
+    
+    overlay.classList.add('hidden');
+    frame.style.display = 'none';
+    error.style.display = 'block';
+  }
+
+  function openExternal(){
+    window.open(eventsUrl, '_blank');
+  }
+
+  // Set timeout for loading
+  window.addEventListener('load', () => {
+    loadTimeout = setTimeout(() => {
+      // If still loading after 10 seconds, assume it failed
+      const overlay = document.getElementById('loadingOverlay');
+      if (!overlay.classList.contains('hidden')) {
+        showError();
+      }
+    }, 10000);
+  });
 </script>
 
 </body>
