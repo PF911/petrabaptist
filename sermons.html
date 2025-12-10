@@ -2,191 +2,40 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Petra Baptist Church - Sermons</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sermons Viewer | Petra Baptist Church</title>
 
 <style>
   body {
     margin: 0;
+    background: #000;
     font-family: Arial, sans-serif;
-    color: white;
-    text-align: center;
-    overflow: hidden;
   }
 
-  .page-background {
+  .frame-container {
     position: fixed;
     top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
-    z-index: 0;
-  }
-
-  .app-frame {
-    position: relative;
-    z-index: 1;
     width: 100%;
-    max-width: 420px;
-    margin: 0 auto;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 100%;
+    background: #000;
   }
 
-  .logo-bar {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+  iframe {
     width: 100%;
-    max-width: 420px;
-    padding-top: 10px;
-    z-index: 50;
-  }
-
-  .logo-bar img {
-    width: 80%;
-    max-width: 300px;
-    height: auto;
-  }
-
-  .content-area {
-    position: absolute;
-    top: 90px;
-    bottom: 160px;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .sermons-button {
-    background: rgba(255,255,255,0.9);
-    color: #2e6aa9;
+    height: 100%;
     border: none;
-    border-radius: 12px;
-    padding: 20px 40px;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .sermons-button:hover {
-    background: white;
-    transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-  }
-
-  .info-text {
-    margin-top: 20px;
-    font-size: 16px;
-    color: rgba(255,255,255,0.9);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-  }
-
-  .footer-banner {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 420px;
-    background: #1d4f7a;
-    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-    z-index: 100;
-  }
-
-  .banner-row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 4px 0;
-  }
-
-  .banner-row a {
-    background: rgba(255,255,255,0.15);
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-weight: bold;
-    font-size: 16px;
-    white-space: nowrap;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-    text-decoration: none;
-    transition: background 0.3s;
-  }
-
-  .banner-row a:hover {
-    background: rgba(255,255,255,0.3);
-  }
-
-  .active {
-    background: rgba(255,255,255,0.6) !important;
-    color: #1d4f7a !important;
-    box-shadow: 0 0 12px rgba(255,255,255,0.9);
   }
 </style>
 </head>
 
 <body>
 
-<div class="page-background"></div>
-
-<div class="app-frame">
-
-  <!-- Logo -->
-  <div class="logo-bar">
-    <img src="img/logo2.png" alt="Petra Baptist Church Logo">
-  </div>
-
-  <!-- Content -->
-  <div class="content-area">
-    <a class="sermons-button" href="https://www.youtube.com/@petrabaptistchurch947/videos" target="_blank">
-      📺 Watch Sermons
-    </a>
-
-    <p class="info-text">
-      Tap to view our latest sermons on YouTube<br>
-      <small>Swipe from left edge to return</small>
-    </p>
-  </div>
-
-  <!-- Footer Navigation -->
-  <div class="footer-banner">
-
-    <div class="banner-row">
-      <a href="index.html">Home</a>
-      <a href="sermons.html" class="active">Sermons</a>
-      <a href="prayer.html">Prayer</a>
-    </div>
-
-    <div class="banner-row">
-      <a href="bibles.html">Bibles</a>
-      <a href="contact.html">Contact</a>
-      <a href="facebook.html">Facebook</a>
-    </div>
-
-    <div class="banner-row">
-      <a href="flocknotes.html">Flocknotes</a>
-      <a href="events.html">Events</a>
-      <a href="website.html">Website</a>
-    </div>
-
-  </div>
-
+<div class="frame-container">
+  <iframe 
+    src="https://www.youtube.com/embed?listType=user_uploads&list=petrabaptistchurch947"
+    allowfullscreen
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  ></iframe>
 </div>
 
 </body>
