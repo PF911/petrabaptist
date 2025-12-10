@@ -191,7 +191,7 @@
   // Set timeout for loading
   window.addEventListener('load', () => {
     loadTimeout = setTimeout(() => {
-      // If still loading after 10 seconds, assume it failed
+      // If still loading after 4 seconds, assume it failed
       const overlay = document.getElementById('loadingOverlay');
       if (!overlay.classList.contains('hidden')) {
         showError();
