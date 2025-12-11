@@ -1,152 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Petra Baptist Sermons</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Sermons | Petra Baptist Church</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  /* Background */
+  .page-background {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+    z-index: 0;
+  }
+
+  /* Main frame (phone width) */
+  .app-frame {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Top logo */
+  .logo-bar {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    padding-top: 10px;
+    z-index: 50;
+  }
+
+  .logo-bar img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+  }
+
+  /* Content area between logo and footer */
+  .content-area {
+    position: absolute;
+    top: 100px;
+    bottom: 160px;
+    left: 0;
+    right: 0;
+    padding: 10px 10px 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .page-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  }
+
+  .page-subtitle {
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* Playlist buttons (similar to Bible buttons) */
+  .playlist-button {
+    width: 90%;
+    background: #ffffff;
+    border-radius: 10px;
+    color: #0f3f7a;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 14px 12px;
+    font-size: 16px;
+    border: 2px solid #0f3f7a;
+    text-shadow: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .playlist-button:hover {
+    background: #e6eef8;
+    transform: scale(1.02);
+  }
+
+  .playlist-text {
+    text-align: left;
+  }
+
+  .playlist-title {
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+
+  .playlist-desc {
+    font-size: 13px;
+    color: #30507f;
+  }
+
+  .playlist-arrow {
+    font-size: 20px;
+  }
+
+  /* Footer banner */
+  .footer-banner {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    background: #1d4f7a;
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 100;
+  }
+
+  .banner-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 4px 0;
+  }
+
+  .banner-row div {
+    background: rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    white-space: nowrap;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  .banner-row div:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  .banner-row div.active {
+    background: rgba(255,255,255,0.6);
+    color: #1d4f7a;
+    box-shadow: 0 0 12px rgba(255,255,255,0.9);
+    font-weight: bold;
+  }
+
+  @media (max-width: 480px) {
+    .banner-row div {
+      font-size: 14px;
+      padding: 8px 10px;
     }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      background: #000;
-      color: #fff;
+    .playlist-button {
+      font-size: 14px;
+      padding: 12px 10px;
     }
+  }
+</style>
 
-    .container {
-      padding: 12px;
-    }
+<script>
+  function goHome() {
+    window.location.href = "index.html";
+  }
 
-    h1 {
-      text-align: center;
-      font-size: 1.25rem;
-      margin: 8px 0 10px;
-    }
+  function openPlaylist(playlistId, title) {
+    const url =
+      "sermon-viewer.html?list=" + encodeURIComponent(playlistId) +
+      "&title=" + encodeURIComponent(title);
+    window.location.href = url;
+  }
 
-    .subtitle {
-      text-align: center;
-      font-size: 0.85rem;
-      color: #cfcfcf;
-      margin-bottom: 12px;
-    }
-
-    .playlist-list {
-      max-height: calc(100vh - 80px);
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding-bottom: 10px;
-    }
-
-    .playlist-card {
-      border-radius: 10px;
-      padding: 12px;
-      background: #141414;
-      border: 1px solid #333;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.2s ease;
-    }
-
-    .playlist-card:hover {
-      background: #1f1f1f;
-    }
-
-    .playlist-info {
-      flex: 1;
-      padding-right: 10px;
-    }
-
-    .playlist-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .playlist-desc {
-      font-size: 0.8rem;
-      color: #cfcfcf;
-    }
-
-    .playlist-arrow {
-      font-size: 1.2rem;
-      opacity: 0.75;
-    }
-  </style>
-
-  <script>
-    function openPlaylist(playlistId, title) {
-      const url =
-        "sermon-viewer.html?list=" +
-        encodeURIComponent(playlistId) +
-        "&title=" +
-        encodeURIComponent(title);
-
-      window.location.href = url;
-    }
-  </script>
+  // Highlight Sermons in footer
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".banner-row div").forEach(btn => {
+      const link = btn.getAttribute("onclick") || "";
+      if (link.includes("sermons-menu.html") || link.includes("sermons.html")) {
+        btn.classList.add("active");
+      }
+    });
+  });
+</script>
 </head>
 
 <body>
-  <div class="container">
-    <h1>Petra Baptist Sermons</h1>
-    <div class="subtitle">Choose a playlist to watch</div>
+  <div class="page-background"></div>
 
-    <div class="playlist-list">
+  <div class="app-frame">
+    <!-- Top Logo -->
+    <div class="logo-bar">
+      <img src="img/logo2.png" alt="Petra Baptist Church Logo">
+    </div>
 
-      <div class="playlist-card"
-        onclick="openPlaylist('PLw2qfRFieARsDq584jSmAeJJeRNil2X4N', 'Playlist 1')">
-        <div class="playlist-info">
+    <!-- Playlist Menu -->
+    <div class="content-area">
+      <div class="page-title">Sermons</div>
+      <div class="page-subtitle">Choose a playlist to watch</div>
+
+      <!-- Playlist 1 -->
+      <div class="playlist-button"
+           onclick="openPlaylist('PLw2qfRFieARsDq584jSmAeJJeRNil2X4N', 'Playlist 1')">
+        <div class="playlist-text">
           <div class="playlist-title">Playlist 1</div>
           <div class="playlist-desc">Tap to view sermons in this playlist.</div>
         </div>
         <div class="playlist-arrow">▶</div>
       </div>
 
-      <div class="playlist-card"
-        onclick="openPlaylist('PLw2qfRFieARvLYfV1SxvQa1J0qCirblEI', 'Playlist 2')">
-        <div class="playlist-info">
+      <!-- Playlist 2 -->
+      <div class="playlist-button"
+           onclick="openPlaylist('PLw2qfRFieARvLYfV1SxvQa1J0qCirblEI', 'Playlist 2')">
+        <div class="playlist-text">
           <div class="playlist-title">Playlist 2</div>
           <div class="playlist-desc">Tap to view sermons in this playlist.</div>
         </div>
         <div class="playlist-arrow">▶</div>
       </div>
 
-      <div class="playlist-card"
-        onclick="openPlaylist('PLw2qfRFieARvkqL2HigT-s418sGJh8CV-', 'Playlist 3')">
-        <div class="playlist-info">
+      <!-- Playlist 3 -->
+      <div class="playlist-button"
+           onclick="openPlaylist('PLw2qfRFieARvkqL2HigT-s418sGJh8CV-', 'Playlist 3')">
+        <div class="playlist-text">
           <div class="playlist-title">Playlist 3</div>
           <div class="playlist-desc">Tap to view sermons in this playlist.</div>
         </div>
         <div class="playlist-arrow">▶</div>
       </div>
 
-      <div class="playlist-card"
-        onclick="openPlaylist('PLw2qfRFieARtTOCRfXCP1Zh6j8peZyKTe', 'Playlist 4')">
-        <div class="playlist-info">
+      <!-- Playlist 4 -->
+      <div class="playlist-button"
+           onclick="openPlaylist('PLw2qfRFieARtTOCRfXCP1Zh6j8peZyKTe', 'Playlist 4')">
+        <div class="playlist-text">
           <div class="playlist-title">Playlist 4</div>
           <div class="playlist-desc">Tap to view sermons in this playlist.</div>
         </div>
         <div class="playlist-arrow">▶</div>
       </div>
 
-      <div class="playlist-card"
-        onclick="openPlaylist('PLw2qfRFieARttAu0eb7sV7V9A0yy5t3P0', 'Playlist 5')">
-        <div class="playlist-info">
+      <!-- Playlist 5 -->
+      <div class="playlist-button"
+           onclick="openPlaylist('PLw2qfRFieARttAu0eb7sV7V9A0yy5t3P0', 'Playlist 5')">
+        <div class="playlist-text">
           <div class="playlist-title">Playlist 5</div>
           <div class="playlist-desc">Tap to view sermons in this playlist.</div>
         </div>
         <div class="playlist-arrow">▶</div>
       </div>
 
+    </div>
+
+    <!-- Footer menu -->
+    <div class="footer-banner">
+      <div class="banner-row">
+        <div onclick="goHome()">Home</div>
+        <div onclick="window.location.href='sermons-menu.html'">Sermons</div>
+        <div onclick="window.location.href='prayer.html'">Prayer</div>
+      </div>
+
+      <div class="banner-row">
+        <div onclick="window.location.href='bibles.html'">Bibles</div>
+        <div onclick="window.location.href='contact.html'">Contact</div>
+        <div onclick="window.location.href='facebook.html'">Facebook</div>
+      </div>
+
+      <div class="banner-row">
+        <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+        <div onclick="window.location.href='events.html'">Events</div>
+        <div onclick="window.location.href='website.html'">Website</div>
+      </div>
     </div>
   </div>
 </body>

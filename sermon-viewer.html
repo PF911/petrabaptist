@@ -1,79 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Sermon Viewer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Sermon Viewer | Petra Baptist Church</title>
 
-  <style>
-    body {
-      margin: 0;
-      background: #000;
-      color: #fff;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .page-background {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+    z-index: 0;
+  }
+
+  .app-frame {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo-bar {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    padding-top: 10px;
+    z-index: 50;
+  }
+
+  .logo-bar img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+  }
+
+  .content-area {
+    position: absolute;
+    top: 100px;
+    bottom: 160px;
+    left: 0;
+    right: 0;
+    padding: 6px 8px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .viewer-header {
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  }
+
+  .back-link {
+    font-size: 13px;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-bottom: 4px;
+  }
+
+  iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background: #000;
+  }
+
+  .footer-banner {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    background: #1d4f7a;
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 100;
+  }
+
+  .banner-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 4px 0;
+  }
+
+  .banner-row div {
+    background: rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    white-space: nowrap;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  .banner-row div:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  .banner-row div.active {
+    background: rgba(255,255,255,0.6);
+    color: #1d4f7a;
+    box-shadow: 0 0 12px rgba(255,255,255,0.9);
+    font-weight: bold;
+  }
+
+  @media (max-width: 480px) {
+    .banner-row div {
+      font-size: 14px;
+      padding: 8px 10px;
     }
+  }
+</style>
 
-    .header {
-      padding: 10px;
-      background: #111;
-      border-bottom: 1px solid #222;
-      text-align: center;
-      font-size: 1rem;
-      font-weight: 600;
-    }
+<script>
+  function goHome() {
+    window.location.href = "index.html";
+  }
 
-    .back-btn {
-      position: absolute;
-      left: 10px;
-      top: 10px;
-      background: #222;
-      border: 1px solid #444;
-      padding: 5px 10px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
+  function goSermonsMenu() {
+    window.location.href = "sermons-menu.html";
+  }
 
-    iframe {
-      flex: 1;
-      width: 100%;
-      border: none;
-    }
-  </style>
+  function getQueryParam(name) {
+    const url = new URL(window.location.href);
+    return url.searchParams.get(name);
+  }
 
-  <script>
-    function getQuery(name) {
-      const url = new URL(window.location.href);
-      return url.searchParams.get(name);
-    }
+  document.addEventListener("DOMContentLoaded", function () {
+    const playlistId = getQueryParam("list");
+    const title = getQueryParam("title") || "Sermons";
 
-    function goBack() {
-      window.history.back();
-    }
-
-    window.onload = function () {
-      const playlistId = getQuery("list");
-      const title = getQuery("title") || "Sermons";
-
-      document.getElementById("title").innerText = title;
-
-      // Build the YouTube playlist embed URL
+    document.getElementById("viewer-title").innerText = title;
+    if (playlistId) {
       const embedUrl = "https://www.youtube.com/embed?list=" + playlistId;
-
       document.getElementById("player").src = embedUrl;
-    };
-  </script>
+    }
+
+    // highlight Sermons in footer
+    document.querySelectorAll(".banner-row div").forEach(btn => {
+      const link = btn.getAttribute("onclick") || "";
+      if (link.includes("sermons-menu.html") || link.includes("sermons.html")) {
+        btn.classList.add("active");
+      }
+    });
+  });
+</script>
 </head>
 
 <body>
-  <div class="header">
-    <div class="back-btn" onclick="goBack()">← Back</div>
-    <span id="title">Loading…</span>
-  </div>
+  <div class="page-background"></div>
 
-  <iframe id="player" allowfullscreen></iframe>
+  <div class="app-frame">
+    <!-- Top Logo -->
+    <div class="logo-bar">
+      <img src="img/logo2.png" alt="Petra Baptist Church Logo">
+    </div>
+
+    <!-- Viewer Content -->
+    <div class="content-area">
+      <div class="back-link" onclick="goSermonsMenu()">← Back to Sermon Playlists</div>
+      <div id="viewer-title" class="viewer-header">Sermons</div>
+      <iframe id="player" allowfullscreen></iframe>
+    </div>
+
+    <!-- Footer menu -->
+    <div class="footer-banner">
+      <div class="banner-row">
+        <div onclick="goHome()">Home</div>
+        <div onclick="window.location.href='sermons-menu.html'">Sermons</div>
+        <div onclick="window.location.href='prayer.html'">Prayer</div>
+      </div>
+
+      <div class="banner-row">
+        <div onclick="window.location.href='bibles.html'">Bibles</div>
+        <div onclick="window.location.href='contact.html'">Contact</div>
+        <div onclick="window.location.href='facebook.html'">Facebook</div>
+      </div>
+
+      <div class="banner-row">
+        <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+        <div onclick="window.location.href='events.html'">Events</div>
+        <div onclick="window.location.href='website.html'">Website</div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
