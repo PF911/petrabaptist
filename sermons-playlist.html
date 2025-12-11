@@ -3,29 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Playlist | Petra Baptist Church</title>
+<title>Sermon Playlist | Petra Baptist Church</title>
 
 <style>
   body { margin:0; font-family:Arial; color:white; text-align:center; overflow:hidden; }
-  .page-background { position:fixed; top:0; left:0; width:100%; height:100%; background:linear-gradient(to bottom,#2e6aa9,#338cd0); }
-  .app-frame { position:relative; z-index:1; width:100%; max-width:420px; margin:0 auto; height:100vh; display:flex; flex-direction:column; }
-  .logo-bar { position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:420px; padding-top:10px; }
+  .page-background { position:fixed; top:0; left:0; width:100%; height:100%;
+    background:linear-gradient(to bottom,#2e6aa9,#338cd0); }
+  .app-frame { position:relative; z-index:1; width:100%; max-width:420px; margin:0 auto;
+    height:100vh; display:flex; flex-direction:column; }
+
+  .logo-bar { position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%;
+    max-width:420px; padding-top:10px; }
   .logo-bar img { width:80%; max-width:300px; }
 
   .content-area {
     position:absolute; top:100px; bottom:160px; left:0; right:0;
-    padding:10px; overflow-y:auto; display:flex; flex-direction:column; gap:12px;
+    padding:15px; overflow-y:auto; display:flex; flex-direction:column; gap:15px;
   }
 
   .page-title { font-size:20px; font-weight:bold; }
   .back-link { font-size:13px; text-decoration:underline; cursor:pointer; }
 
-  iframe {
-    width:100%;
-    height:750px;   /* FIXED — forces YouTube playlist mode */
-    border:none;
-    border-radius:10px;
-    background:#000;
+  .sermon-item {
+    background:white; color:#0f3f7a; padding:14px;
+    border-radius:10px; border:2px solid #0f3f7a;
+    font-weight:bold; text-align:left;
+    cursor:pointer; display:flex; justify-content:space-between;
   }
 
   .footer-banner {
@@ -50,36 +53,33 @@ function getParam(key) {
   return new URL(window.location.href).searchParams.get(key);
 }
 
+// You can replace these later with real titles + IDs
+const sermons = [
+  { title: "Daniel Part 6", id: "K0EF56e56No" },
+  { title: "Daniel Part 5", id: "fAGcIBwG0qY" },
+  { title: "Daniel Part 4", id: "gjXSRIeSOuA" },
+  { title: "Daniel Part 3", id: "EdbOcZvFvcU" },
+  { title: "Daniel Part 2", id: "Z4__i33kfn4" }
+];
+
 document.addEventListener("DOMContentLoaded", function () {
-  const playlistId = getParam("list");
-  const playlistTitle = getParam("title");
+  const plistTitle = getParam("title") || "Playlist";
+  document.getElementById("playlist-title").innerText = plistTitle;
 
-  document.getElementById("playlist-title").innerText = playlistTitle;
+  const container = document.getElementById("sermon-list");
 
-  const embedUrl =
-    "https://www.youtube.com/embed/videoseries?list=" +
-    playlistId +
-    "&index=0&autoplay=0&enablejsapi=1";
-
-  document.getElementById("playlist-frame").src = embedUrl;
-
-  window.addEventListener("message", function (event) {
-    if (!event.data || event.data.event !== "infoDelivery") return;
-
-    const info = event.data.info;
-    if (info && info.videoData && info.videoData.video_id) {
-      const videoId = info.videoData.video_id;
-      const title = info.videoData.title || "Sermon";
-
-      window.location.href =
-        "sermon-select.html?v=" +
-        encodeURIComponent(videoId) +
-        "&title=" +
-        encodeURIComponent(title);
-    }
+  sermons.forEach(s => {
+    const div = document.createElement("div");
+    div.className = "sermon-item";
+    div.innerHTML = `<span>${s.title}</span><span>▶</span>`;
+    div.onclick = () => {
+      location.href = `sermon-select.html?v=${s.id}&title=${encodeURIComponent(s.title)}`;
+    };
+    container.appendChild(div);
   });
 });
 </script>
+
 </head>
 
 <body>
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <div id="playlist-title" class="page-title">Playlist</div>
     <div class="back-link" onclick="location.href='sermons-menu.html'">← Back to Playlists</div>
 
-    <iframe id="playlist-frame" allowfullscreen></iframe>
+    <div id="sermon-list"></div>
   </div>
 
   <div class="footer-banner">
@@ -102,13 +102,11 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="active">Sermons</div>
       <div onclick="location.href='prayer.html'">Prayer</div>
     </div>
-
     <div class="banner-row">
       <div onclick="location.href='bibles.html'">Bibles</div>
       <div onclick="location.href='contact.html'">Contact</div>
       <div onclick="location.href='facebook.html'">Facebook</div>
     </div>
-
     <div class="banner-row">
       <div onclick="location.href='flocknotes.html'">Flocknotes</div>
       <div onclick="location.href='events.html'">Events</div>
@@ -117,5 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 
 </div>
+
 </body>
 </html>
