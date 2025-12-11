@@ -64,17 +64,18 @@
     gap: 6px;
   }
 
-  .viewer-header {
-    font-size: 15px;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-  }
-
   .back-link {
     font-size: 13px;
     text-decoration: underline;
     cursor: pointer;
     margin-bottom: 4px;
+  }
+
+  .viewer-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
   }
 
   iframe {
@@ -85,6 +86,7 @@
     background: #000;
   }
 
+  /* Footer */
   .footer-banner {
     position: fixed;
     bottom: 0;
@@ -160,12 +162,17 @@
     const title = getQueryParam("title") || "Sermons";
 
     document.getElementById("viewer-title").innerText = title;
+
     if (playlistId) {
-      const embedUrl = "https://www.youtube.com/embed?list=" + playlistId;
+      const embedUrl =
+        "https://www.youtube.com/embed/videoseries?list=" +
+        playlistId +
+        "&index=0&autoplay=0";
+
       document.getElementById("player").src = embedUrl;
     }
 
-    // highlight Sermons in footer
+    // highlight footer
     document.querySelectorAll(".banner-row div").forEach(btn => {
       const link = btn.getAttribute("onclick") || "";
       if (link.includes("sermons-menu.html") || link.includes("sermons.html")) {
@@ -180,19 +187,19 @@
   <div class="page-background"></div>
 
   <div class="app-frame">
-    <!-- Top Logo -->
+    <!-- Logo -->
     <div class="logo-bar">
       <img src="img/logo2.png" alt="Petra Baptist Church Logo">
     </div>
 
-    <!-- Viewer Content -->
+    <!-- Content -->
     <div class="content-area">
       <div class="back-link" onclick="goSermonsMenu()">← Back to Sermon Playlists</div>
       <div id="viewer-title" class="viewer-header">Sermons</div>
       <iframe id="player" allowfullscreen></iframe>
     </div>
 
-    <!-- Footer menu -->
+    <!-- Footer -->
     <div class="footer-banner">
       <div class="banner-row">
         <div onclick="goHome()">Home</div>
