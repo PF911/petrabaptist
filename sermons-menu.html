@@ -1,50 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Sermons</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Petra Baptist Sermons</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-  body {
-    margin: 0;
-    background: #0b5c89;
-    font-family: Arial, sans-serif;
-    text-align: center;
-  }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-  h1 {
-    color: white;
-    padding: 20px;
-    font-size: 32px;
-  }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #000;
+      color: #fff;
+    }
 
-  .frame {
-    width: 100%;
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px 0;
-  }
+    .container {
+      padding: 12px;
+    }
 
-  iframe {
-    width: 100%;
-    height: 540px;
-    border: none;
-    border-radius: 12px;
-  }
-</style>
+    h1 {
+      text-align: center;
+      font-size: 1.25rem;
+      margin: 8px 0 10px;
+    }
 
+    .subtitle {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #cfcfcf;
+      margin-bottom: 12px;
+    }
+
+    .playlist-list {
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-bottom: 10px;
+    }
+
+    .playlist-card {
+      border-radius: 10px;
+      padding: 12px;
+      background: #141414;
+      border: 1px solid #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s ease;
+    }
+
+    .playlist-card:hover {
+      background: #1f1f1f;
+    }
+
+    .playlist-info {
+      flex: 1;
+      padding-right: 10px;
+    }
+
+    .playlist-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .playlist-desc {
+      font-size: 0.8rem;
+      color: #cfcfcf;
+    }
+
+    .playlist-arrow {
+      font-size: 1.2rem;
+      opacity: 0.75;
+    }
+  </style>
+
+  <script>
+    function openPlaylist(playlistId, title) {
+      const url =
+        "sermon-viewer.html?list=" +
+        encodeURIComponent(playlistId) +
+        "&title=" +
+        encodeURIComponent(title);
+
+      window.location.href = url;
+    }
+  </script>
 </head>
+
 <body>
+  <div class="container">
+    <h1>Petra Baptist Sermons</h1>
+    <div class="subtitle">Choose a playlist to watch</div>
 
-<h1>Sermons</h1>
+    <div class="playlist-list">
 
-<div class="frame">
-  <iframe 
-    src="https://www.youtube.com/embed?listType=user_uploads&list=UCbZSSD3T2kcpnFOKaGl-crw"
-    allowfullscreen>
-  </iframe>
-</div>
+      <div class="playlist-card"
+        onclick="openPlaylist('PLw2qfRFieARsDq584jSmAeJJeRNil2X4N', 'Playlist 1')">
+        <div class="playlist-info">
+          <div class="playlist-title">Playlist 1</div>
+          <div class="playlist-desc">Tap to view sermons in this playlist.</div>
+        </div>
+        <div class="playlist-arrow">▶</div>
+      </div>
 
+      <div class="playlist-card"
+        onclick="openPlaylist('PLw2qfRFieARvLYfV1SxvQa1J0qCirblEI', 'Playlist 2')">
+        <div class="playlist-info">
+          <div class="playlist-title">Playlist 2</div>
+          <div class="playlist-desc">Tap to view sermons in this playlist.</div>
+        </div>
+        <div class="playlist-arrow">▶</div>
+      </div>
+
+      <div class="playlist-card"
+        onclick="openPlaylist('PLw2qfRFieARvkqL2HigT-s418sGJh8CV-', 'Playlist 3')">
+        <div class="playlist-info">
+          <div class="playlist-title">Playlist 3</div>
+          <div class="playlist-desc">Tap to view sermons in this playlist.</div>
+        </div>
+        <div class="playlist-arrow">▶</div>
+      </div>
+
+      <div class="playlist-card"
+        onclick="openPlaylist('PLw2qfRFieARtTOCRfXCP1Zh6j8peZyKTe', 'Playlist 4')">
+        <div class="playlist-info">
+          <div class="playlist-title">Playlist 4</div>
+          <div class="playlist-desc">Tap to view sermons in this playlist.</div>
+        </div>
+        <div class="playlist-arrow">▶</div>
+      </div>
+
+      <div class="playlist-card"
+        onclick="openPlaylist('PLw2qfRFieARttAu0eb7sV7V9A0yy5t3P0', 'Playlist 5')">
+        <div class="playlist-info">
+          <div class="playlist-title">Playlist 5</div>
+          <div class="playlist-desc">Tap to view sermons in this playlist.</div>
+        </div>
+        <div class="playlist-arrow">▶</div>
+      </div>
+
+    </div>
+  </div>
 </body>
 </html>
