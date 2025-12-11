@@ -1,40 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sermons</title>
-<style>
-  body {
-    margin: 0;
-    background: linear-gradient(#0b4f71, #066ca3);
-    font-family: Arial, sans-serif;
-    color: white;
-    text-align: center;
-  }
-  .wrapper {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-  }
-  iframe {
-    width: 100%;
-    height: 500px;
-    border: none;
-    border-radius: 10px;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sermons</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #0d5a87;
+      color: white;
+      text-align: center;
+    }
+
+    .content {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .video-wrapper {
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+      margin: 0 auto;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+  </style>
 </head>
+
 <body>
 
-<h1>Sermons</h1>
+  <div class="content">
+    <h1>Sermons</h1>
 
-<div class="wrapper">
-  <iframe 
-    src="https://www.youtube.com/embed?list=UU-bZSSD3T2kcpnFOKaGl-crw" 
-    allowfullscreen>
-  </iframe>
-</div>
+    <div class="video-wrapper">
+      <iframe
+        src="https://www.youtube.com/embed?listType=user_uploads&list=petrabaptistchurch947"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
 
 </body>
 </html>
