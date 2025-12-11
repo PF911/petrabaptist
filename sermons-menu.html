@@ -24,7 +24,7 @@
     z-index: 0;
   }
 
-  /* Main frame (phone width) */
+  /* Main frame */
   .app-frame {
     position: relative;
     z-index: 1;
@@ -37,7 +37,7 @@
     align-items: center;
   }
 
-  /* Top logo */
+  /* Logo */
   .logo-bar {
     position: fixed;
     top: 0;
@@ -55,7 +55,7 @@
     height: auto;
   }
 
-  /* Content area between logo and footer */
+  /* Content area */
   .content-area {
     position: absolute;
     top: 100px;
@@ -66,45 +66,44 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    gap: 15px;
   }
 
   .page-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    margin-bottom: 6px;
+    margin-bottom: -5px;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
   }
 
   .page-subtitle {
     font-size: 14px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     color: rgba(255,255,255,0.9);
   }
 
-  /* Playlist buttons (similar to Bible buttons) */
+  /* Playlist button style */
   .playlist-button {
     width: 90%;
+    margin: 0 auto;
     background: #ffffff;
     border-radius: 10px;
     color: #0f3f7a;
-    font-weight: bold;
-    text-decoration: none;
+    border: 2px solid #0f3f7a;
     padding: 14px 12px;
     font-size: 16px;
-    border: 2px solid #0f3f7a;
-    text-shadow: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-    transition: all 0.2s ease-in-out;
+    font-weight: bold;
+    text-decoration: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    transition: transform 0.2s ease, background 0.2s ease;
   }
 
   .playlist-button:hover {
-    background: #e6eef8;
     transform: scale(1.02);
+    background: #e8f1fb;
   }
 
   .playlist-text {
@@ -113,19 +112,19 @@
 
   .playlist-title {
     font-size: 16px;
-    margin-bottom: 2px;
+    font-weight: bold;
   }
 
   .playlist-desc {
     font-size: 13px;
-    color: #30507f;
+    color: #304f7a;
   }
 
   .playlist-arrow {
     font-size: 20px;
   }
 
-  /* Footer banner */
+  /* Footer */
   .footer-banner {
     position: fixed;
     bottom: 0;
@@ -157,10 +156,8 @@
     font-weight: bold;
     cursor: pointer;
     font-size: 16px;
-    white-space: nowrap;
     color: white;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-    transition: background 0.3s, box-shadow 0.3s;
+    transition: background 0.3s;
   }
 
   .banner-row div:hover {
@@ -171,131 +168,111 @@
     background: rgba(255,255,255,0.6);
     color: #1d4f7a;
     box-shadow: 0 0 12px rgba(255,255,255,0.9);
-    font-weight: bold;
   }
 
-  @media (max-width: 480px) {
-    .banner-row div {
-      font-size: 14px;
-      padding: 8px 10px;
-    }
-    .playlist-button {
-      font-size: 14px;
-      padding: 12px 10px;
-    }
-  }
 </style>
 
 <script>
-  function goHome() {
-    window.location.href = "index.html";
-  }
+function goHome() {
+  window.location.href = "index.html";
+}
 
-  function openPlaylist(playlistId, title) {
-    const url =
-      "sermon-viewer.html?list=" + encodeURIComponent(playlistId) +
-      "&title=" + encodeURIComponent(title);
-    window.location.href = url;
-  }
-
-  // Highlight Sermons in footer
-  document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".banner-row div").forEach(btn => {
-      const link = btn.getAttribute("onclick") || "";
-      if (link.includes("sermons-menu.html") || link.includes("sermons.html")) {
-        btn.classList.add("active");
-      }
-    });
+// Highlight Sermons in footer
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".banner-row div").forEach(btn => {
+    const link = btn.getAttribute("onclick") || "";
+    if (link.includes("sermons-menu")) {
+      btn.classList.add("active");
+    }
   });
+});
 </script>
+
 </head>
 
 <body>
-  <div class="page-background"></div>
+<div class="page-background"></div>
 
-  <div class="app-frame">
-    <!-- Top Logo -->
-    <div class="logo-bar">
-      <img src="img/logo2.png" alt="Petra Baptist Church Logo">
+<div class="app-frame">
+
+  <div class="logo-bar">
+    <img src="img/logo2.png" alt="Petra Baptist Church Logo">
+  </div>
+
+  <div class="content-area">
+    <div class="page-title">Sermons</div>
+    <div class="page-subtitle">Choose a playlist to watch</div>
+
+    <!-- PLAYLIST BUTTONS (updated to point to sermons-playlist.html) -->
+
+    <div class="playlist-button"
+         onclick="window.location.href='sermons-playlist.html?list=PLw2qfRFieARsDq584jSmAeJJeRNil2X4N&title=Playlist 1'">
+      <div class="playlist-text">
+        <div class="playlist-title">Playlist 1</div>
+        <div class="playlist-desc">Tap to view sermons in this playlist.</div>
+      </div>
+      <div class="playlist-arrow">▶</div>
     </div>
 
-    <!-- Playlist Menu -->
-    <div class="content-area">
-      <div class="page-title">Sermons</div>
-      <div class="page-subtitle">Choose a playlist to watch</div>
-
-      <!-- Playlist 1 -->
-      <div class="playlist-button"
-           onclick="openPlaylist('PLw2qfRFieARsDq584jSmAeJJeRNil2X4N', 'Playlist 1')">
-        <div class="playlist-text">
-          <div class="playlist-title">Playlist 1</div>
-          <div class="playlist-desc">Tap to view sermons in this playlist.</div>
-        </div>
-        <div class="playlist-arrow">▶</div>
+    <div class="playlist-button"
+         onclick="window.location.href='sermons-playlist.html?list=PLw2qfRFieARvLYfV1SxvQa1J0qCirblEI&title=Playlist 2'">
+      <div class="playlist-text">
+        <div class="playlist-title">Playlist 2</div>
+        <div class="playlist-desc">Tap to view sermons in this playlist.</div>
       </div>
-
-      <!-- Playlist 2 -->
-      <div class="playlist-button"
-           onclick="openPlaylist('PLw2qfRFieARvLYfV1SxvQa1J0qCirblEI', 'Playlist 2')">
-        <div class="playlist-text">
-          <div class="playlist-title">Playlist 2</div>
-          <div class="playlist-desc">Tap to view sermons in this playlist.</div>
-        </div>
-        <div class="playlist-arrow">▶</div>
-      </div>
-
-      <!-- Playlist 3 -->
-      <div class="playlist-button"
-           onclick="openPlaylist('PLw2qfRFieARvkqL2HigT-s418sGJh8CV-', 'Playlist 3')">
-        <div class="playlist-text">
-          <div class="playlist-title">Playlist 3</div>
-          <div class="playlist-desc">Tap to view sermons in this playlist.</div>
-        </div>
-        <div class="playlist-arrow">▶</div>
-      </div>
-
-      <!-- Playlist 4 -->
-      <div class="playlist-button"
-           onclick="openPlaylist('PLw2qfRFieARtTOCRfXCP1Zh6j8peZyKTe', 'Playlist 4')">
-        <div class="playlist-text">
-          <div class="playlist-title">Playlist 4</div>
-          <div class="playlist-desc">Tap to view sermons in this playlist.</div>
-        </div>
-        <div class="playlist-arrow">▶</div>
-      </div>
-
-      <!-- Playlist 5 -->
-      <div class="playlist-button"
-           onclick="openPlaylist('PLw2qfRFieARttAu0eb7sV7V9A0yy5t3P0', 'Playlist 5')">
-        <div class="playlist-text">
-          <div class="playlist-title">Playlist 5</div>
-          <div class="playlist-desc">Tap to view sermons in this playlist.</div>
-        </div>
-        <div class="playlist-arrow">▶</div>
-      </div>
-
+      <div class="playlist-arrow">▶</div>
     </div>
 
-    <!-- Footer menu -->
-    <div class="footer-banner">
-      <div class="banner-row">
-        <div onclick="goHome()">Home</div>
-        <div onclick="window.location.href='sermons-menu.html'">Sermons</div>
-        <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div class="playlist-button"
+         onclick="window.location.href='sermons-playlist.html?list=PLw2qfRFieARvkqL2HigT-s418sGJh8CV-&title=Playlist 3'">
+      <div class="playlist-text">
+        <div class="playlist-title">Playlist 3</div>
+        <div class="playlist-desc">Tap to view sermons in this playlist.</div>
       </div>
+      <div class="playlist-arrow">▶</div>
+    </div>
 
-      <div class="banner-row">
-        <div onclick="window.location.href='bibles.html'">Bibles</div>
-        <div onclick="window.location.href='contact.html'">Contact</div>
-        <div onclick="window.location.href='facebook.html'">Facebook</div>
+    <div class="playlist-button"
+         onclick="window.location.href='sermons-playlist.html?list=PLw2qfRFieARtTOCRfXCP1Zh6j8peZyKTe&title=Playlist 4'">
+      <div class="playlist-text">
+        <div class="playlist-title">Playlist 4</div>
+        <div class="playlist-desc">Tap to view sermons in this playlist.</div>
       </div>
+      <div class="playlist-arrow">▶</div>
+    </div>
 
-      <div class="banner-row">
-        <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
-        <div onclick="window.location.href='events.html'">Events</div>
-        <div onclick="window.location.href='website.html'">Website</div>
+    <div class="playlist-button"
+         onclick="window.location.href='sermons-playlist.html?list=PLw2qfRFieARttAu0eb7sV7V9A0yy5t3P0&title=Playlist 5'">
+      <div class="playlist-text">
+        <div class="playlist-title">Playlist 5</div>
+        <div class="playlist-desc">Tap to view sermons in this playlist.</div>
       </div>
+      <div class="playlist-arrow">▶</div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-banner">
+    <div class="banner-row">
+      <div onclick="goHome()">Home</div>
+      <div onclick="window.location.href='sermons-menu.html'" class="active">Sermons</div>
+      <div onclick="window.location.href='prayer.html'">Prayer</div>
+    </div>
+
+    <div class="banner-row">
+      <div onclick="window.location.href='bibles.html'">Bibles</div>
+      <div onclick="window.location.href='contact.html'">Contact</div>
+      <div onclick="window.location.href='facebook.html'">Facebook</div>
+    </div>
+
+    <div class="banner-row">
+      <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+      <div onclick="window.location.href='events.html'">Events</div>
+      <div onclick="window.location.href='website.html'">Website</div>
     </div>
   </div>
+
+</div>
 </body>
 </html>
