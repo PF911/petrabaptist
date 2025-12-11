@@ -3,29 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sermons Viewer</title>
+<title>Sermons</title>
 
 <style>
-    body {
-        margin: 0;
-        background: #0b74b5;
-        overflow: hidden;
-        font-family: Arial, sans-serif;
-    }
-    iframe {
-        width: 100%;
-        height: 100vh;
-        border: none;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #0a578f;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+  }
+
+  .app-frame {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  h1 {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  iframe {
+    width: 100%;
+    height: 700px;
+    border: none;
+    border-radius: 12px;
+  }
+
+  .home-button {
+    margin-top: 25px;
+  }
+
+  .home-button a {
+    display: inline-block;
+    padding: 12px 22px;
+    background: #1c3d50;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 8px;
+  }
 </style>
-
 </head>
+
 <body>
+  <div class="app-frame">
 
-<iframe 
-    src="https://www.youtube.com/embed/videoseries?list=UUbZSSD3T2kcpnFOKaGl-crw"
-    allowfullscreen>
-</iframe>
+    <h1>Sermons</h1>
 
+    <!-- AUTO-GENERATED YOUTUBE UPLOADS PLAYLIST -->
+    <iframe 
+      src="https://www.youtube.com/embed/videoseries?list=UUbZSSD3T2kcpnFOKaGl-crw" 
+      allowfullscreen>
+    </iframe>
+
+    <div class="home-button">
+      <a href="index.html">Home</a>
+    </div>
+
+  </div>
 </body>
 </html>
