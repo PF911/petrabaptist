@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Sermon Player</title>
 
 <style>
 html, body {
   margin: 0;
+  padding: 0;
   height: 100%;
   background: black;
+  overflow: hidden;
 }
 
 iframe {
   width: 100%;
   height: 100%;
-  border: none;
+  border: 0;
 }
 </style>
 </head>
 
 <body>
 
-<iframe id="player" allowfullscreen></iframe>
+<iframe id="player"
+  allow="autoplay; encrypted-media; fullscreen"
+  allowfullscreen>
+</iframe>
 
 <script>
 const playlists = {
@@ -32,10 +38,10 @@ const playlists = {
 };
 
 const params = new URLSearchParams(window.location.search);
-const key = params.get('list');
+const key = params.get("pl"); // 🔒 LOCKED
 
 if (playlists[key]) {
-  document.getElementById('player').src =
+  document.getElementById("player").src =
     "https://www.youtube.com/embed/videoseries?list=" +
     playlists[key] +
     "&playsinline=1";
