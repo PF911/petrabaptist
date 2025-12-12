@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Sermons | Petra Baptist Church</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+    color: white;
+    text-align: center;
+  }
+
+  .app-frame {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+
+  .logo {
+    width: 75%;
+    max-width: 300px;
+    margin-bottom: 30px;
+  }
+
+  .sermon-btn {
+    background: white;
+    color: #0f3f7a;
+    padding: 18px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .hint {
+    font-size: 14px;
+    margin-top: 10px;
+    opacity: 0.85;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="app-frame">
+
+  <img src="img/logo.png" class="logo" alt="Petra Baptist Church">
+
+  <div class="sermon-btn" onclick="openPlaylist()">
+    Watch Sermons
+  </div>
+
+  <div class="hint">
+    Sermons open inside the app
+  </div>
+
+</div>
+
+<script>
+function openPlaylist() {
+  window.location.href =
+    "https://www.youtube.com/playlist?list=PLJBBM9LiYIsqOPyOtcPiMSSL3lau";
+}
+</script>
+
+</body>
+</html>
