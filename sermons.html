@@ -1,85 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sermons</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Petra Baptist Church – Sermons</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #1f6fb2;
-      color: #fff;
-      text-align: center;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
 
-    .container {
-      padding: 30px 20px;
-    }
+/* Background */
+.page-background {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+  z-index: 0;
+}
 
-    .logo {
-      max-width: 180px;
-      margin: 20px auto;
-    }
+/* App frame */
+.app-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  height: 100vh;
+}
 
-    .watch-btn {
-      display: block;
-      margin: 30px auto;
-      padding: 15px 20px;
-      max-width: 280px;
-      background: #ffffff;
-      color: #1f6fb2;
-      font-size: 18px;
-      font-weight: 600;
-      border-radius: 8px;
-      text-decoration: none;
-    }
+/* Logo bar */
+.logo-bar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+  padding-top: 10px;
+  z-index: 50;
+}
 
-    .watch-btn small {
-      display: block;
-      font-size: 12px;
-      margin-top: 6px;
-      opacity: 0.7;
-    }
+.logo-bar img {
+  width: 80%;
+  max-width: 300px;
+}
 
-    .menu {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #174f82;
-      padding: 10px 0;
-      display: flex;
-      justify-content: space-around;
-      font-size: 14px;
-    }
+/* Center content */
+.content-area {
+  position: absolute;
+  top: 90px;
+  bottom: 160px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
 
-    .menu a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-    }
-  </style>
+/* Sermons button */
+.sermons-button {
+  background: rgba(255,255,255,0.9);
+  color: #2e6aa9;
+  border: none;
+  border-radius: 12px;
+  padding: 20px 40px;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sermons-button:active {
+  transform: scale(0.97);
+}
+
+/* Info text */
+.info-text {
+  margin-top: 20px;
+  font-size: 16px;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Footer banner */
+.footer-banner {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+  background: #1d4f7a;
+  box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+  padding: 10px 0;
+  z-index: 100;
+}
+
+.banner-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.banner-row a {
+  display: block;
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+}
+
+.banner-row a.active {
+  background: rgba(255,255,255,0.6);
+  color: #1d4f7a;
+  box-shadow: 0 0 12px rgba(255,255,255,0.9);
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
-    <img src="images/petra-logo.png" alt="Petra Baptist" class="logo" />
+<div class="page-background"></div>
 
-    <a href="sermon-player.html" class="watch-btn">
-      Watch Sermons
-      <small>Sermons open inside the app</small>
-    </a>
+<div class="app-frame">
+
+  <div class="logo-bar">
+    <img src="img/logo2.png" alt="Petra Baptist Church">
   </div>
 
-  <div class="menu">
-    <a href="index.html">Home</a>
-    <a href="bibles.html">Bibles</a>
-    <a href="prayer.html">Prayer</a>
-    <a href="events.html">Events</a>
+  <div class="content-area">
+    <!-- INTERNAL NAVIGATION (no YouTube jump) -->
+    <button class="sermons-button"
+            onclick="window.location.href='sermon-player.html'">
+      📺 Watch Sermons
+    </button>
+
+    <p class="info-text">
+      Tap to view our latest sermons on YouTube<br>
+      <small>Swipe from left edge to return</small>
+    </p>
   </div>
+
+  <div class="footer-banner">
+    <div class="banner-row">
+      <a href="index.html">Home</a>
+      <a href="sermons.html" class="active">Sermons</a>
+      <a href="prayer.html">Prayer</a>
+    </div>
+
+    <div class="banner-row">
+      <a href="bibles.html">Bibles</a>
+      <a href="contact.html">Contact</a>
+      <a href="facebook.html">Facebook</a>
+    </div>
+
+    <div class="banner-row">
+      <a href="flocknotes.html">Flocknotes</a>
+      <a href="events.html">Events</a>
+      <a href="website.html">Website</a>
+    </div>
+  </div>
+
+</div>
 
 </body>
 </html>
