@@ -1,72 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Sermons | Petra Baptist Church</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sermons</title>
 
-<style>
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
-    color: white;
-    text-align: center;
-  }
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #1f6fb2;
+      color: #fff;
+      text-align: center;
+    }
 
-  .app-frame {
-    max-width: 420px;
-    margin: 0 auto;
-    padding: 30px 20px;
-  }
+    .container {
+      padding: 30px 20px;
+    }
 
-  .logo {
-    width: 75%;
-    max-width: 300px;
-    margin-bottom: 30px;
-  }
+    .logo {
+      max-width: 180px;
+      margin: 20px auto;
+    }
 
-  .sermon-btn {
-    background: white;
-    color: #0f3f7a;
-    padding: 18px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+    .watch-btn {
+      display: block;
+      margin: 30px auto;
+      padding: 15px 20px;
+      max-width: 280px;
+      background: #ffffff;
+      color: #1f6fb2;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+    }
 
-  .hint {
-    font-size: 14px;
-    margin-top: 10px;
-    opacity: 0.85;
-  }
-</style>
+    .watch-btn small {
+      display: block;
+      font-size: 12px;
+      margin-top: 6px;
+      opacity: 0.7;
+    }
+
+    .menu {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #174f82;
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-around;
+      font-size: 14px;
+    }
+
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="app-frame">
+  <div class="container">
+    <img src="images/petra-logo.png" alt="Petra Baptist" class="logo" />
 
-  <img src="img/logo.png" class="logo" alt="Petra Baptist Church">
-
-  <div class="sermon-btn" onclick="openPlaylist()">
-    Watch Sermons
+    <a href="sermon-player.html" class="watch-btn">
+      Watch Sermons
+      <small>Sermons open inside the app</small>
+    </a>
   </div>
 
-  <div class="hint">
-    Sermons open inside the app
+  <div class="menu">
+    <a href="index.html">Home</a>
+    <a href="bibles.html">Bibles</a>
+    <a href="prayer.html">Prayer</a>
+    <a href="events.html">Events</a>
   </div>
-
-</div>
-
-<script>
-function openPlaylist() {
-  window.location.href =
-    "https://www.youtube.com/playlist?list=PLJBBM9LiYIsqOPyOtcPiMSSL3lau";
-}
-</script>
 
 </body>
 </html>
