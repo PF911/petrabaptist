@@ -3,54 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Sermon Player</title>
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background: black;
-}
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+  }
 
-iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
+  /* True full-screen, avoids “too wide / cropped” feel */
+  #player {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border: 0;
+    background: #000;
+  }
+
+  /* If something goes wrong, show a simple message */
+  .fallback {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    background: #000;
+  }
+
+  .fallback a {
+    color: #8ab4f8;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .fallback a:hover {
+    text-decoration: underline;
+  }
 </style>
 </head>
 
 <body>
 
-<iframe id="player"
-  allow="autoplay; encrypted-media; fullscreen"
-  allowfullscreen>
+<iframe
+  id="player"
+  title="Sermon Player"
+  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+  allowfullscreen
+  referrerpolicy="no-referrer-when-downgrade">
 </iframe>
+
+<div class="fallback" id="fallback">
+  <div>
+    <div style="font-size:18px;font-weight:bold;margin-bottom:10px;">
+      Unable to load the playlist inside the app
+    </div>
+    <div style="opacity:0.85;line-height:1.4;">
+      This can happen occasionally due to YouTube security checks.<br><br>
+      Please go back and try again, or watch on YouTube:
+      <br><br>
+      <a id="ytLink" href="#" target="_blank" rel="noopener">Open playlist on YouTube</a>
+    </div>
+  </div>
+</div>
 
 <script>
 /*
-  Petra Baptist Church
-  Dynamic Sermon Player
+  Petra Baptist Church – Dynamic Sermon Player (Strategy A)
+  - Keeps navigation inside the app
+  - Loads YouTube only inside the iframe
+  - Avoids top-level redirects that cause “Back to YouTube”
 */
 
-const playlists = {
-  sunday: "PLw2qfRFieARtnuv348BgkJ_gJKt-dQleS",
+const PLAYLISTS = {
+  sunday:    "PLw2qfRFieARtnuv348BgkJ_gJKt-dQleS",
   wednesday: "PLw2qfRFieARvPINGa05dvwgZLeCRdhoWi",
-  special: "PLw2qfRFieARvQlLThC8b1xqxQOzTlO5cR"
+  special:   "PLw2qfRFieARvQlLThC8b1xqxQOzTlO5cR"
 };
 
-const params = new URLSearchParams(window.location.search);
-const key = params.get("pl");
-
-if (playlists[key]) {
-  document.getElementById("player").src =
-    "https://www.youtube.com/embed/videoseries?list=" + playlists[key];
-} else {
-  document.body.innerHTML =
-    "<p style='color:white;text-align:center;margin-top:40vh;font-family:Arial;'>No sermon playlist selected</p>";
+function getKey() {
+  const params = new URLSearchParams(window.location.search);
+  return (params.get("pl") || "").toLowerCase();
 }
+
+function buildEmbedUrl(listId) {
+  // Use the official playlist embed endpoint
+  return "https://www.youtube.com/embed/videoseries?list=" + encodeURIComponent(listId);
+}
+
+function buildWatchUrl(listId) {
+  return "https://www.youtube.com/playlist?list=" + encodeURIComponent(listId);
+}
+
+(function init() {
+  const key = getKey();
+  const listId = PLAYLISTS[key];
+
+  if (!listId) {
+    document.getElementById("fallback").style.display = "flex";
+    document.getElementById("ytLink").style.display = "none";
+    return;
+  }
+
+  const iframe = document.getElementById("player");
+  const fallback = document.getElementById("fallback");
+  const ytLink = document.getElementById("ytLink");
+
+  const embedUrl = buildEmbedUrl(listId);
+  ytLink.href = buildWatchUrl(listId);
+
+  // Load YouTube ONLY inside the iframe (prevents top-level navigation to youtube.com)
+  iframe.src = embedUrl;
+
+  // If iframe never loads (network/security), show a graceful fallback link
+  const FAILSAFE_MS = 9000;
+  const timer = setTimeout(() => {
+    // We can't reliably detect YouTube bot checks from here, so we time out gracefully.
+    fallback.style.display = "flex";
+  }, FAILSAFE_MS);
+
+  iframe.addEventListener("load", () => {
+    clearTimeout(timer);
+    // If it loads, keep fallback hidden.
+    fallback.style.display = "none";
+  });
+})();
 </script>
 
 </body>
