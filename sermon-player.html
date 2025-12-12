@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
+               user-scalable=no, viewport-fit=cover">
 <title>Sermon Player</title>
 
 <style>
@@ -11,7 +12,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: black;
+  background: #000;
   overflow: hidden;
 }
 
@@ -20,34 +21,120 @@ iframe {
   height: 100%;
   border: 0;
 }
+
+/* Shown only if fallback triggers */
+#fallback {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  padding: 24px;
+}
+
+#fallback button {
+  margin-top: 16px;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  background: #2f6ea4;
+  color: #fff;
+}
 </style>
 </head>
 
 <body>
 
 <iframe id="player"
-  allow="autoplay; encrypted-media; fullscreen"
-  allowfullscreen>
+        allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+        allowfullscreen>
 </iframe>
 
+<div id="fallback">
+  <div>
+    <div style="font-size:18px;font-weight:600;margin-bottom:10px;">
+      Opening sermon…
+    </div>
+    <div style="opacity:0.85;line-height:1.4;">
+      If the video doesn’t load here,<br>
+      it will open in a secure viewer.
+    </div>
+    <button id="openExternal">Open Sermon</button>
+  </div>
+</div>
+
 <script>
-const playlists = {
-  sunday: "PLw2qfRFieARtnuv348BgkJ_gJKt-dQleS",
+/* ===== PLAYLIST MAP (LOCKED) ===== */
+const PLAYLISTS = {
+  sunday:    "PLw2qfRFieARtnuv348BgkJ_gJKt-dQleS",
   wednesday: "PLw2qfRFieARvPINGa05dvwgZLeCRdhoWi",
-  special: "PLw2qfRFieARvQlLThC8b1xqxQOzTlO5cR"
+  special:   "PLw2qfRFieARvQlLThC8b1xqxQOzTlO5cR"
 };
 
+/* ===== HELPERS ===== */
 const params = new URLSearchParams(window.location.search);
-const key = params.get("pl"); // 🔒 LOCKED
+const key = params.get("pl");
+const listId = PLAYLISTS[key];
 
-if (playlists[key]) {
-  document.getElementById("player").src =
-    "https://www.youtube.com/embed/videoseries?list=" +
-    playlists[key] +
-    "&playsinline=1";
-} else {
-  location.href = "sermons.html";
+const iframe = document.getElementById("player");
+const fallback = document.getElementById("fallback");
+const openBtn = document.getElementById("openExternal");
+
+if (!listId) {
+  // Safety net: no param → return to sermons
+  location.replace("sermons.html");
 }
+
+/* Build URLs */
+const EMBED_URL =
+  "https://www.youtube.com/embed/videoseries?list=" +
+  listId +
+  "&playsinline=1";
+
+const WATCH_URL =
+  "https://www.youtube.com/playlist?list=" + listId;
+
+/* ===== FALLBACK LOGIC ===== */
+let loaded = false;
+
+/* If iframe loads successfully, cancel fallback */
+iframe.addEventListener("load", () => {
+  loaded = true;
+});
+
+/* After timeout, assume YouTube blocked and fallback */
+const FAILSAFE_MS = 7000;
+setTimeout(() => {
+  if (loaded) return;
+
+  fallback.style.display = "flex";
+
+  openBtn.onclick = () => {
+    // Prefer Capacitor in-app Safari if available
+    if (window.Capacitor &&
+        window.Capacitor.Plugins &&
+        window.Capacitor.Plugins.Browser) {
+
+      window.Capacitor.Plugins.Browser.open({
+        url: WATCH_URL,
+        presentationStyle: "fullscreen"
+      });
+
+    } else {
+      // Web fallback (desktop / normal browser)
+      window.open(WATCH_URL, "_blank");
+    }
+  };
+}, FAILSAFE_MS);
+
+/* ===== START EMBED ATTEMPT ===== */
+iframe.src = EMBED_URL;
 </script>
 
 </body>
