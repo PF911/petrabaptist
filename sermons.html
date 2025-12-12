@@ -1,105 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sermons</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(#2f6ea4, #1e4f78);
-  color: white;
-  text-align: center;
+body{
+  margin:0;
+  font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+  background:#2f6fa3;
+  color:#fff;
 }
 
-.header {
-  padding: 20px;
+.wrapper{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
 }
 
-.header img {
-  width: 90px;
-  border-radius: 50%;
+.card{
+  background:#fff;
+  color:#2f6fa3;
+  width:90%;
+  max-width:360px;
+  border-radius:18px;
+  padding:24px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
-h1 {
-  margin: 10px 0 20px;
-  font-size: 22px;
+.card h2{
+  margin-top:0;
+  margin-bottom:18px;
 }
 
-.card {
-  background: white;
-  color: #2f6ea4;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+.btn{
+  display:block;
+  width:100%;
+  padding:14px;
+  margin:12px 0;
+  font-size:16px;
+  border:none;
+  border-radius:12px;
+  background:#2f6fa3;
+  color:#fff;
 }
 
-.card button {
-  width: 100%;
-  padding: 14px;
-  margin: 10px 0;
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
-  background: #2f6ea4;
-  color: white;
-}
-
-.card button:active {
-  background: #1e4f78;
-}
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.2);
-  padding: 10px 0;
-}
-
-.footer button {
-  margin: 5px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: none;
-  background: rgba(255,255,255,0.15);
-  color: white;
+.note{
+  margin-top:18px;
+  font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  <img src="img/petra-logo.png" alt="Petra Baptist" />
-  <h1>Petra Baptist Church</h1>
-</div>
+<div class="wrapper">
+  <div class="card">
+    <h2>Watch Sermons</h2>
 
-<div class="card">
-  <h2>Watch Sermons</h2>
+    <button class="btn" onclick="go('sunday')">Sunday Services</button>
+    <button class="btn" onclick="go('wednesday')">Wednesday Bible Studies</button>
+    <button class="btn" onclick="go('special')">Special Services</button>
 
-  <button onclick="openPlaylist('sunday')">Sunday Services</button>
-  <button onclick="openPlaylist('wednesday')">Wednesday Bible Studies</button>
-  <button onclick="openPlaylist('special')">Special Services</button>
-
-  <p style="font-size:14px;margin-top:10px;">
-    Videos play inside the app.<br>
-    Swipe back to return.
-  </p>
-</div>
-
-<div class="footer">
-  <button onclick="location.href='index.html'">Home</button>
-  <button> Sermons </button>
-  <button onclick="location.href='prayer.html'">Prayer</button>
+    <div class="note">
+      Videos play inside the app.<br>
+      If blocked, they open externally.
+    </div>
+  </div>
 </div>
 
 <script>
-function openPlaylist(type) {
-  window.location.href = 'sermon-player.html?pl=' + type;
+function go(type){
+  location.href = 'sermon-player.html?pl=' + type;
 }
 </script>
 
