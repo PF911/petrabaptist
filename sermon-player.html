@@ -18,6 +18,27 @@ body{
   background:#111;
   text-align:center;
   font-size:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.back-btn{
+  background:#2f6fa3;
+  color:#fff;
+  padding:8px 16px;
+  border-radius:6px;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.back-btn:hover{
+  background:#265a8a;
+}
+
+.title{
+  flex:1;
 }
 
 iframe{
@@ -30,7 +51,11 @@ iframe{
 
 <body>
 
-<div class="header">Petra Baptist Church</div>
+<div class="header">
+  <a href="sermons.html" class="back-btn">← Back</a>
+  <div class="title">Petra Baptist Church</div>
+  <div style="width:70px;"></div>
+</div>
 <iframe id="player" allowfullscreen></iframe>
 
 <script>
