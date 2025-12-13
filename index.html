@@ -1,107 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Petra Baptist Church</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Petra Baptist Church</title>
+  <script src="cordova.js"></script>
 
-<style>
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
-    color: white;
-    text-align: center;
-  }
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+      color: white;
+      overflow-x: hidden;
+    }
 
-  .app-frame {
-    max-width: 420px;
-    margin: 0 auto;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+    .app-frame {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
-  .main {
-    padding: 40px 20px 120px;
-  }
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-bottom: 80px;
+    }
 
-  .logo {
-    width: 75%;
-    max-width: 300px;
-    margin-bottom: 25px;
-  }
+    img.logo {
+      width: 60%;
+      max-width: 360px;
+      height: auto;
+      margin: 0 auto 25px auto;
+    }
 
-  .tagline {
-    width: 70%;
-    max-width: 260px;
-  }
+    img.tags {
+      width: 55%;
+      max-width: 300px;
+      height: auto;
+    }
 
-  .footer {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 420px;
-    background: #1d4f7a;
-    padding: 12px 0;
-  }
+    /* Footer banner */
+    .footer-banner {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 900px;
+      background: #1d4f7a;
+      box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 0;
+      z-index: 100;
+    }
 
-  .footer-row {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 6px 0;
-  }
+    .banner-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 6px 0;
+    }
 
-  .footer-btn {
-    background: rgba(255,255,255,0.15);
-    padding: 10px 16px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 15px;
-  }
+    .banner-row div {
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 17px;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
 
-  .footer-btn:hover {
-    background: rgba(255,255,255,0.3);
-  }
-</style>
+    .banner-row div:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .banner-row div.active {
+      background: rgba(255,255,255,0.6);
+      color: #1d4f7a;
+      box-shadow: 0 0 12px rgba(255,255,255,0.9);
+    }
+
+    @media (max-width: 768px) {
+      .app-frame { max-width: 420px; }
+      .banner-row div {
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="app-frame">
+    <div class="main-content">
+      <img src="img/home.png" class="logo" alt="Petra Baptist Church Logo">
+      <img src="img/tags.png" class="tags" alt="Tagline">
+    </div>
 
-<div class="app-frame">
+    <!-- Footer menu -->
+    <div class="footer-banner">
+      <div class="banner-row">
+        <div onclick="goHome()">Home</div>
+        <div onclick="window.location.href='sermons.html'">Sermons</div>
+        <div onclick="window.location.href='prayer.html'">Prayer</div>
+      </div>
 
-  <div class="main">
-    <img src="img/logo.png" class="logo" alt="Petra Baptist Church">
-    <br>
-    <img src="img/tags.png" class="tagline" alt="Making the Bible Relevant">
+      <div class="banner-row">
+        <div onclick="window.location.href='bibles.html'">Bibles</div>
+        <div onclick="window.location.href='contact.html'">Contact</div>
+        <div onclick="window.location.href='facebook.html'">Facebook</div>
+      </div>
+
+      <div class="banner-row">
+        <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+        <div onclick="window.location.href='events.html'">Events</div>
+        <div onclick="window.location.href='website.html'">Website</div>
+      </div>
+    </div>
   </div>
 
-  <div class="footer">
-    <div class="footer-row">
-      <div class="footer-btn" onclick="location.href='index.html'">Home</div>
-      <div class="footer-btn" onclick="location.href='sermons.html'">Sermons</div>
-      <div class="footer-btn" onclick="location.href='prayer.html'">Prayer</div>
-    </div>
+  <script>
+    document.addEventListener("deviceready", function() {
+      if (navigator.splashscreen) navigator.splashscreen.hide();
+    }, false);
 
-    <div class="footer-row">
-      <div class="footer-btn" onclick="location.href='bibles.html'">Bibles</div>
-      <div class="footer-btn" onclick="location.href='contact.html'">Contact</div>
-      <div class="footer-btn" onclick="location.href='facebook.html'">Facebook</div>
-    </div>
+    function goHome() {
+      window.location.href = "index.html";
+    }
 
-    <div class="footer-row">
-      <div class="footer-btn" onclick="location.href='events.html'">Events</div>
-      <div class="footer-btn" onclick="location.href='website.html'">Website</div>
-    </div>
-  </div>
-
-</div>
-
+    // Highlight active footer button
+    document.addEventListener("DOMContentLoaded", function() {
+      const currentPage = window.location.pathname.split("/").pop() || "index.html";
+      const buttons = document.querySelectorAll(".banner-row div");
+      buttons.forEach(btn => btn.classList.remove("active"));
+      buttons.forEach(btn => {
+        const onclick = btn.getAttribute("onclick") || "";
+        if (currentPage === "index.html" && onclick.includes("goHome")) {
+          btn.classList.add("active");
+        } else if (onclick.includes(currentPage)) {
+          btn.classList.add("active");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
