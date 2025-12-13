@@ -35,9 +35,9 @@ iframe{
 
 <script>
 const playlists = {
-  sunday:    "PLw2qfRFieARtnuv348BgkJ_gJKt-dQleS",
-  wednesday:"PLw2qfRFieARvPINGa05dvwgZLeCRdhoWi",
-  special:  "PLw2qfRFieARvQlLThC8b1xqxQOzTlO5cR"
+  sunday:    "PLw2qfRFieARtMUKDzo5JV42m22JBnp_Ya",
+  wednesday: "PLw2qfRFieARvd5oS_rA-qa4q9Au5M4ft0",
+  special:   "PLw2qfRFieARuaIVDu9vIK3TuMuqTZBOuQ"
 };
 
 const params = new URLSearchParams(location.search);
@@ -50,7 +50,7 @@ const externalURL = "https://www.youtube.com/playlist?list=" + list;
 const iframe = document.getElementById("player");
 iframe.src = embedURL;
 
-// FALLBACK — if YouTube blocks embed
+// Fallback - if YouTube blocks embed
 setTimeout(() => {
   try {
     if (!iframe.contentWindow || iframe.contentWindow.length === 0) {
