@@ -2,49 +2,54 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Sermon Player</title>
 
 <style>
-body{
+*{
   margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
   background:#000;
   color:#fff;
   font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+  overflow:hidden;
 }
 
 .header{
-  padding:12px;
   background:#111;
-  text-align:center;
-  font-size:16px;
+  padding:15px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  gap:15px;
 }
 
 .back-btn{
   background:#2f6fa3;
   color:#fff;
-  padding:8px 16px;
-  border-radius:6px;
+  padding:12px 20px;
+  border-radius:8px;
   text-decoration:none;
-  font-size:14px;
+  font-size:16px;
   font-weight:bold;
-}
-
-.back-btn:hover{
-  background:#265a8a;
+  white-space:nowrap;
+  flex-shrink:0;
 }
 
 .title{
+  font-size:16px;
+  text-align:center;
   flex:1;
 }
 
 iframe{
   width:100%;
-  height:calc(100vh - 48px);
+  height:calc(100vh - 55px);
   border:none;
+  display:block;
 }
 </style>
 </head>
@@ -54,8 +59,8 @@ iframe{
 <div class="header">
   <a href="sermons.html" class="back-btn">← Back</a>
   <div class="title">Petra Baptist Church</div>
-  <div style="width:70px;"></div>
 </div>
+
 <iframe id="player" allowfullscreen></iframe>
 
 <script>
