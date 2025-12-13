@@ -70,8 +70,24 @@ iframe{
 
 <script>
 function goBack() {
-  window.location.href = 'sermons.html';
+  // Try multiple methods for Capacitor
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = 'sermons.html';
+  }
 }
+
+// Also handle if back button is tapped
+document.addEventListener('DOMContentLoaded', function() {
+  const backBtn = document.querySelector('.back-btn');
+  if (backBtn) {
+    backBtn.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      goBack();
+    });
+  }
+});
 
 const playlists = {
   sunday:    "PLw2qfRFieARtMUKDzo5JV42m22JBnp_Ya",
