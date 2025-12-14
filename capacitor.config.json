@@ -1,0 +1,18 @@
+{
+  "appId": "com.petrabaptist.app",
+  "appName": "Petra Baptist Church",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "allowNavigation": [
+      "youtube.com",
+      "*.youtube.com",
+      "youtu.be"
+    ]
+  },
+  "ios": {
+    "contentInset": "never",
+    "allowsInlineMediaPlayback": true,
+    "limitsNavigationsToAppBoundDomains": false
+  }
+}
