@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sermons</title>
+
+<style>
+body{
+  margin:0;
+  font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+  background:#2f6fa3;
+  color:#fff;
+}
+
+.wrapper{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  padding-bottom:120px;
+}
+
+.card{
+  background:#fff;
+  color:#2f6fa3;
+  width:90%;
+  max-width:360px;
+  border-radius:18px;
+  padding:24px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.card h2{
+  margin-top:0;
+  margin-bottom:18px;
+}
+
+.btn{
+  display:block;
+  width:100%;
+  padding:14px;
+  margin:12px 0;
+  font-size:16px;
+  border:none;
+  border-radius:12px;
+  background:#2f6fa3;
+  color:#fff;
+  cursor:pointer;
+}
+
+.btn:active{
+  background:#265a8a;
+}
+
+.note{
+  margin-top:18px;
+  font-size:14px;
+}
+
+.footer {
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#1d4f7a;
+  padding:12px 0;
+}
+
+.footer-row {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin:6px 0;
+}
+
+.footer-btn {
+  background:rgba(255,255,255,0.15);
+  padding:10px 16px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:15px;
+  color:#fff;
+  text-decoration:none;
+}
+
+.footer-btn:hover {
+  background:rgba(255,255,255,0.3);
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+  <div class="card">
+    <h2>Watch Sermons</h2>
+
+    <button class="btn" onclick="openYouTube('PLw2qfRFieARtMUKDzo5JV42m22JBnp_Ya')">Sunday Services</button>
+    <button class="btn" onclick="openYouTube('PLw2qfRFieARvd5oS_rA-qa4q9Au5M4ft0')">Wednesday Bible Studies</button>
+    <button class="btn" onclick="openYouTube('PLw2qfRFieARuaIVDu9vIK3TuMuqTZBOuQ')">Special Services</button>
+
+    <div class="note">
+      Opens YouTube playlists
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-row">
+    <a href="index.html" class="footer-btn">Home</a>
+    <a href="sermons.html" class="footer-btn">Sermons</a>
+    <a href="prayer.html" class="footer-btn">Prayer</a>
+  </div>
+
+  <div class="footer-row">
+    <a href="bibles.html" class="footer-btn">Bibles</a>
+    <a href="contact.html" class="footer-btn">Contact</a>
+    <a href="facebook.html" class="footer-btn">Facebook</a>
+  </div>
+
+  <div class="footer-row">
+    <a href="events.html" class="footer-btn">Events</a>
+    <a href="website.html" class="footer-btn">Website</a>
+  </div>
+</div>
+
+<script>
+async function openYouTube(playlistId) {
+  const url = `https://www.youtube.com/playlist?list=${playlistId}`;
+  
+  // Try Capacitor Browser first
+  try {
+    if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Browser) {
+      await window.Capacitor.Plugins.Browser.open({ url: url });
+      return;
+    }
+  } catch (e) {
+    console.log('Browser plugin not available:', e);
+  }
+  
+  // Fallback: try to open YouTube app directly with custom URL scheme
+  const youtubeAppUrl = `youtube://www.youtube.com/playlist?list=${playlistId}`;
+  window.location.href = youtubeAppUrl;
+  
+  // If that fails after a short delay, open in Safari
+  setTimeout(() => {
+    window.location.href = url;
+  }, 1000);
+}
+</script>
+
+</body>
+</html>

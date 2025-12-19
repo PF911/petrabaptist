@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Petra Baptist Church</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+    color: white;
+    text-align: center;
+  }
+
+  .app-frame {
+    max-width: 420px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .main {
+    padding: 40px 20px 120px;
+  }
+
+  .logo {
+    width: 75%;
+    max-width: 300px;
+    margin-bottom: 25px;
+  }
+
+  .tagline {
+    width: 70%;
+    max-width: 260px;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #1d4f7a;
+    padding: 12px 0;
+  }
+
+  .footer-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 6px 0;
+  }
+
+  .footer-btn {
+    background: rgba(255,255,255,0.15);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+  }
+
+  .footer-btn:hover {
+    background: rgba(255,255,255,0.3);
+  }
+</style>
+</head>
+
+<body>
+
+<div class="app-frame">
+
+  <div class="main">
+    <img src="img/logo.png" class="logo" alt="Petra Baptist Church">
+    <br>
+    <img src="img/tags.png" class="tagline" alt="Making the Bible Relevant">
+  </div>
+
+  <div class="footer">
+    <div class="footer-row">
+      <div class="footer-btn" onclick="location.href='index.html'">Home</div>
+      <div class="footer-btn" onclick="location.href='sermons.html'">Sermons</div>
+      <div class="footer-btn" onclick="location.href='prayer.html'">Prayer</div>
+    </div>
+
+    <div class="footer-row">
+      <div class="footer-btn" onclick="location.href='bibles.html'">Bibles</div>
+      <div class="footer-btn" onclick="location.href='contact.html'">Contact</div>
+      <div class="footer-btn" onclick="location.href='facebook.html'">Facebook</div>
+    </div>
+
+    <div class="footer-row">
+      <div class="footer-btn" onclick="location.href='events.html'">Events</div>
+      <div class="footer-btn" onclick="location.href='website.html'">Website</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
