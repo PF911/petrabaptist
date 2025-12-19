@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Sermons</title>
 
 <style>
 body{
   margin:0;
-  font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: Arial, sans-serif;
   background:#2f6fa3;
   color:#fff;
 }
 
+/* Main content */
 .wrapper{
   display:flex;
   justify-content:center;
   align-items:center;
   min-height:100vh;
-  padding-bottom:120px;
+  padding-bottom:140px; /* space for footer */
 }
 
 .card{
@@ -59,35 +60,59 @@ body{
   font-size:14px;
 }
 
-.footer {
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#1d4f7a;
-  padding:12px 0;
+/* ===== FOOTER NAV — MATCHES INDEX EXACTLY ===== */
+
+.footer-banner {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+  background: #1d4f7a;
+  box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  z-index: 100;
 }
 
-.footer-row {
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin:6px 0;
+.banner-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0;
 }
 
-.footer-btn {
-  background:rgba(255,255,255,0.15);
-  padding:10px 16px;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-  font-size:15px;
-  color:#fff;
-  text-decoration:none;
+.banner-row div {
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
-.footer-btn:hover {
-  background:rgba(255,255,255,0.3);
+.banner-row div:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.banner-row div.active {
+  background: rgba(255,255,255,0.6);
+  color: #1d4f7a;
+  box-shadow: 0 0 12px rgba(255,255,255,0.9);
+  font-weight: bold;
+}
+
+@media (max-width: 480px) {
+  .banner-row div {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
 }
 </style>
 </head>
@@ -98,9 +123,17 @@ body{
   <div class="card">
     <h2>Watch Sermons</h2>
 
-    <button class="btn" onclick="openYouTube('PLw2qfRFieARtMUKDzo5JV42m22JBnp_Ya')">Sunday Services</button>
-    <button class="btn" onclick="openYouTube('PLw2qfRFieARvd5oS_rA-qa4q9Au5M4ft0')">Wednesday Bible Studies</button>
-    <button class="btn" onclick="openYouTube('PLw2qfRFieARuaIVDu9vIK3TuMuqTZBOuQ')">Special Services</button>
+    <button class="btn" onclick="openYouTube('PLw2qfRFieARtMUKDzo5JV42m22JBnp_Ya')">
+      Sunday Services
+    </button>
+
+    <button class="btn" onclick="openYouTube('PLw2qfRFieARvd5oS_rA-qa4q9Au5M4ft0')">
+      Wednesday Bible Studies
+    </button>
+
+    <button class="btn" onclick="openYouTube('PLw2qfRFieARuaIVDu9vIK3TuMuqTZBOuQ')">
+      Special Services
+    </button>
 
     <div class="note">
       Opens YouTube playlists
@@ -108,47 +141,41 @@ body{
   </div>
 </div>
 
-<div class="footer">
-  <div class="footer-row">
-    <a href="index.html" class="footer-btn">Home</a>
-    <a href="sermons.html" class="footer-btn">Sermons</a>
-    <a href="prayer.html" class="footer-btn">Prayer</a>
+<!-- FOOTER NAV (CLONED FROM INDEX) -->
+<div class="footer-banner">
+  <div class="banner-row">
+    <div onclick="goHome()">Home</div>
+    <div class="active">Sermons</div>
+    <div onclick="window.location.href='prayer.html'">Prayer</div>
   </div>
 
-  <div class="footer-row">
-    <a href="bibles.html" class="footer-btn">Bibles</a>
-    <a href="contact.html" class="footer-btn">Contact</a>
-    <a href="facebook.html" class="footer-btn">Facebook</a>
+  <div class="banner-row">
+    <div onclick="window.location.href='bibles.html'">Bibles</div>
+    <div onclick="window.location.href='contact.html'">Contact</div>
+    <div onclick="window.location.href='facebook.html'">Facebook</div>
   </div>
 
-  <div class="footer-row">
-    <a href="events.html" class="footer-btn">Events</a>
-    <a href="website.html" class="footer-btn">Website</a>
+  <div class="banner-row">
+    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="window.location.href='events.html'">Events</div>
+    <div onclick="window.location.href='website.html'">Website</div>
   </div>
 </div>
 
 <script>
+function goHome() {
+  window.location.href = "index.html";
+}
+
 async function openYouTube(playlistId) {
   const url = `https://www.youtube.com/playlist?list=${playlistId}`;
-  
-  // Try Capacitor Browser first
   try {
-    if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Browser) {
-      await window.Capacitor.Plugins.Browser.open({ url: url });
+    if (window.Capacitor?.Plugins?.Browser) {
+      await window.Capacitor.Plugins.Browser.open({ url });
       return;
     }
-  } catch (e) {
-    console.log('Browser plugin not available:', e);
-  }
-  
-  // Fallback: try to open YouTube app directly with custom URL scheme
-  const youtubeAppUrl = `youtube://www.youtube.com/playlist?list=${playlistId}`;
-  window.location.href = youtubeAppUrl;
-  
-  // If that fails after a short delay, open in Safari
-  setTimeout(() => {
-    window.location.href = url;
-  }, 1000);
+  } catch(e){}
+  window.location.href = url;
 }
 </script>
 
