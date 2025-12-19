@@ -1,66 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Petra Baptist Church</title>
 
 <style>
-  body {
+  html, body {
+    height: 100%;
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-family: Arial, sans-serif;
-    color: white;
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .page-background {
-    position: fixed;
-    inset: 0;
     background: linear-gradient(to bottom, #2e6aa9, #338cd0);
-    z-index: 0;
+    color: white;
+    overflow: hidden;
   }
 
   .app-frame {
     position: relative;
-    z-index: 1;
+    width: 100%;
     max-width: 420px;
-    margin: 0 auto;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
   }
 
-  .main {
-    padding-top: 60px;
-  }
-
-  .logo {
-    width: 75%;
-    max-width: 280px;
-    margin-bottom: 20px;
-  }
-
-  .cta {
+  .main-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 80px;
   }
 
-  .cta div {
-    background: rgba(255,255,255,0.2);
-    padding: 10px;
-    border-radius: 6px;
-    font-weight: bold;
+  img.logo {
+    width: 75%;
+    max-width: 320px;
+    height: auto;
+    margin: 0 auto 20px auto;
   }
 
-  /* Footer */
+  img.tags {
+    width: 70%;
+    max-width: 260px;
+    height: auto;
+  }
+
+  /* Footer banner */
   .footer-banner {
-    background: #1d4f7a;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 420px;
+    background: #1d4f7a;
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 10px 0;
+    z-index: 100;
   }
 
   .banner-row {
@@ -77,51 +85,120 @@
     padding: 10px 16px;
     font-weight: bold;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 16px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    transition: background 0.3s, box-shadow 0.3s;
   }
 
   .banner-row div:hover {
     background: rgba(255,255,255,0.3);
   }
+
+  /* Active glowing button */
+  .banner-row div.active {
+    background: rgba(255,255,255,0.6);
+    color: #1d4f7a;
+    box-shadow: 0 0 12px rgba(255,255,255,0.9);
+    font-weight: bold;
+  }
+
+  @media (max-width: 480px) {
+    .banner-row div {
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+  }
+
+  /* Splash overlay */
+  #splash {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #2e6aa9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+  }
+
+  #splash.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #splash img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 </style>
 </head>
 
 <body>
-<div class="page-background"></div>
+  <!-- Splash -->
+  <div id="splash">
+    <img src="res/splash.png" alt="Petra Baptist Church Splash">
+  </div>
 
-<div class="app-frame">
+  <div class="app-frame">
+    <div class="main-content">
+      <img src="img/home.png" class="logo" alt="Petra Baptist Church Logo">
+      <img src="img/tags.png" class="tags" alt="Tagline">
+    </div>
 
-  <div class="main">
-    <img src="img/logo.png" class="logo" alt="Petra Baptist Church">
-    <div class="cta">
-      <div>CONNECT</div>
-      <div>GROW</div>
-      <div>SERVE</div>
-      <div>REACH</div>
+    <!-- Footer menu -->
+    <div class="footer-banner">
+      <div class="banner-row">
+        <div onclick="goHome()">Home</div>
+        <div onclick="window.location.href='sermons.html'">Sermons</div>
+        <div onclick="window.location.href='prayer.html'">Prayer</div>
+      </div>
+
+      <div class="banner-row">
+        <div onclick="window.location.href='bibles.html'">Bibles</div>
+        <div onclick="window.location.href='contact.html'">Contact</div>
+        <div onclick="window.location.href='facebook.html'">Facebook</div>
+      </div>
+
+      <div class="banner-row">
+        <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+        <div onclick="window.location.href='events.html'">Events</div>
+        <div onclick="window.location.href='website.html'">Website</div>
+      </div>
     </div>
   </div>
 
-  <!-- FOOTER (authoritative layout) -->
-  <div class="footer-banner">
-    <div class="banner-row">
-      <div onclick="location.href='index.html'">Home</div>
-      <div onclick="location.href='sermons.html'">Sermons</div>
-      <div onclick="location.href='prayer.html'">Prayer</div>
-    </div>
+  <script>
+    // Fade splash screen
+    document.addEventListener("DOMContentLoaded", function() {
+      const splash = document.getElementById("splash");
+      setTimeout(() => splash.classList.add("fade-out"), 600);
+    });
 
-    <div class="banner-row">
-      <div onclick="location.href='bibles.html'">Bibles</div>
-      <div onclick="location.href='contact.html'">Contact</div>
-      <div onclick="location.href='facebook.html'">Facebook</div>
-    </div>
+    function goHome() { window.location.href = "index.html"; }
 
-    <div class="banner-row">
-      <div onclick="location.href='flocknotes.html'">Flocknotes</div>
-      <div onclick="location.href='events.html'">Events</div>
-      <div onclick="location.href='website.html'">Website</div>
-    </div>
-  </div>
+    // Highlight only the current page footer button
+    document.addEventListener("DOMContentLoaded", function() {
+      const currentPage = window.location.pathname.split("/").pop() || "index.html";
+      const buttons = document.querySelectorAll(".banner-row div");
 
-</div>
+      // Clear all active states first
+      buttons.forEach(btn => btn.classList.remove("active"));
+
+      buttons.forEach(btn => {
+        const onclick = btn.getAttribute("onclick") || "";
+        // Home should glow only when on index.html
+        if (currentPage === "index.html" && onclick.includes("goHome")) {
+          btn.classList.add("active");
+        } 
+        else if (onclick.includes(currentPage)) {
+          btn.classList.add("active");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
