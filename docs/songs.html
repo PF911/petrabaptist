@@ -3,125 +3,172 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Petra Baptist Songs</title>
+<title>Songs | Petra Baptist Church</title>
 
 <style>
-body {
+  body {
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: linear-gradient(#2f6fa5, #2b87c8);
-    min-height: 100vh;
-}
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+    color: white;
+    text-align: center;
+  }
 
-/* PAGE CONTENT */
-.content {
-    max-width: 420px;
-    margin: 0 auto;
-    padding: 20px 16px 140px;
-    box-sizing: border-box;
-}
+  .header {
+    padding-top: 20px;
+  }
 
-/* SONG CARDS */
-.song-card {
-    background: #e9f3fb;
+  .header img {
+    width: 180px;
+  }
+
+  .content {
+    padding: 20px 10px 170px;
+  }
+
+  .song-card {
+    background: rgba(255,255,255,0.15);
     border-radius: 14px;
     padding: 16px;
-    margin-bottom: 18px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
+    margin: 14px auto;
+    max-width: 340px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+  }
 
-.song-title {
-    text-align: center;
-    color: #1e4f7a;
+  .music-icon {
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.90);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0b3f75;
+    font-size: 28px;
     font-weight: 700;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.20);
+  }
+
+  .song-title {
     font-size: 16px;
-    line-height: 1.3;
-    margin-bottom: 10px;
-}
+    font-weight: bold;
+    color: #0b3f75;
+    background: rgba(255,255,255,0.88);
+    border-radius: 10px;
+    padding: 10px 8px;
+    margin: 0 auto 10px auto;
+    max-width: 300px;
+    line-height: 1.2;
+  }
 
-audio {
+  audio {
     width: 100%;
-}
+  }
 
-/* ===== FIXED NAV — MATCHES INDEX ===== */
-.nav-wrap {
+  /* ===== FOOTER — MATCHES index.html STYLE ===== */
+  .footer-banner {
     position: fixed;
-    bottom: 10px;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100% - 24px);
+    width: 100%;
     max-width: 420px;
-    background: #1f4f73;
-    padding: 10px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-    box-sizing: border-box;
-}
+    background: #1d4f7a;
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 100;
+  }
 
-.nav-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  .banner-row {
+    display: flex;
+    justify-content: center;
     gap: 8px;
-}
+    margin: 4px 0;
+  }
 
-.nav-btn {
-    background: #3a6f8f;
-    color: #fff;
-    text-align: center;
-    padding: 8px 4px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-}
+  .banner-row div {
+    background: rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    transition: background 0.3s, box-shadow 0.3s;
+    white-space: nowrap;
+  }
 
-.nav-btn.primary {
-    background: #2b87c8;
-}
+  .banner-row div:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  .banner-row div.active {
+    background: rgba(255,255,255,0.6);
+    color: #1d4f7a;
+    box-shadow: 0 0 12px rgba(255,255,255,0.9);
+  }
+
+  @media (max-width: 480px) {
+    .banner-row div {
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+  }
 </style>
 </head>
 
 <body>
 
+<div class="header">
+  <img src="img/logo2.png" alt="Petra Baptist Church">
+</div>
+
 <div class="content">
 
-    <div class="song-card">
-        <div class="song-title">
-            Petra Baptist Song<br>Version One
-        </div>
-        <audio controls>
-            <source src="audio/song1.mp3" type="audio/mpeg">
-        </audio>
-    </div>
+  <div class="song-card">
+    <div class="music-icon">♪</div>
+    <div class="song-title">Petra Baptist Song<br>Version One</div>
+    <audio controls preload="metadata">
+      <source src="media/petra-song-1.mp3" type="audio/mpeg">
+    </audio>
+  </div>
 
-    <div class="song-card">
-        <div class="song-title">
-            Petra Baptist Song<br>Version Two
-        </div>
-        <audio controls>
-            <source src="audio/song2.mp3" type="audio/mpeg">
-        </audio>
-    </div>
+  <div class="song-card">
+    <div class="music-icon">♪</div>
+    <div class="song-title">Petra Baptist Song<br>Version Two</div>
+    <audio controls preload="metadata">
+      <source src="media/petra-song-2.mp3" type="audio/mpeg">
+    </audio>
+  </div>
 
 </div>
 
-<!-- NAV — IDENTICAL STRUCTURE -->
-<div class="nav-wrap">
-    <div class="nav-grid">
-        <a class="nav-btn" href="sermons.html">Sermons</a>
-        <a class="nav-btn" href="prayer.html">Prayer</a>
-        <a class="nav-btn" href="bibles.html">Bibles</a>
+<div class="footer-banner">
 
-        <a class="nav-btn" href="facebook.html">Facebook</a>
-        <a class="nav-btn primary" href="index.html">Home</a>
-        <a class="nav-btn" href="website.html">Website</a>
+  <div class="banner-row">
+    <div onclick="window.location.href='sermons.html'">Sermons</div>
+    <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div onclick="window.location.href='bibles.html'">Bibles</div>
+  </div>
 
-        <a class="nav-btn" href="flocknotes.html">Flocknotes</a>
-        <a class="nav-btn" href="contact.html">Contact</a>
-        <a class="nav-btn" href="events.html">Events</a>
+  <div class="banner-row">
+    <div onclick="window.location.href='facebook.html'">Facebook</div>
+    <div onclick="window.location.href='index.html'">Home</div>
+    <div onclick="window.location.href='website.html'">Website</div>
+  </div>
 
-        <a class="nav-btn" href="songs.html">Songs</a>
-    </div>
+  <div class="banner-row">
+    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="window.location.href='contact.html'">Contact</div>
+    <div onclick="window.location.href='events.html'">Events</div>
+    <div class="active" onclick="window.location.href='songs.html'">Songs</div>
+  </div>
+
 </div>
 
 </body>
