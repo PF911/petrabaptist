@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Sermon Player</title>
+
+<style>
+body{
+  margin:0;
+  padding:0;
+  background:#000;
+  overflow:hidden;
+  font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.nav-bar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:60px;
+  background:#2f6fa3;
+  display:flex;
+  align-items:center;
+  padding:0 15px;
+  z-index:10000;
+}
+
+.back-button{
+  background:rgba(255,255,255,0.4);
+  color:#fff;
+  border:2px solid #fff;
+  padding:12px 24px;
+  border-radius:8px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  -webkit-appearance:none;
+}
+
+.church-name{
+  color:#fff;
+  margin-left:15px;
+  font-size:16px;
+}
+
+.message{
+  color:#fff;
+  text-align:center;
+  margin-top:100px;
+  padding:20px;
+  font-size:16px;
+}
+
+.yt-link{
+  display:inline-block;
+  margin-top:20px;
+  padding:15px 30px;
+  background:#ff0000;
+  color:#fff;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav-bar">
+  <button class="back-button" id="backBtn">← BACK</button>
+  <span class="church-name">Petra Baptist Church</span>
+</div>
+
+<div class="message">
+  <p>YouTube embedding is restricted in iOS apps.</p>
+  <p>Tap below to watch on YouTube:</p>
+  <a href="#" id="ytLink" class="yt-link">Open YouTube Playlist</a>
+</div>
+
+<script>
+// Back button - try window.history.back first
+document.getElementById('backBtn').onclick = function() {
+  if (window.history && window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.replace('sermons.html');
+  }
+};
+
+// YouTube link
+const playlists = {
+  sunday:    "PLw2qfRFieARtMUKDzo5JV42m22JBnp_Ya",
+  wednesday: "PLw2qfRFieARvd5oS_rA-qa4q9Au5M4ft0",
+  special:   "PLw2qfRFieARuaIVDu9vIK3TuMuqTZBOuQ"
+};
+
+const params = new URLSearchParams(window.location.search);
+const key = params.get("pl");
+const list = playlists[key];
+
+if (list) {
+  const ytURL = "https://www.youtube.com/playlist?list=" + list;
+  document.getElementById('ytLink').href = ytURL;
+}
+</script>
+
+</body>
+</html>

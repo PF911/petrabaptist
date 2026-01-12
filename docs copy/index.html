@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Petra Baptist Church</title>
+
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+    color: white;
+    overflow: hidden;
+  }
+
+  .app-frame {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 80px;
+  }
+
+  img.logo {
+    width: 75%;
+    max-width: 320px;
+    height: auto;
+    margin: 0 auto 20px auto;
+  }
+
+  img.tags {
+    width: 70%;
+    max-width: 260px;
+    height: auto;
+  }
+
+  /* Footer banner */
+  .footer-banner {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    background: #1d4f7a;
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 100;
+  }
+
+  .banner-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 4px 0;
+  }
+
+  .banner-row div {
+    background: rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  .banner-row div:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  .banner-row div.active {
+    background: rgba(255,255,255,0.6);
+    color: #1d4f7a;
+    box-shadow: 0 0 12px rgba(255,255,255,0.9);
+  }
+
+  @media (max-width: 480px) {
+    .banner-row div {
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+  }
+
+  /* Splash */
+  #splash {
+    position: fixed;
+    inset: 0;
+    background: #2e6aa9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+  }
+
+  #splash.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #splash img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
+</head>
+
+<body>
+
+<div id="splash">
+  <img src="res/splash.png" alt="Splash">
+</div>
+
+<div class="app-frame">
+
+  <div class="main-content">
+    <img src="img/home.png" class="logo" alt="Petra Baptist Church">
+    <img src="img/tags.png" class="tags" alt="Tagline">
+  </div>
+
+  <!-- UPDATED FOOTER NAV ONLY -->
+  <div class="footer-banner">
+
+    <div class="banner-row">
+      <div onclick="window.location.href='sermons.html'">Sermons</div>
+      <div onclick="window.location.href='prayer.html'">Prayer</div>
+      <div onclick="window.location.href='bibles.html'">Bibles</div>
+    </div>
+
+    <div class="banner-row">
+      <div onclick="window.location.href='facebook.html'">Facebook</div>
+      <div class="active" onclick="window.location.href='index.html'">Home</div>
+      <div onclick="window.location.href='website.html'">Website</div>
+    </div>
+
+    <div class="banner-row">
+      <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+      <div onclick="window.location.href='contact.html'">Contact</div>
+      <div onclick="window.location.href='events.html'">Events</div>
+      <div onclick="window.location.href='songs.html'">Songs</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => document.getElementById("splash").classList.add("fade-out"), 600);
+  });
+</script>
+
+</body>
+</html>

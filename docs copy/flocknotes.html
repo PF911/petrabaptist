@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Flocknote | Petra Baptist Church</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .page-background {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+    z-index: 0;
+  }
+
+  .app-frame {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo-bar {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    padding-top: 10px;
+    z-index: 50;
+  }
+
+  .logo-bar img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+  }
+
+  .content-area {
+    position: absolute;
+    top: 90px;
+    bottom: 160px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .flocknote-info {
+    background: rgba(255,255,255,0.95);
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 350px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  }
+
+  .flocknote-info h1 {
+    color: #2e6aa9;
+    margin-top: 0;
+    font-size: 24px;
+  }
+
+  .flocknote-info p {
+    color: #333;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  .open-button {
+    background: #2e6aa9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+    transition: background 0.3s;
+  }
+
+  .open-button:hover {
+    background: #1d4f7a;
+  }
+
+  /* footer banner */
+  .footer-banner {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    background: #1d4f7a;
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 100;
+  }
+
+  .banner-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 4px 0;
+  }
+
+  .banner-row div {
+    background: rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    white-space: nowrap;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  .banner-row div:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  /* ACTIVE glowing footer button */
+  .banner-row div.active {
+    background: rgba(255,255,255,0.6);
+    color: #1d4f7a;
+    box-shadow: 0 0 12px rgba(255,255,255,0.9);
+    font-weight: bold;
+  }
+
+  @media (max-width: 480px) {
+    .banner-row div {
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+    .flocknote-info {
+      padding: 20px;
+    }
+    .flocknote-info h1 {
+      font-size: 20px;
+    }
+    .flocknote-info p {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script>
+  function goHome(){ window.location.href = "index.html"; }
+
+  // Open Flocknote link safely (Cordova + browser)
+  function openFlocknote() {
+    const url = "https://petrabaptistchurch.flocknote.com";
+    if (window.cordova && cordova.InAppBrowser) {
+      cordova.InAppBrowser.open(url, "_system");
+    } else {
+      window.open(url, "_blank");
+    }
+  }
+
+  // Footer glow highlight
+  document.addEventListener("DOMContentLoaded", function() {
+    const currentPage = window.location.pathname.split("/").pop();
+    document.querySelectorAll(".banner-row div").forEach(btn => {
+      const link = btn.getAttribute("onclick") || "";
+      if (link.includes(currentPage)) {
+        btn.classList.add("active");
+      }
+    });
+  });
+</script>
+</head>
+
+<body>
+  <div class="page-background"></div>
+
+  <div class="app-frame">
+
+    <!-- Top Logo -->
+    <div class="logo-bar">
+      <img src="img/logo2.png" alt="Petra Baptist Church Logo">
+    </div>
+
+    <!-- Flocknote Section -->
+    <div class="content-area">
+      <div class="flocknote-info">
+        <h1>📬 Flocknote</h1>
+        <p>Stay connected with Petra Baptist Church through Flocknote! Receive updates, announcements, and ministry news directly to your inbox.</p>
+        <button class="open-button" onclick="openFlocknote()">Open Flocknote</button>
+      </div>
+    </div>
+
+    <!-- Footer menu -->
+    <div class="footer-banner">
+      <div class="banner-row">
+        <div onclick="goHome()">Home</div>
+        <div onclick="window.location.href='sermons.html'">Sermons</div>
+        <div onclick="window.location.href='prayer.html'">Prayer</div>
+      </div>
+
+      <div class="banner-row">
+        <div onclick="window.location.href='bibles.html'">Bibles</div>
+        <div onclick="window.location.href='contact.html'">Contact</div>
+        <div onclick="window.location.href='facebook.html'">Facebook</div>
+      </div>
+
+      <div class="banner-row">
+        <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+        <div onclick="window.location.href='events.html'">Events</div>
+        <div onclick="window.location.href='website.html'">Website</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
