@@ -3,177 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Songs</title>
+<title>Songs | Petra Baptist Church</title>
 
 <style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    color: #fff;
-    background: linear-gradient(
-      to bottom,
-      #0C63BD,
-      #1976D2,
-      #1E88E5,
-      #42A5F5,
-      #64B5F6,
-      #90CAF9,
-      #BBDEFB
-    );
-  }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+  color: white;
+  text-align: center;
+}
 
-  .container {
-    max-width: 420px;
-    margin: 0 auto;
-    padding: 20px 15px 140px;
-  }
+/* ---------- TOP LOGO ---------- */
+.header {
+  padding-top: 20px;
+}
 
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+.header img {
+  width: 180px;
+}
 
-  .song-card {
-    background: rgba(255,255,255,0.15);
-    border-radius: 14px;
-    padding: 18px;
-    margin: 22px 0;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-  }
+/* ---------- CONTENT ---------- */
+.content {
+  padding: 20px 10px 160px;
+}
 
-  .song-title {
-    color: #1d4f7a; /* dark blue to match CONNECT */
-    font-weight: bold;
-    margin-bottom: 10px;
-    line-height: 1.3;
-  }
+.song-card {
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 12px auto;
+  max-width: 340px;
+}
 
-  .song-title .main {
-    font-size: 18px;
-  }
+.song-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0b3f75;
+  background: rgba(255,255,255,0.85);
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
 
-  .song-title .sub {
-    font-size: 15px;
-    opacity: 0.9;
-  }
+audio {
+  width: 100%;
+}
 
-  audio {
-    width: 100%;
-  }
+/* ===============================
+   FOOTER — COPIED FROM INDEX
+   DO NOT MODIFY
+   =============================== */
 
-  /* Footer banner - MATCHED TO INDEX */
-  .footer-banner {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 420px;
-    background: #1d4f7a;
-    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-    z-index: 100;
-  }
+.footer-banner {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+  background: #1d4f7a;
+  box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  z-index: 100;
+  box-sizing: border-box;
+}
 
-  .banner-row {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin: 4px 0;
-  }
+.banner-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0;
+}
 
-  .banner-row div {
-    background: rgba(255,255,255,0.15);
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-    transition: background 0.3s, box-shadow 0.3s;
-  }
+.banner-row div {
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
 
-  .banner-row div:hover {
-    background: rgba(255,255,255,0.3);
-  }
-
-  .banner-row div.active {
-    background: rgba(255,255,255,0.6);
-    color: #1d4f7a;
-    box-shadow: 0 0 12px rgba(255,255,255,0.9);
-  }
-
-  @media (max-width: 480px) {
-    .banner-row div {
-      font-size: 14px;
-      padding: 8px 10px;
-    }
-  }
+.banner-row div.active {
+  background: rgba(255,255,255,0.6);
+  color: #1d4f7a;
+  box-shadow: 0 0 12px rgba(255,255,255,0.9);
+}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- HEADER -->
+<div class="header">
+  <img src="img/logo2.png" alt="Petra Baptist Church">
+</div>
 
-  <h1>
-    <img src="img/logo3.png" alt="Petra Baptist Church" width="450" height="150">
-  </h1>
+<!-- CONTENT -->
+<div class="content">
 
-  <!-- SONG 1 -->
   <div class="song-card">
-    <div class="song-title">
-      <div class="main">Petra Baptist Song</div>
-      <div class="sub">Version One</div>
-    </div>
-
-    <audio controls preload="none">
-      <source src="song1.mp3" type="audio/mpeg">
-      Your browser does not support audio playback.
+    <div class="song-title">Petra Baptist Song<br>Version One</div>
+    <audio controls>
+      <source src="media/petra-song-1.mp3" type="audio/mpeg">
     </audio>
   </div>
 
-  <!-- SONG 2 -->
   <div class="song-card">
-    <div class="song-title">
-      <div class="main">Petra Baptist Song</div>
-      <div class="sub">Version Two</div>
-    </div>
-
-    <audio controls preload="none">
-      <source src="song2.mp3" type="audio/mpeg">
-      Your browser does not support audio playback.
+    <div class="song-title">Petra Baptist Song<br>Version Two</div>
+    <audio controls>
+      <source src="media/petra-song-2.mp3" type="audio/mpeg">
     </audio>
   </div>
 
 </div>
 
-<!-- FOOTER NAV -->
+<!-- FOOTER -->
 <div class="footer-banner">
 
   <div class="banner-row">
-    <div onclick="window.location.href='sermons.html'">Sermons</div>
-    <div onclick="window.location.href='prayer.html'">Prayer</div>
-    <div onclick="window.location.href='bibles.html'">Bibles</div>
+    <div onclick="location.href='sermons.html'">Sermons</div>
+    <div onclick="location.href='prayer.html'">Prayer</div>
+    <div onclick="location.href='bibles.html'">Bibles</div>
   </div>
 
   <div class="banner-row">
-    <div onclick="window.location.href='facebook.html'">Facebook</div>
-    <div onclick="window.location.href='index.html'">Home</div>
-    <div onclick="window.location.href='website.html'">Website</div>
+    <div onclick="location.href='facebook.html'">Facebook</div>
+    <div onclick="location.href='index.html'">Home</div>
+    <div onclick="location.href='website.html'">Website</div>
   </div>
 
   <div class="banner-row">
-    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
-    <div onclick="window.location.href='contact.html'">Contact</div>
-    <div onclick="window.location.href='events.html'">Events</div>
-    <div class="active" onclick="window.location.href='songs.html'">Songs</div>
+    <div onclick="location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="location.href='contact.html'">Contact</div>
+    <div onclick="location.href='events.html'">Events</div>
+    <div class="active">Songs</div>
   </div>
 
 </div>
