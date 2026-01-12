@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Petra Baptist Church TEST</title>
+<title>Petra Baptist Church</title>
 
 <style>
   html, body {
@@ -74,7 +74,6 @@
   .banner-row {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
     gap: 8px;
     margin: 4px 0;
   }
@@ -95,12 +94,10 @@
     background: rgba(255,255,255,0.3);
   }
 
-  /* Active glowing button */
   .banner-row div.active {
     background: rgba(255,255,255,0.6);
     color: #1d4f7a;
     box-shadow: 0 0 12px rgba(255,255,255,0.9);
-    font-weight: bold;
   }
 
   @media (max-width: 480px) {
@@ -110,17 +107,15 @@
     }
   }
 
-  /* Splash overlay */
+  /* Splash */
   #splash {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    inset: 0;
     background: #2e6aa9;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    opacity: 1;
     transition: opacity 0.8s ease;
   }
 
@@ -138,67 +133,48 @@
 </head>
 
 <body>
-  <!-- Splash -->
-  <div id="splash">
-    <img src="res/splash.png" alt="Petra Baptist Church Splash">
+
+<div id="splash">
+  <img src="res/splash.png" alt="Splash">
+</div>
+
+<div class="app-frame">
+
+  <div class="main-content">
+    <img src="img/home.png" class="logo" alt="Petra Baptist Church">
+    <img src="img/tags.png" class="tags" alt="Tagline">
   </div>
 
-  <div class="app-frame">
-    <div class="main-content">
-      <img src="img/home.png" class="logo" alt="Petra Baptist Church Logo">
-      <img src="img/tags.png" class="tags" alt="Tagline">
+  <!-- UPDATED FOOTER NAV ONLY -->
+  <div class="footer-banner">
+
+    <div class="banner-row">
+      <div onclick="window.location.href='sermons.html'">Sermons</div>
+      <div onclick="window.location.href='prayer.html'">Prayer</div>
+      <div onclick="window.location.href='bibles.html'">Bibles</div>
     </div>
 
-    <!-- Footer menu -->
-    <div class="footer-banner">
-      <div class="banner-row">
-        <div onclick="goHome()">Home</div>
-        <div onclick="window.location.href='sermons.html'">Sermons</div>
-        <div onclick="window.location.href='prayer.html'">Prayer</div>
-      </div>
-
-      <div class="banner-row">
-        <div onclick="window.location.href='bibles.html'">Bibles</div>
-        <div onclick="window.location.href='contact.html'">Contact</div>
-        <div onclick="window.location.href='facebook.html'">Facebook</div>
-      </div>
-
-      <div class="banner-row">
-        <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
-        <div onclick="window.location.href='events.html'">Events</div>
-        <div onclick="window.location.href='website.html'">Website</div>
-      </div>
+    <div class="banner-row">
+      <div onclick="window.location.href='facebook.html'">Facebook</div>
+      <div class="active" onclick="window.location.href='index.html'">Home</div>
+      <div onclick="window.location.href='website.html'">Website</div>
     </div>
+
+    <div class="banner-row">
+      <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+      <div onclick="window.location.href='contact.html'">Contact</div>
+      <div onclick="window.location.href='events.html'">Events</div>
+      <div onclick="window.location.href='songs.html'">Songs</div>
+    </div>
+
   </div>
+</div>
 
-  <script>
-    // Fade splash screen
-    document.addEventListener("DOMContentLoaded", function() {
-      const splash = document.getElementById("splash");
-      setTimeout(() => splash.classList.add("fade-out"), 600);
-    });
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => document.getElementById("splash").classList.add("fade-out"), 600);
+  });
+</script>
 
-    function goHome() { window.location.href = "index.html"; }
-
-    // Highlight only the current page footer button
-    document.addEventListener("DOMContentLoaded", function() {
-      const currentPage = window.location.pathname.split("/").pop() || "index.html";
-      const buttons = document.querySelectorAll(".banner-row div");
-
-      // Clear all active states first
-      buttons.forEach(btn => btn.classList.remove("active"));
-
-      buttons.forEach(btn => {
-        const onclick = btn.getAttribute("onclick") || "";
-        // Home should glow only when on index.html
-        if (currentPage === "index.html" && onclick.includes("goHome")) {
-          btn.classList.add("active");
-        } 
-        else if (onclick.includes(currentPage)) {
-          btn.classList.add("active");
-        }
-      });
-    });
-  </script>
 </body>
 </html>
