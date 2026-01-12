@@ -1,179 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Website — Petra Baptist Church</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Website | Petra Baptist Church</title>
 
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{
-    font-family:Arial,sans-serif;
-    background:linear-gradient(to bottom,#2e6aa9,#338cd0);
-    overflow:hidden;
-    height:100vh;
-  }
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:white;
+  text-align:center;
+}
 
-  .app-frame{
-    width:100%;
-    max-width:420px;
-    margin:0 auto;
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    position:relative;
-  }
+/* Background */
+.page-background{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(to bottom,#2e6aa9,#338cd0);
+  z-index:0;
+}
 
-  /* Top navigation */
-  .top-nav{
-    background:rgba(29,79,122,0.95);
-    padding:12px 16px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.3);
-    z-index:100;
-  }
-  .back-button,.nav-button{
-    background:rgba(255,255,255,0.2);
-    border:none;
-    color:white;
-    font-size:20px;
-    width:40px;
-    height:40px;
-    border-radius:8px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:background 0.2s;
-  }
-  .back-button:hover,.nav-button:hover{background:rgba(255,255,255,0.3);}
-  .nav-title{
-    flex:1;
-    color:white;
-    font-size:18px;
-    font-weight:bold;
-    text-shadow:1px 1px 2px rgba(0,0,0,0.4);
-  }
+/* App frame */
+.app-frame{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:420px;
+  margin:0 auto;
+  height:100vh;
+}
 
-  /* Browser area */
-  .browser-content{flex:1;background:white;position:relative;overflow:hidden;}
-  .browser-frame{width:100%;height:100%;border:none;background:white;}
+/* Logo */
+.logo-bar{
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:420px;
+}
 
-  .loading-overlay{
-    position:absolute;top:0;left:0;right:0;bottom:0;
-    background:white;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    z-index:50;transition:opacity .3s;
-  }
-  .loading-overlay.hidden{opacity:0;pointer-events:none;}
-  .spinner{
-    width:50px;height:50px;border:4px solid #e0e0e0;
-    border-top:4px solid #2e6aa9;border-radius:50%;
-    animation:spin 1s linear infinite;
-  }
-  @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-  .loading-text{margin-top:20px;color:#2e6aa9;font-size:16px;}
+.logo-bar img{
+  width:80%;
+  max-width:300px;
+  height:auto;
+}
 
-  /* Footer menu */
-  .footer-menu{
-    background:#1d4f7a;
-    box-shadow:0 -3px 8px rgba(0,0,0,0.35);
-    padding:12px 8px;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    z-index:100;
-  }
-  .menu-item{
-    background:rgba(255,255,255,0.15);
-    border:none;
-    color:white;
-    padding:10px 16px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:14px;
-    font-weight:bold;
-    transition:background .2s, box-shadow .3s;
-    white-space:nowrap;
-    text-shadow:1px 1px 2px rgba(0,0,0,0.4);
-  }
-  .menu-item:hover{background:rgba(255,255,255,0.3);}
-  .menu-item.active{
-    background:rgba(255,255,255,0.6);
-    color:#1d4f7a;
-    box-shadow:0 0 12px rgba(255,255,255,0.9);
-  }
+/* CONTENT — ANCHORED */
+.content-area{
+  position:absolute;
+  top:110px;
+  bottom:170px;
+  left:10px;
+  right:10px;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+}
 
-  @media(max-width:480px){
-    .menu-item{font-size:12px;padding:8px 10px;}
-  }
+iframe{
+  width:100%;
+  height:100%;
+  border:none;
+  background:white;
+}
+
+/* FOOTER — SAME AS ALL OTHER PAGES */
+.footer-banner{
+  position:fixed;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 20px);
+  max-width:420px;
+  background:#1d4f7a;
+  border-radius:14px;
+  box-shadow:0 -3px 8px rgba(0,0,0,0.35);
+  padding:10px 0;
+  z-index:100;
+}
+
+.banner-row{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin:4px 0;
+}
+
+.banner-row div{
+  background:rgba(255,255,255,0.15);
+  border-radius:6px;
+  padding:10px 14px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:15px;
+  color:white;
+}
+
+.banner-row div.active{
+  background:rgba(255,255,255,0.6);
+  color:#1d4f7a;
+  box-shadow:0 0 12px rgba(255,255,255,0.9);
+}
 </style>
 </head>
 
 <body>
-  <div class="app-frame">
 
-    <!-- Top Navigation -->
-    <div class="top-nav">
-      <button class="back-button" onclick="goHome()" title="Back to Home">←</button>
-      <div class="nav-title">Website</div>
-      <div class="nav-actions">
-        <button class="nav-button" onclick="refreshPage()" title="Refresh">↻</button>
-        <button class="nav-button" onclick="openExternal()" title="Open in Browser">⧉</button>
-      </div>
-    </div>
+<div class="page-background"></div>
 
-    <!-- Browser Content -->
-    <div class="browser-content">
-      <div class="loading-overlay" id="loadingOverlay">
-        <div class="spinner"></div>
-        <div class="loading-text">Loading Website...</div>
-      </div>
+<div class="app-frame">
 
-      <iframe
-        id="browserFrame"
-        class="browser-frame"
-        src="https://petrabaptist.com/"
-        title="Petra Baptist Church Website"
-        onload="hideLoading()">
-      </iframe>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer-menu">
-      <button class="menu-item" onclick="goHome()">Home</button>
-      <button class="menu-item" onclick="navigate('events.html')">Events</button>
-      <button class="menu-item" onclick="navigate('website.html')">Website</button>
-      <button class="menu-item" onclick="navigate('contact.html')">Contact</button>
-    </div>
+  <!-- Logo -->
+  <div class="logo-bar">
+    <img src="img/logo2.png" alt="Petra Baptist Church Logo">
   </div>
 
-  <script>
-    const websiteUrl='https://petrabaptist.com/';
-    function goHome(){window.location.href='index.html';}
-    function navigate(page){window.location.href=page;}
-    function refreshPage(){
-      const frame=document.getElementById('browserFrame');
-      const overlay=document.getElementById('loadingOverlay');
-      overlay.classList.remove('hidden');
-      frame.src=frame.src;
-    }
-    function hideLoading(){
-      const overlay=document.getElementById('loadingOverlay');
-      setTimeout(()=>overlay.classList.add('hidden'),300);
-    }
-    function openExternal(){window.open(websiteUrl,'_blank');}
+  <!-- Website Iframe -->
+  <div class="content-area">
+    <iframe
+      src="https://petrabaptist.com/"
+      title="Petra Baptist Church Website">
+    </iframe>
+  </div>
 
-    // Highlight active footer button
-    document.addEventListener("DOMContentLoaded",()=>{
-      const currentPage=window.location.pathname.split("/").pop();
-      document.querySelectorAll(".menu-item").forEach(btn=>{
-        const link=btn.getAttribute("onclick")||"";
-        if(link.includes(currentPage))btn.classList.add("active");
-      });
-    });
-  </script>
+</div>
+
+<!-- FOOTER NAV -->
+<div class="footer-banner">
+
+  <div class="banner-row">
+    <div onclick="window.location.href='sermons.html'">Sermons</div>
+    <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div onclick="window.location.href='bibles.html'">Bibles</div>
+  </div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='facebook.html'">Facebook</div>
+    <div onclick="window.location.href='index.html'">Home</div>
+    <div class="active">Website</div>
+  </div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="window.location.href='contact.html'">Contact</div>
+    <div onclick="window.location.href='events.html'">Events</div>
+    <div onclick="window.location.href='songs.html'">Songs</div>
+  </div>
+
+</div>
+
 </body>
 </html>

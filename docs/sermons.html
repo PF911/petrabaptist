@@ -11,25 +11,25 @@ body{
   font-family: Arial, sans-serif;
   background:#2f6fa3;
   color:#fff;
-  overflow:hidden;
 }
 
-/* Shared centering frame (MATCHES PRAYER) */
+/* App frame */
 .app-frame{
-  position: relative;
-  width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
-  height: 100vh;
+  width:100%;
+  max-width:420px;
+  margin:0 auto;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
 /* Main content */
 .wrapper{
+  flex:1;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100%;
-  padding-bottom:160px;
+  padding-bottom:160px; /* room for footer */
 }
 
 .card{
@@ -66,21 +66,19 @@ body{
   font-size:14px;
 }
 
-/* FOOTER — IDENTICAL CENTERING TO PRAYER */
+/* FOOTER — SAME AS INDEX / SONGS */
 .footer-banner{
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 420px;
-  background: #1d4f7a;
-  box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 0;
-  z-index: 100;
+  position:fixed;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 20px);
+  max-width:420px;
+  background:#1d4f7a;
+  border-radius:14px;
+  box-shadow:0 -3px 8px rgba(0,0,0,0.35);
+  padding:10px 0;
+  z-index:100;
 }
 
 .banner-row{
@@ -91,18 +89,17 @@ body{
 }
 
 .banner-row div{
-  background: rgba(255,255,255,0.15);
+  background:rgba(255,255,255,0.15);
   border-radius:6px;
-  padding:10px 16px;
+  padding:10px 14px;
   font-weight:bold;
   cursor:pointer;
-  font-size:16px;
+  font-size:15px;
   color:white;
-  text-shadow:1px 1px 2px rgba(0,0,0,0.4);
 }
 
 .banner-row div.active{
-  background: rgba(255,255,255,0.6);
+  background:rgba(255,255,255,0.6);
   color:#1d4f7a;
   box-shadow:0 0 12px rgba(255,255,255,0.9);
 }
@@ -133,33 +130,35 @@ body{
     </div>
   </div>
 
-  <!-- Footer menu -->
-  <div class="footer-banner">
-    <div class="banner-row">
-      <div onclick="window.location.href='index.html'">Home</div>
-      <div class="active">Sermons</div>
-      <div onclick="window.location.href='prayer.html'">Prayer</div>
-    </div>
+</div>
 
-    <div class="banner-row">
-      <div onclick="window.location.href='bibles.html'">Bibles</div>
-      <div onclick="window.location.href='contact.html'">Contact</div>
-      <div onclick="window.location.href='facebook.html'">Facebook</div>
-    </div>
+<!-- FOOTER NAV -->
+<div class="footer-banner">
 
-    <div class="banner-row">
-      <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
-      <div onclick="window.location.href='events.html'">Events</div>
-      <div onclick="window.location.href='website.html'">Website</div>
-    </div>
+  <div class="banner-row">
+    <div class="active">Sermons</div>
+    <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div onclick="window.location.href='bibles.html'">Bibles</div>
+  </div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='facebook.html'">Facebook</div>
+    <div onclick="window.location.href='index.html'">Home</div>
+    <div onclick="window.location.href='website.html'">Website</div>
+  </div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="window.location.href='contact.html'">Contact</div>
+    <div onclick="window.location.href='events.html'">Events</div>
+    <div onclick="window.location.href='songs.html'">Songs</div>
   </div>
 
 </div>
 
 <script>
-async function openYouTube(id){
-  const url=`https://www.youtube.com/playlist?list=${id}`;
-  window.location.href=url;
+function openYouTube(id){
+  window.location.href = `https://www.youtube.com/playlist?list=${id}`;
 }
 </script>
 

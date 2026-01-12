@@ -6,132 +6,118 @@
 <title>Facebook | Petra Baptist Church</title>
 
 <style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    color: white;
-    text-align: center;
-    overflow: hidden;
-  }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+}
 
-  .page-background {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
-    z-index: 0;
-  }
+/* Background */
+.page-background {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+  z-index: 0;
+}
 
-  .app-frame {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 420px;
-    margin: 0 auto;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+/* App frame */
+.app-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  height: 100vh;
+}
 
-  .logo-bar {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 420px;
-    padding-top: 10px;
-    z-index: 50;
-  }
+/* Logo */
+.logo-bar {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+}
 
-  .logo-bar img {
-    width: 80%;
-    max-width: 300px;
-    height: auto;
-  }
+.logo-bar img {
+  width: 80%;
+  max-width: 300px;
+  height: auto;
+}
 
-  .content-area {
-    position: absolute;
-    top: 100px;
-    bottom: 160px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+/* CONTENT — ANCHORED */
+.content-area {
+  position: absolute;
+  top: 110px;
+  bottom: 170px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .facebook-button {
-    background: #1877f2;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 16px 26px;
-    font-size: 20px;
-    font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-    text-decoration: none;
-  }
+/* Facebook button */
+.facebook-button {
+  background: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 26px;
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  text-decoration: none;
+}
 
-  .facebook-button:hover {
-    background: #3b8ff8;
-    transform: scale(1.05);
-  }
+.facebook-button:hover {
+  background: #3b8ff8;
+}
 
-  .footer-banner {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 420px;
-    background: #1d4f7a;
-    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-    z-index: 100;
-  }
+/* FOOTER — CONSISTENT WITH OTHER PAGES */
+.footer-banner {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 20px);
+  max-width: 420px;
+  background: #1d4f7a;
+  border-radius: 14px;
+  box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+  padding: 10px 0;
+  z-index: 100;
+}
 
-  .banner-row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 4px 0;
-  }
+.banner-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0;
+}
 
-  .banner-row a {
-    background: rgba(255,255,255,0.15);
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-weight: bold;
-    font-size: 16px;
-    white-space: nowrap;
-    color: white;
-    text-decoration: none;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-    transition: all 0.3s ease;
-  }
+.banner-row div {
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+  color: white;
+}
 
-  .banner-row a:hover {
-    background: rgba(255,255,255,0.3);
-  }
-
-  .active {
-    background: rgba(255,255,255,0.6) !important;
-    color: #1d4f7a !important;
-    box-shadow: 0 0 12px rgba(255,255,255,0.9);
-  }
+.banner-row div.active {
+  background: rgba(255,255,255,0.6);
+  color: #1d4f7a;
+  box-shadow: 0 0 12px rgba(255,255,255,0.9);
+}
 </style>
-
 </head>
 
 <body>
@@ -147,44 +133,35 @@
 
   <!-- Main Content -->
   <div class="content-area">
-    <a class="facebook-button" 
-       href="https://www.facebook.com/petrabaptistchurch" 
-       target="_blank">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
-        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 
-                 5.373-12 12c0 5.99 4.388 10.954 
-                 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 
-                 1.792-4.669 4.533-4.669 1.312 0 2.686.235 
-                 2.686.235v2.953H15.83c-1.491 
-                 0-1.956.925-1.956 1.874v2.25h3.328l-.532 
-                 3.47h-2.796v8.385C19.612 23.027 
-                 24 18.062 24 12.073z"/>
-      </svg>
+    <a class="facebook-button"
+       href="https://www.facebook.com/petrabaptistchurch"
+       target="_blank" rel="noopener">
       Visit Our Facebook
     </a>
   </div>
 
-  <!-- Footer Navigation -->
-  <div class="footer-banner">
+</div>
 
-    <div class="banner-row">
-      <a href="index.html">Home</a>
-      <a href="sermons.html">Sermons</a>
-      <a href="prayer.html">Prayer</a>
-    </div>
+<!-- FOOTER NAV -->
+<div class="footer-banner">
 
-    <div class="banner-row">
-      <a href="bibles.html">Bibles</a>
-      <a href="contact.html">Contact</a>
-      <a href="facebook.html" class="active">Facebook</a>
-    </div>
+  <div class="banner-row">
+    <div onclick="window.location.href='sermons.html'">Sermons</div>
+    <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div onclick="window.location.href='bibles.html'">Bibles</div>
+  </div>
 
-    <div class="banner-row">
-      <a href="flocknotes.html">Flocknotes</a>
-      <a href="events.html">Events</a>
-      <a href="website.html">Website</a>
-    </div>
+  <div class="banner-row">
+    <div class="active">Facebook</div>
+    <div onclick="window.location.href='index.html'">Home</div>
+    <div onclick="window.location.href='website.html'">Website</div>
+  </div>
 
+  <div class="banner-row">
+    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="window.location.href='contact.html'">Contact</div>
+    <div onclick="window.location.href='events.html'">Events</div>
+    <div onclick="window.location.href='songs.html'">Songs</div>
   </div>
 
 </div>
