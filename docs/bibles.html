@@ -13,7 +13,6 @@ body{
   text-align:center;
 }
 
-/* Background */
 .page-background{
   position:fixed;
   inset:0;
@@ -21,7 +20,6 @@ body{
   z-index:0;
 }
 
-/* App frame */
 .app-frame{
   position:relative;
   z-index:1;
@@ -29,15 +27,12 @@ body{
   max-width:420px;
   margin:0 auto;
   height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
-/* Logo */
 .logo-bar{
-  position:absolute;
-  top:10px;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
+  padding-top:10px;
 }
 
 .logo-bar img{
@@ -45,44 +40,31 @@ body{
   max-width:300px;
 }
 
-/* Content */
 .content-area{
-  position:absolute;
-  top:110px;
-  bottom:170px;
-  left:10px;
-  right:10px;
+  flex:1;
   display:flex;
   flex-direction:column;
   align-items:center;
   gap:10px;
+  padding:20px 10px;
 }
 
-/* Bible buttons — SINGLE LINE GUARANTEED */
 a.bible-button{
   width:90%;
-  background:#ffffff;
-  border-radius:8px;
+  background:#fff;
   color:#0f3f7a;
   font-weight:bold;
   text-decoration:none;
   padding:10px 6px;
   font-size:14px;
+  border-radius:8px;
   border:2px solid #0f3f7a;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  box-shadow:0 2px 6px rgba(0,0,0,0.25);
 }
 
-/* Footer — EXACT MATCH */
 .footer-banner{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
-  max-width:420px;
   background:#1d4f7a;
   box-shadow:0 -3px 8px rgba(0,0,0,0.35);
   display:flex;
@@ -135,25 +117,25 @@ a.bible-button{
     <a class="bible-button" href="bible.spn.html">Spanish Bible (NVI)</a>
   </div>
 
-</div>
+  <div class="footer-banner">
+    <div class="banner-row">
+      <div onclick="location.href='sermons.html'">Sermons</div>
+      <div onclick="location.href='prayer.html'">Prayer</div>
+      <div class="active">Bibles</div>
+    </div>
+    <div class="banner-row">
+      <div onclick="location.href='facebook.html'">Facebook</div>
+      <div onclick="location.href='index.html'">Home</div>
+      <div onclick="location.href='website.html'">Website</div>
+    </div>
+    <div class="banner-row">
+      <div onclick="location.href='flocknotes.html'">Flocknotes</div>
+      <div onclick="location.href='contact.html'">Contact</div>
+      <div onclick="location.href='events.html'">Events</div>
+      <div onclick="location.href='songs.html'">Songs</div>
+    </div>
+  </div>
 
-<div class="footer-banner">
-  <div class="banner-row">
-    <div onclick="location.href='sermons.html'">Sermons</div>
-    <div onclick="location.href='prayer.html'">Prayer</div>
-    <div class="active" onclick="location.href='bibles.html'">Bibles</div>
-  </div>
-  <div class="banner-row">
-    <div onclick="location.href='facebook.html'">Facebook</div>
-    <div onclick="location.href='index.html'">Home</div>
-    <div onclick="location.href='website.html'">Website</div>
-  </div>
-  <div class="banner-row">
-    <div onclick="location.href='flocknotes.html'">Flocknotes</div>
-    <div onclick="location.href='contact.html'">Contact</div>
-    <div onclick="location.href='events.html'">Events</div>
-    <div onclick="location.href='songs.html'">Songs</div>
-  </div>
 </div>
 
 </body>

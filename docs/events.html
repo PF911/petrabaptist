@@ -13,7 +13,6 @@ body{
   text-align:center;
 }
 
-/* Background */
 .page-background{
   position:fixed;
   inset:0;
@@ -21,7 +20,6 @@ body{
   z-index:0;
 }
 
-/* App frame */
 .app-frame{
   position:relative;
   z-index:1;
@@ -29,94 +27,65 @@ body{
   max-width:420px;
   margin:0 auto;
   height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
-/* Logo */
 .logo-bar{
-  position:absolute;
-  top:10px;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
-  max-width:420px;
+  padding-top:10px;
 }
 
 .logo-bar img{
   width:80%;
   max-width:300px;
-  height:auto;
 }
 
-/* CONTENT – ANCHORED */
 .content-area{
-  position:absolute;
-  top:110px;
-  bottom:170px;
-  left:10px;
-  right:10px;
-  background:white;
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px 10px;
+}
+
+.event-card{
+  background:rgba(255,255,255,0.15);
   border-radius:12px;
-  overflow:hidden;
+  padding:20px;
+  width:90%;
+  max-width:360px;
+  text-align:left;
 }
 
-iframe{
-  width:100%;
-  height:100%;
-  border:none;
-  background:white;
+.footer-banner{
+  background:#1d4f7a;
+  box-shadow:0 -3px 8px rgba(0,0,0,0.35);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:10px 0;
 }
 
-/* Footer banner - EXACT MATCH TO INDEX */
-.footer-banner {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 420px;
-  background: #1d4f7a;
-  box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 0;
-  z-index: 100;
+.banner-row{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin:4px 0;
 }
 
-.banner-row {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin: 4px 0;
+.banner-row div{
+  background:rgba(255,255,255,0.15);
+  border-radius:6px;
+  padding:8px 12px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:14px;
+  white-space:nowrap;
 }
 
-.banner-row div {
-  background: rgba(255,255,255,0.15);
-  border-radius: 6px;
-  padding: 10px 16px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 16px;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-  transition: background 0.3s, box-shadow 0.3s;
-}
-
-.banner-row div:hover {
-  background: rgba(255,255,255,0.3);
-}
-
-.banner-row div.active {
-  background: rgba(255,255,255,0.6);
-  color: #1d4f7a;
-  box-shadow: 0 0 12px rgba(255,255,255,0.9);
-}
-
-@media (max-width: 480px) {
-  .banner-row div {
-    font-size: 14px;
-    padding: 8px 10px;
-  }
+.banner-row div.active{
+  background:rgba(255,255,255,0.6);
+  color:#1d4f7a;
 }
 </style>
 </head>
@@ -127,41 +96,34 @@ iframe{
 
 <div class="app-frame">
 
-  <!-- Logo -->
   <div class="logo-bar">
-    <img src="img/logo2.png" alt="Petra Baptist Church Logo">
+    <img src="img/logo2.png" alt="Petra Baptist Church">
   </div>
 
-  <!-- Events Iframe -->
   <div class="content-area">
-    <iframe
-      src="https://petrabaptist.com/events"
-      title="Petra Baptist Church Events">
-    </iframe>
+    <div class="event-card">
+      <h2>Church Events</h2>
+      <p>Upcoming events and announcements will be listed here.</p>
+    </div>
   </div>
 
-</div>
-
-<!-- FOOTER NAV -->
-<div class="footer-banner">
-
-  <div class="banner-row">
-    <div onclick="window.location.href='sermons.html'">Sermons</div>
-    <div onclick="window.location.href='prayer.html'">Prayer</div>
-    <div onclick="window.location.href='bibles.html'">Bibles</div>
-  </div>
-
-  <div class="banner-row">
-    <div onclick="window.location.href='facebook.html'">Facebook</div>
-    <div onclick="window.location.href='index.html'">Home</div>
-    <div onclick="window.location.href='website.html'">Website</div>
-  </div>
-
-  <div class="banner-row">
-    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
-    <div onclick="window.location.href='contact.html'">Contact</div>
-    <div class="active" onclick="window.location.href='events.html'">Events</div>
-    <div onclick="window.location.href='songs.html'">Songs</div>
+  <div class="footer-banner">
+    <div class="banner-row">
+      <div onclick="location.href='sermons.html'">Sermons</div>
+      <div onclick="location.href='prayer.html'">Prayer</div>
+      <div onclick="location.href='bibles.html'">Bibles</div>
+    </div>
+    <div class="banner-row">
+      <div onclick="location.href='facebook.html'">Facebook</div>
+      <div onclick="location.href='index.html'">Home</div>
+      <div onclick="location.href='website.html'">Website</div>
+    </div>
+    <div class="banner-row">
+      <div onclick="location.href='flocknotes.html'">Flocknotes</div>
+      <div onclick="location.href='contact.html'">Contact</div>
+      <div class="active">Events</div>
+      <div onclick="location.href='songs.html'">Songs</div>
+    </div>
   </div>
 
 </div>
