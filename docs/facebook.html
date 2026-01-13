@@ -47,7 +47,7 @@ body {
   height: auto;
 }
 
-/* CONTENT – ANCHORED */
+/* CONTENT â€” ANCHORED */
 .content-area {
   position: absolute;
   top: 110px;
@@ -81,58 +81,40 @@ body {
 }
 
 /* Footer banner */
-.footer-banner {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 420px;
-  background: #1d4f7a;
-  box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 0;
-  z-index: 100;
-}
-
-.banner-row {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin: 4px 0;
-}
-
-.banner-row div {
-  background: rgba(255,255,255,0.15);
-  border-radius: 6px;
-  padding: 10px 16px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 14px;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-  transition: background 0.3s, box-shadow 0.3s;
-}
-
-
-.banner-row div:hover {
-  background: rgba(255,255,255,0.3);
-}
-
-.banner-row div.active {
-  background: rgba(255,255,255,0.6);
-  color: #1d4f7a;
-  box-shadow: 0 0 12px rgba(255,255,255,0.9);
-}
-
-@media (max-width: 480px) {
-  .banner-row div {
-    font-size: 14px;
-    padding: 8px 10px;
+  .footer-banner {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    background: #1d4f7a;
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 100;
   }
-}
+
+  .banner-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 4px 0;
+  }
+
+  .banner-row div {
+    background: rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    transition: background 0.3s, box-shadow 0.3s;
+  }
 </style>
 </head>
 
@@ -168,7 +150,7 @@ body {
   </div>
 
   <div class="banner-row">
-    <div class="active" onclick="window.location.href='facebook.html'">Facebook</div>
+    <div class="active">Facebook</div>
     <div onclick="window.location.href='index.html'">Home</div>
     <div onclick="window.location.href='website.html'">Website</div>
   </div>

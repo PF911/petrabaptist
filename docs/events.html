@@ -1,71 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Events – Petra Baptist</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Events | Petra Baptist Church</title>
 
-  <!-- Shared footer styles -->
-  <link rel="stylesheet" href="footer.css">
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:white;
+  text-align:center;
+}
 
-  <style>
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(#2f79b8, #1f5f93);
-      color:#fff;
-      text-align:center;
-    }
-    .container{
-      padding:20px 16px 120px;
-    }
-    h1{
-      font-size:20px;
-      margin-bottom:10px;
-    }
-    .card{
-      background: rgba(255,255,255,0.12);
-      border-radius:10px;
-      padding:16px;
-      margin-top:16px;
-      font-size:14px;
-      line-height:1.5;
-    }
-  </style>
+/* Background */
+.page-background{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(to bottom,#2e6aa9,#338cd0);
+  z-index:0;
+}
+
+/* App frame */
+.app-frame{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:420px;
+  margin:0 auto;
+  height:100vh;
+}
+
+/* Logo */
+.logo-bar{
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:420px;
+}
+
+.logo-bar img{
+  width:80%;
+  max-width:300px;
+  height:auto;
+}
+
+/* CONTENT – ANCHORED */
+.content-area{
+  position:absolute;
+  top:110px;
+  bottom:170px;
+  left:10px;
+  right:10px;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+iframe{
+  width:100%;
+  height:100%;
+  border:none;
+  background:white;
+}
+
+/* Footer banner - EXACT MATCH TO INDEX */
+.footer-banner {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+  background: #1d4f7a;
+  box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  z-index: 100;
+}
+
+.banner-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.banner-row div {
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.banner-row div:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.banner-row div.active {
+  background: rgba(255,255,255,0.6);
+  color: #1d4f7a;
+  box-shadow: 0 0 12px rgba(255,255,255,0.9);
+}
+
+@media (max-width: 480px) {
+  .banner-row div {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
-    <h1>Church Events</h1>
+<div class="page-background"></div>
 
-    <div class="card">
-      <p>No upcoming events posted.</p>
-      <p>Please check back soon.</p>
-    </div>
+<div class="app-frame">
+
+  <!-- Logo -->
+  <div class="logo-bar">
+    <img src="img/logo2.png" alt="Petra Baptist Church Logo">
   </div>
 
-  <!-- FOOTER -->
-  <div class="footer">
-    <div class="banner-row">
-      <div onclick="location.href='sermons.html'">Sermons</div>
-      <div onclick="location.href='prayer.html'">Prayer</div>
-      <div onclick="location.href='bibles.html'">Bibles</div>
-    </div>
-
-    <div class="banner-row">
-      <div onclick="location.href='facebook.html'">Facebook</div>
-      <div onclick="location.href='index.html'">Home</div>
-      <div onclick="location.href='website.html'">Website</div>
-    </div>
-
-    <div class="banner-row">
-      <div onclick="location.href='flocknotes.html'">Flocknotes</div>
-      <div onclick="location.href='contact.html'">Contact</div>
-      <div class="active">Events</div>
-      <div onclick="location.href='songs.html'">Songs</div>
-    </div>
+  <!-- Events Iframe -->
+  <div class="content-area">
+    <iframe
+      src="https://petrabaptist.com/events"
+      title="Petra Baptist Church Events">
+    </iframe>
   </div>
+
+</div>
+
+<!-- FOOTER NAV -->
+<div class="footer-banner">
+
+  <div class="banner-row">
+    <div onclick="window.location.href='sermons.html'">Sermons</div>
+    <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div onclick="window.location.href='bibles.html'">Bibles</div>
+  </div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='facebook.html'">Facebook</div>
+    <div onclick="window.location.href='index.html'">Home</div>
+    <div onclick="window.location.href='website.html'">Website</div>
+  </div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="window.location.href='contact.html'">Contact</div>
+    <div class="active" onclick="window.location.href='events.html'">Events</div>
+    <div onclick="window.location.href='songs.html'">Songs</div>
+  </div>
+
+</div>
 
 </body>
 </html>

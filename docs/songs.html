@@ -1,65 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Songs</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Songs | Petra Baptist Church</title>
 
-  <link rel="stylesheet" href="footer.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+    color: white;
+    text-align: center;
+  }
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(#2b78b8, #1f5f94);
-      color: #fff;
-      text-align: center;
+  .header {
+    padding-top: 20px;
+  }
+
+  .header img {
+    width: 180px;
+  }
+
+  .content {
+    padding: 20px 10px 170px;
+  }
+
+  .song-card {
+    background: rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 16px;
+    margin: 14px auto;
+    max-width: 340px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+  }
+
+  .music-icon {
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.90);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0b3f75;
+    font-size: 28px;
+    font-weight: 700;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.20);
+  }
+
+  .song-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0b3f75;
+    background: rgba(255,255,255,0.88);
+    border-radius: 10px;
+    padding: 10px 8px;
+    margin: 0 auto 10px auto;
+    max-width: 300px;
+    line-height: 1.2;
+  }
+
+  audio {
+    width: 100%;
+  }
+
+  /* ===== FOOTER — MATCHES index.html STYLE ===== */
+  .footer-banner {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    background: #1d4f7a;
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 100;
+  }
+
+  .banner-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 4px 0;
+  }
+
+  .banner-row div {
+    background: rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    transition: background 0.3s, box-shadow 0.3s;
+    white-space: nowrap;
+  }
+
+  .banner-row div:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  .banner-row div.active {
+    background: rgba(255,255,255,0.6);
+    color: #1d4f7a;
+    box-shadow: 0 0 12px rgba(255,255,255,0.9);
+  }
+
+  @media (max-width: 480px) {
+    .banner-row div {
+      font-size: 14px;
+      padding: 8px 10px;
     }
-
-    .content {
-      padding: 30px 16px 120px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.15);
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 320px;
-      margin: 0 auto;
-    }
-  </style>
+  }
+</style>
 </head>
 
 <body>
 
-  <div class="content">
-    <div class="card">
-      <h2>Songs</h2>
-      <p>Worship and teaching songs.</p>
-    </div>
+<div class="header">
+  <img src="img/logo2.png" alt="Petra Baptist Church">
+</div>
+
+<div class="content">
+
+  <div class="song-card">
+    <div class="music-icon">♪</div>
+    <div class="song-title">Petra Baptist Song<br>Version One</div>
+    <audio controls preload="metadata">
+      <source src="media/petra-song-1.mp3" type="audio/mpeg">
+    </audio>
   </div>
 
-  <!-- STANDARD FOOTER (DO NOT EDIT) -->
-  <div class="footer">
-    <div class="footer-row">
-      <a href="sermons.html">Sermons</a>
-      <a href="prayer.html">Prayer</a>
-      <a href="bibles.html">Bibles</a>
-    </div>
-
-    <div class="footer-row">
-      <a href="facebook.html">Facebook</a>
-      <a href="index.html">Home</a>
-      <a href="website.html">Website</a>
-    </div>
-
-    <div class="footer-row">
-      <a href="flocknotes.html">Flocknotes</a>
-      <a href="contact.html">Contact</a>
-      <a href="events.html">Events</a>
-      <a href="songs.html" class="active">Songs</a>
-    </div>
+  <div class="song-card">
+    <div class="music-icon">♪</div>
+    <div class="song-title">Petra Baptist Song<br>Version Two</div>
+    <audio controls preload="metadata">
+      <source src="media/petra-song-2.mp3" type="audio/mpeg">
+    </audio>
   </div>
+
+</div>
+
+<div class="footer-banner">
+
+  <div class="banner-row">
+    <div onclick="window.location.href='sermons.html'">Sermons</div>
+    <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div onclick="window.location.href='bibles.html'">Bibles</div>
+  </div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='facebook.html'">Facebook</div>
+    <div onclick="window.location.href='index.html'">Home</div>
+    <div onclick="window.location.href='website.html'">Website</div>
+  </div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="window.location.href='contact.html'">Contact</div>
+    <div onclick="window.location.href='events.html'">Events</div>
+    <div class="active" onclick="window.location.href='songs.html'">Songs</div>
+  </div>
+
+</div>
 
 </body>
 </html>

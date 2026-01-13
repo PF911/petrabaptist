@@ -1,18 +1,9 @@
-<div class="footer">
-  <div class="footer-row">
-    <a href="sermons.html">Sermons</a>
-    <a href="prayer.html">Prayer</a>
-    <a href="bibles.html">Bibles</a>
-  </div>
-  <div class="footer-row">
-    <a href="facebook.html">Facebook</a>
-    <a href="index.html">Home</a>
-    <a href="website.html">Website</a>
-  </div>
-  <div class="footer-row">
-    <a href="flocknotes.html">Flocknotes</a>
-    <a href="contact.html">Contact</a>
-    <a href="events.html">Events</a>
-    <a href="songs.html">Songs</a>
-  </div>
-</div>
+{
+  "appId": "com.petrabaptist.app",
+  "appName": "Petra Baptist",
+  "webDir": "dist",
+  "server": {
+    "url": "https://petrabaptist.space",
+    "cleartext": false
+  }
+}

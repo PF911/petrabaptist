@@ -1,190 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Bibles - Petra Baptist Church</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Online Bibles | Petra Baptist Church</title>
 
 <style>
-  html, body{
-    height:100%;
-    margin:0;
-    padding:0;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    font-family:Arial, sans-serif;
-    background:linear-gradient(to bottom, #2e6aa9, #338cd0);
-    color:white;
-    overflow:hidden;
-  }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+}
 
-  .app-frame{
-    position:relative;
-    width:100%;
-    max-width:420px;
-    height:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    align-items:center;
-  }
+/* Background */
+.page-background {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+  z-index: 0;
+}
 
-  .main-content{
-    flex:1;
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:18px 14px 140px 14px; /* leave space for footer */
-    box-sizing:border-box;
-  }
+/* App frame */
+.app-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  height: 100vh;
+}
 
-  .page-header{
-    width:100%;
-    margin-bottom:14px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
+/* Logo */
+.logo-bar {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+}
 
-  .page-header img{
-    width:92%;
-    max-width:380px;
-    height:auto;
-    border-radius:10px;
-  }
+.logo-bar img {
+  width: 80%;
+  max-width: 300px;
+  height: auto;
+}
 
-  .btn-list{
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    align-items:center;
-  }
+/* CONTENT – ANCHORED */
+.content-area {
+  position: absolute;
+  top: 110px;
+  bottom: 170px;
+  left: 10px;
+  right: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
 
-  .btn{
-    width:92%;
-    max-width:380px;
-    background:rgba(255,255,255,0.92);
-    color:#1d4f7a;
-    border-radius:8px;
-    padding:10px 12px;
-    font-weight:bold;
-    font-size:14px;
-    text-align:center;
-    cursor:pointer;
-    box-shadow:0 2px 8px rgba(0,0,0,0.25);
-    user-select:none;
-  }
+/* Bible buttons */
+a.bible-button {
+  display: block;
+  width: 85%;
+  background: #ffffff;
+  border-radius: 10px;
+  color: #0f3f7a;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 14px 0;
+  font-size: 17px;
+  border: 2px solid #0f3f7a;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
 
-  .btn:active{
-    transform:scale(0.99);
-  }
+a.bible-button:hover {
+  background: #e6eef8;
+}
 
-  /* Footer banner (EXACT from index) */
-  .footer-banner{
-    position:fixed;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:100%;
-    max-width:420px;
-    background:#1d4f7a;
-    box-shadow:0 -3px 8px rgba(0,0,0,0.35);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:10px 0;
-    z-index:100;
-  }
+/* Footer banner - EXACT MATCH TO INDEX */
+.footer-banner {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+  background: #1d4f7a;
+  box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  z-index: 100;
+}
 
-  .banner-row{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin:4px 0;
-  }
+.banner-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0;
+}
 
-  .banner-row div{
-    background:rgba(255,255,255,0.15);
-    border-radius:6px;
-    padding:10px 16px;
-    font-weight:bold;
-    cursor:pointer;
-    font-size:14px;
-    color:white;
-    text-shadow:1px 1px 2px rgba(0,0,0,0.4);
-    transition:background 0.3s, box-shadow 0.3s;
-  }
+.banner-row div {
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  transition: background 0.3s, box-shadow 0.3s;
+}
 
-  .banner-row div:hover{
-    background:rgba(255,255,255,0.3);
-  }
+.banner-row div:hover {
+  background: rgba(255,255,255,0.3);
+}
 
-  .banner-row div.active{
-    background:rgba(255,255,255,0.6);
-    color:#1d4f7a;
-    box-shadow:0 0 12px rgba(255,255,255,0.9);
-  }
+.banner-row div.active {
+  background: rgba(255,255,255,0.6);
+  color: #1d4f7a;
+  box-shadow: 0 0 12px rgba(255,255,255,0.9);
+}
 
-  @media (max-width:480px){
-    .banner-row div{
-      font-size:14px;
-      padding:8px 10px;
-    }
+@media (max-width: 480px) {
+  .banner-row div {
+    font-size: 14px;
+    padding: 8px 10px;
   }
+}
 </style>
 </head>
 
 <body>
+
+<div class="page-background"></div>
+
 <div class="app-frame">
 
-  <div class="main-content">
-
-    <div class="page-header">
-      <img src="img/header.png" alt="Petra Baptist Church">
-    </div>
-
-    <div class="btn-list">
-      <div class="btn" onclick="window.location.href='bible-nkjv.html'">New King James Version (NKJV)</div>
-      <div class="btn" onclick="window.location.href='bible-niv.html'">New International Version (NIV)</div>
-      <div class="btn" onclick="window.location.href='bible-nlt.html'">New Living Translation (NLT)</div>
-      <div class="btn" onclick="window.location.href='bible-esv.html'">English Standard Version (ESV)</div>
-      <div class="btn" onclick="window.location.href='bible-nasb.html'">New American Standard Bible (NASB)</div>
-      <div class="btn" onclick="window.location.href='bible-kjv.html'">King James Version (KJV)</div>
-      <div class="btn" onclick="window.location.href='bible-spn.html'">Spanish Bible (NVI)</div>
-    </div>
-
+  <!-- Logo -->
+  <div class="logo-bar">
+    <img src="img/logo2.png" alt="Petra Baptist Church Logo">
   </div>
 
-  <!-- FOOTER (EXACT match to index) -->
-  <div class="footer-banner">
-
-    <div class="banner-row">
-      <div onclick="window.location.href='sermons.html'">Sermons</div>
-      <div onclick="window.location.href='prayer.html'">Prayer</div>
-      <div class="active" onclick="window.location.href='bibles.html'">Bibles</div>
-    </div>
-
-    <div class="banner-row">
-      <div onclick="window.location.href='facebook.html'">Facebook</div>
-      <div onclick="window.location.href='index.html'">Home</div>
-      <div onclick="window.location.href='website.html'">Website</div>
-    </div>
-
-    <div class="banner-row">
-      <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
-      <div onclick="window.location.href='contact.html'">Contact</div>
-      <div onclick="window.location.href='events.html'">Events</div>
-      <div onclick="window.location.href='songs.html'">Songs</div>
-    </div>
-
+  <!-- Bible Buttons -->
+  <div class="content-area">
+    <a class="bible-button" href="bible.nkjv.html">New King James Version (NKJV)</a>
+    <a class="bible-button" href="bible.niv.html">New International Version (NIV)</a>
+    <a class="bible-button" href="bible.nlt.html">New Living Translation (NLT)</a>
+    <a class="bible-button" href="bible.esv.html">English Standard Version (ESV)</a>
+    <a class="bible-button" href="bible.nasb.html">New American Standard Bible (NASB)</a>
+    <a class="bible-button" href="bible.kjv.html">King James Version (KJV)</a>
+    <a class="bible-button" href="bible.spn.html">Spanish Bible (NVI)</a>
   </div>
 
 </div>
+
+<!-- FOOTER NAV -->
+<div class="footer-banner">
+
+  <div class="banner-row">
+    <div onclick="window.location.href='sermons.html'">Sermons</div>
+    <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div class="active" onclick="window.location.href='bibles.html'">Bibles</div>
+  </div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='facebook.html'">Facebook</div>
+    <div onclick="window.location.href='index.html'">Home</div>
+    <div onclick="window.location.href='website.html'">Website</div>
+  </div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="window.location.href='contact.html'">Contact</div>
+    <div onclick="window.location.href='events.html'">Events</div>
+    <div onclick="window.location.href='songs.html'">Songs</div>
+  </div>
+
+</div>
+
 </body>
 </html>
