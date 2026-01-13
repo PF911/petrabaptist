@@ -6,131 +6,133 @@
 <title>Flocknotes - Petra Baptist Church</title>
 
 <style>
-  html, body{
-    height:100%;
-    margin:0;
-    padding:0;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    font-family:Arial, sans-serif;
-    background:linear-gradient(to bottom, #2e6aa9, #338cd0);
-    color:white;
-    overflow:hidden;
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+    color: white;
+    overflow: hidden;
   }
 
-  .app-frame{
-    position:relative;
-    width:100%;
-    max-width:420px;
-    height:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    align-items:center;
+  .app-frame {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .main-content{
-    flex:1;
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:18px 14px 140px 14px;
-    box-sizing:border-box;
+  .main-content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 18px 14px 140px 14px;
+    box-sizing: border-box;
   }
 
-  .card{
-    background:rgba(255,255,255,0.95);
-    border-radius:14px;
-    padding:26px;
-    max-width:360px;
-    color:#1d4f7a;
-    box-shadow:0 4px 15px rgba(0,0,0,0.25);
+  .card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 14px;
+    padding: 26px;
+    max-width: 360px;
+    color: #1d4f7a;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
   }
 
-  .card h1{
-    margin-top:0;
+  .card h1 {
+    margin-top: 0;
   }
 
-  .btn{
-    margin-top:20px;
-    background:#2e6aa9;
-    color:white;
-    border:none;
-    border-radius:8px;
-    padding:14px 26px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
+  .btn {
+    margin-top: 20px;
+    background: #2e6aa9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 26px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
   }
 
   /* FOOTER — EXACT MATCH TO INDEX */
-  .footer-banner{
-    position:fixed;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:100%;
-    max-width:420px;
-    background:#1d4f7a;
-    box-shadow:0 -3px 8px rgba(0,0,0,0.35);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:10px 0;
-    z-index:100;
+  .footer-banner {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    background: #1d4f7a;
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 100;
   }
 
-  .banner-row{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin:4px 0;
+  .banner-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 4px 0;
   }
 
-  .banner-row div{
-    background:rgba(255,255,255,0.15);
-    border-radius:6px;
-    padding:10px 16px;
-    font-weight:bold;
-    cursor:pointer;
-    font-size:14px;
-    color:white;
-    text-shadow:1px 1px 2px rgba(0,0,0,0.4);
-    transition:background 0.3s, box-shadow 0.3s;
+  .banner-row div {
+    background: rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    transition: background 0.3s, box-shadow 0.3s;
   }
 
-  .banner-row div:hover{
-    background:rgba(255,255,255,0.3);
+  .banner-row div:hover {
+    background: rgba(255,255,255,0.3);
   }
 
-  .banner-row div.active{
-    background:rgba(255,255,255,0.6);
-    color:#1d4f7a;
-    box-shadow:0 0 12px rgba(255,255,255,0.9);
+  .banner-row div.active {
+    background: rgba(255,255,255,0.6);
+    color: #1d4f7a;
+    box-shadow: 0 0 12px rgba(255,255,255,0.9);
   }
 
-  @media (max-width:480px){
-    .banner-row div{
-      padding:8px 10px;
+  @media (max-width: 480px) {
+    .banner-row div {
+      font-size: 14px;
+      padding: 8px 10px;
     }
   }
 </style>
 </head>
 
 <body>
+
 <div class="app-frame">
 
   <div class="main-content">
     <div class="card">
-      <h1>📬 Flocknotes</h1>
-      <p>Stay connected with Petra Baptist Church.</p>
+      <h1>Flocknotes</h1>
+      <p>Stay connected with church announcements and updates.</p>
       <button class="btn" onclick="window.open('https://petrabaptistchurch.flocknote.com','_system')">
-        Open Flocknote
+        Open Flocknotes
       </button>
     </div>
   </div>
@@ -159,5 +161,6 @@
   </div>
 
 </div>
+
 </body>
 </html>

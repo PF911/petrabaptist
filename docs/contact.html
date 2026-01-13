@@ -1,126 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Contact | Petra Baptist Church</title>
+  <meta charset="UTF-8">
+  <title>Contact – Petra Baptist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  color:white;
-  text-align:center;
-}
+  <!-- Shared footer styles -->
+  <link rel="stylesheet" href="footer.css">
 
-.page-background{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(to bottom,#2e6aa9,#338cd0);
-  z-index:0;
-}
-
-.app-frame{
-  position:relative;
-  z-index:1;
-  width:100%;
-  max-width:420px;
-  margin:0 auto;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-
-.logo-bar{
-  padding-top:10px;
-}
-
-.logo-bar img{
-  width:80%;
-  max-width:300px;
-}
-
-.content-area{
-  flex:1;
-  display:flex;
-  justify-content:center;
-  padding:20px 10px;
-}
-
-.contact-card{
-  background:rgba(255,255,255,0.15);
-  border-radius:12px;
-  padding:18px;
-  width:90%;
-  max-width:360px;
-  text-align:left;
-}
-
-.footer-banner{
-  background:#1d4f7a;
-  box-shadow:0 -3px 8px rgba(0,0,0,0.35);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:10px 0;
-}
-
-.banner-row{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  margin:4px 0;
-}
-
-.banner-row div {
-  background: rgba(255,255,255,0.15);
-  border-radius: 6px;
-  padding: 10px 16px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 14px;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-  transition: background 0.3s, box-shadow 0.3s;
-}
-
-.banner-row div.active{
-  background:rgba(255,255,255,0.6);
-  color:#1d4f7a;
-}
-</style>
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(#2f79b8, #1f5f93);
+      color:#fff;
+      text-align:center;
+    }
+    .container{
+      padding:20px 16px 120px;
+    }
+    h1{
+      font-size:20px;
+      margin-bottom:10px;
+    }
+    p{
+      line-height:1.5;
+      font-size:14px;
+    }
+    .card{
+      background: rgba(255,255,255,0.12);
+      border-radius:10px;
+      padding:16px;
+      margin-top:16px;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="page-background"></div>
+  <div class="container">
+    <h1>Petra Baptist Church</h1>
 
-<div class="app-frame">
-
-  <div class="logo-bar">
-    <img src="img/logo2.png" alt="Petra Baptist Church">
-  </div>
-
-  <div class="content-area">
-    <div class="contact-card">
-      <h2>Petra Baptist Church</h2>
-      <p>5845 State Road 16<br>St. Augustine, FL 32092</p>
-      <p>Email: Pastor@PetraBaptist.com</p>
-      <p>Phone: (904) 813-9520</p>
+    <div class="card">
+      <p>
+        5845 State Road 16<br>
+        St. Augustine, FL 32092
+      </p>
+      <p>
+        Email: pastor@petrabaptist.com<br>
+        Phone: (904) 813-9520
+      </p>
     </div>
   </div>
 
-  <div class="footer-banner">
+  <!-- FOOTER (identical structure to index / bibles / flocknotes) -->
+  <div class="footer">
     <div class="banner-row">
       <div onclick="location.href='sermons.html'">Sermons</div>
       <div onclick="location.href='prayer.html'">Prayer</div>
       <div onclick="location.href='bibles.html'">Bibles</div>
     </div>
+
     <div class="banner-row">
       <div onclick="location.href='facebook.html'">Facebook</div>
       <div onclick="location.href='index.html'">Home</div>
       <div onclick="location.href='website.html'">Website</div>
     </div>
+
     <div class="banner-row">
       <div onclick="location.href='flocknotes.html'">Flocknotes</div>
       <div class="active">Contact</div>
@@ -128,8 +74,6 @@ body{
       <div onclick="location.href='songs.html'">Songs</div>
     </div>
   </div>
-
-</div>
 
 </body>
 </html>
