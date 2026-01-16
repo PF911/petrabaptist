@@ -4,7 +4,7 @@
   "webDir": "docs",
   "plugins": {
     "SplashScreen": {
-      "launchShowDuration": 1500,
+      "launchShowDuration": 5000,
       "launchAutoHide": true,
       "backgroundColor": "#2e6aa9",
       "showSpinner": false,
