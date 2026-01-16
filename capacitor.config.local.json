@@ -1,0 +1,15 @@
+{
+  "appId": "com.petrabaptist.app",
+  "appName": "Petra Baptist",
+  "webDir": "docs",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1500,
+      "launchAutoHide": true,
+      "backgroundColor": "#2e6aa9",
+      "showSpinner": false,
+      "splashFullScreen": true,
+      "splashImmersive": true
+    }
+  }
+}
