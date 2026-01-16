@@ -14,6 +14,47 @@ body {
   text-align: center;
 }
 
+/* Header with logo */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  background: rgba(0,0,0,0.1);
+}
+
+.header img {
+  height: 60px;
+  border-radius: 50%;
+}
+
+.header-text {
+  flex: 1;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin: 0 10px;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.header-button {
+  background: rgba(255,255,255,0.25);
+  border: 2px solid white;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 1px;
+}
+
 .content {
   padding: 20px 10px 160px;
 }
@@ -76,6 +117,17 @@ audio {
 </head>
 
 <body>
+
+<div class="header">
+  <img src="img/logo2.png" alt="Petra Baptist Church">
+  <div class="header-text">PETRA BAPTIST</div>
+  <div class="header-right">
+    <div class="header-button">CONNECT</div>
+    <div class="header-button">GROW</div>
+    <div class="header-button">SERVE</div>
+    <div class="header-button">REACH</div>
+  </div>
+</div>
 
 <div class="content">
 
