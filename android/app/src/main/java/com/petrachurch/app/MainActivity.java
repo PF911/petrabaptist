@@ -1,4 +1,4 @@
-package com.petrabaptist.app;
+package com.petrachurch.app;
 
 import com.getcapacitor.BridgeActivity;
 
