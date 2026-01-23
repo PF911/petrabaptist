@@ -121,10 +121,18 @@ function expandRecurringEvent(event,startRange,endRange){
       untilDate=parseICSDateString(rruleParts.UNTIL);
     }
     
+    // Start from the original event date
     let currentDate=new Date(event.start);
+    
+    // Fast-forward to startRange to avoid processing years of past events
+    while(currentDate<startRange&&currentDate<=untilDate){
+      currentDate.setDate(currentDate.getDate()+(7*interval));
+    }
+    
     let count=0;
     const maxCount=parseInt(rruleParts.COUNT)||100;
     
+    // Now generate occurrences from startRange to endRange
     while(currentDate<=untilDate&&currentDate<=endRange&&count<maxCount){
       if(currentDate>=startRange){
         const duration=event.end?event.end.getTime()-event.start.getTime():0;
