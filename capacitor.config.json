@@ -2,6 +2,10 @@
   "appId": "com.petrachurch.app",
   "appName": "Petra Baptist",
   "webDir": "docs",
+  "server": {
+    "url": "https://petrabaptist.space",
+    "cleartext": false
+  },
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 1500,
