@@ -29,16 +29,16 @@ body{
   max-width:420px;
   margin:0 auto;
   height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
 /* Logo */
 .logo-bar{
-  position:absolute;
-  top:10px;
-  left:50%;
-  transform:translateX(-50%);
+  padding-top:10px;
   width:100%;
-  max-width:420px;
+  text-align:center;
+  flex-shrink:0;
 }
 
 .logo-bar img{
@@ -47,19 +47,18 @@ body{
   height:auto;
 }
 
-/* CONTENT – ANCHORED */
+/* CONTENT - CENTERED */
 .content-area{
-  position:absolute;
-  top:110px;
-  bottom:170px;
-  left:10px;
-  right:10px;
+  flex:1;
   display:flex;
   justify-content:center;
   align-items:center;
+  padding:10px;
+  padding-bottom:180px; /* Space for footer */
+  overflow-y:auto;
 }
 
-/* Fallback card if iframe doesn't work */
+/* Events card */
 .events-card{
   background:rgba(255,255,255,0.95);
   border-radius:15px;
@@ -97,14 +96,6 @@ body{
 
 .open-button:hover{
   background:#1d4f7a;
-}
-
-iframe{
-  width:100%;
-  height:100%;
-  border:none;
-  background:white;
-  border-radius:12px;
 }
 
 /* Footer banner - EXACT MATCH TO INDEX */
@@ -170,10 +161,10 @@ iframe{
 
   <!-- Logo -->
   <div class="logo-bar">
-    <img src="img/logo2.png" alt="Petra Baptist Church Logo">
+    <img src="img/logo2.png" alt="Petra Baptist Church Logo" onerror="this.style.display='none'">
   </div>
 
-  <!-- Events Content - with fallback -->
+  <!-- Events Content -->
   <div class="content-area">
     <div class="events-card">
       <h1>📅 Church Events</h1>
