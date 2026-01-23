@@ -75,7 +75,6 @@ function parseICS(icsData){
       currentEvent={};
     }else if(line==='END:VEVENT'&&currentEvent){
       if(currentEvent.start){
-        // Check if it's a recurring event
         if(currentEvent.rrule){
           const recurringEvents=expandRecurringEvent(currentEvent,startRange,sixtyDaysFromNow);
           events.push(...recurringEvents);
