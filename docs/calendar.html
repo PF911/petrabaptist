@@ -34,20 +34,14 @@ h1{text-align:center;margin-bottom:30px;text-shadow:2px 2px 4px rgba(0,0,0,0.3);
 
 <script>
 const CALENDAR_URL='https://calendar.google.com/calendar/ical/c_7aa6dfe390e9df1454e5c362bf7c909b0b08e8bc8d4991d2f80028f69ef9ea67%40group.calendar.google.com/public/basic.ics';
+const CORS_PROXY='https://api.allorigins.win/raw?url=';
 
 async function loadCalendar(){
   const content=document.getElementById('calendar-content');
   try{
-    // Try direct fetch first (works in most browsers)
-    let response = await fetch(CALENDAR_URL).catch(() => null);
+    const response = await fetch(CORS_PROXY + encodeURIComponent(CALENDAR_URL));
     
-    // If direct fetch fails, try with CORS proxy
-    if(!response || !response.ok){
-      const CORS_PROXY='https://corsproxy.io/?';
-      response = await fetch(CORS_PROXY+encodeURIComponent(CALENDAR_URL));
-    }
-    
-    if(!response.ok) throw new Error('Failed to fetch calendar');
+    if(!response.ok) throw new Error('Failed to fetch calendar: ' + response.status);
     const icsData=await response.text();
 
     const events=parseICS(icsData);
@@ -61,30 +55,28 @@ async function loadCalendar(){
 
   }catch(error){
     console.error('Error loading calendar:',error);
-    content.innerHTML='<div class="error">Unable to load calendar events. Please try again later.<br><small>'+error.message+'</small></div>';
+    content.innerHTML='<div class="error">Unable to load calendar events.<br><small>' + error.message + '</small></div>';
   }
 }
 
 function displayEvents(events, content){
   const html = events.map((event, index) => {
-    const escapedSummary = escapeHtml(event.summary);
-    const escapedLocation = event.location ? escapeHtml(event.location) : '';
-    const escapedDescription = event.description ? escapeHtml(event.description) : '';
+    const title = (event.summary || 'Untitled Event').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const location = event.location ? event.location.replace(/</g, '&lt;').replace(/>/g, '&gt;') : '';
+    const description = event.description ? event.description.replace(/</g, '&lt;').replace(/>/g, '&gt;') : '';
     
-    return `
-      <div class="event" onclick="toggleEvent(${index})">
-        <div class="event-title">
-          <span>${escapedSummary}</span>
-          <span class="expand-indicator" id="indicator-${index}">▼</span>
-        </div>
-        <div class="event-date">${formatDate(event.start)}</div>
-        <div class="event-details" id="details-${index}">
-          <div class="event-time">${formatTime(event.start,event.end)}</div>
-          ${event.location?`<div class="event-location">📍 ${escapedLocation}</div>`:''}
-          ${event.description?`<div class="event-description">${escapedDescription}</div>`:''}
-        </div>
-      </div>
-    `;
+    return '<div class="event" onclick="toggleEvent(' + index + ')">' +
+      '<div class="event-title">' +
+        '<span>' + title + '</span>' +
+        '<span class="expand-indicator" id="indicator-' + index + '">&#9660;</span>' +
+      '</div>' +
+      '<div class="event-date">' + formatDate(event.start) + '</div>' +
+      '<div class="event-details" id="details-' + index + '">' +
+        '<div class="event-time">' + formatTime(event.start, event.end) + '</div>' +
+        (location ? '<div class="event-location">&#128205; ' + location + '</div>' : '') +
+        (description ? '<div class="event-description">' + description + '</div>' : '') +
+      '</div>' +
+    '</div>';
   }).join('');
   
   content.innerHTML = html;
@@ -235,19 +227,12 @@ function formatTime(start,end){
   const startTime=start.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
   if(!end) return startTime;
   const endTime=end.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
-  return `${startTime} - ${endTime}`;
-}
-
-function escapeHtml(text){
-  if(!text) return '';
-  const div=document.createElement('div');
-  div.textContent=text;
-  return div.innerHTML;
+  return startTime + ' - ' + endTime;
 }
 
 function toggleEvent(index){
-  const details=document.getElementById(`details-${index}`);
-  const indicator=document.getElementById(`indicator-${index}`);
+  const details=document.getElementById('details-' + index);
+  const indicator=document.getElementById('indicator-' + index);
   
   if(details && indicator){
     if(details.classList.contains('expanded')){
