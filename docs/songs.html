@@ -77,6 +77,19 @@ audio {
   width: 100%;
 }
 
+/* Simple action button */
+.action-btn {
+  display: inline-block;
+  width: 100%;
+  max-width: 320px;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 /* Footer banner */
 .footer-banner {
   position: fixed;
@@ -146,14 +159,15 @@ audio {
   <!-- Songs Content -->
   <div class="content-area">
 
+    <!-- REPLACED: Redirect test that actually works -->
     <div class="song-box">
-      <div class="song-title">Petra Baptist Song<br>Version One</div>
-      <audio controls preload="auto" crossorigin="anonymous">
-        <source src="https://petrabaptist.space/song1.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
+      <div class="song-title">Petra Women<br>Redirect Test</div>
+      <button class="action-btn" onclick="window.location.href='women.html'">
+        Open PetraWomen.net
+      </button>
     </div>
 
+    <!-- Unchanged -->
     <div class="song-box">
       <div class="song-title">Petra Baptist Song<br>Version Two</div>
       <audio controls preload="auto" crossorigin="anonymous">
