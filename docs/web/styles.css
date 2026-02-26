@@ -156,6 +156,16 @@ p {
     color: var(--primary-color);
 }
 
+.nav-logo {
+    height: 50px;
+    width: auto;
+    transition: var(--transition-smooth);
+}
+
+.nav-logo:hover {
+    transform: scale(1.05);
+}
+
 .nav-brand i {
     font-size: 1.8rem;
 }
