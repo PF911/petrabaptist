@@ -157,8 +157,11 @@ p {
 }
 
 .nav-logo {
-    height: 50px;
-    width: auto;
+    height: 50px !important;
+    max-height: 50px !important;
+    width: auto !important;
+    max-width: 200px !important;
+    object-fit: contain;
     transition: var(--transition-smooth);
 }
 
@@ -911,6 +914,20 @@ p {
     
     .nav-toggle {
         display: flex;
+    }
+    
+    /* Mobile logo adjustments */
+    .nav-logo {
+        height: 40px !important;  /* Slightly smaller on mobile */
+        max-height: 40px !important;
+    }
+    
+    .nav-brand a {
+        font-size: 1.2rem;  /* Smaller text on mobile */
+    }
+    
+    .nav-brand span {
+        display: none;  /* Hide text on mobile, show only logo */
     }
     
     .nav-menu {
