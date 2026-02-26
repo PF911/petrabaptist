@@ -161,9 +161,9 @@ p {
 .nav-logo-container {
     position: absolute;
     top: -35px;        /* Half in/half out - PERFECT */
-    left: 0px;         /* Flush left - at edge */
-    width: 150px;
-    height: 150px;
+    left: -150px;       /* Negative - extends into left margin */
+    width: 160px;      /* Your size */
+    height: 167px;
     background: white;
     border-radius: 50%;
     display: flex;
@@ -171,15 +171,15 @@ p {
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     z-index: 1001;
-    overflow: hidden;   /* Clean circular edge */
+    overflow: hidden;  /* Masks logo to perfect circle */
 }
 
 .nav-logo {
-    width: 150px !important;        /* Fills circle completely */
-    height: 150px !important;
-    max-width: 150px !important;
-    max-height: 150px !important;
-    object-fit: cover;              /* Fills entire space */
+    width: 168px !important;        /* Same as container */
+    height: 168px !important;
+    max-width: 168px !important;
+    max-height: 168px !important;
+    object-fit: cover;              /* FILLS entire circle (crops oblong logo) */
 }
 
 .nav-toggle {
@@ -934,11 +934,11 @@ p {
         width: 100px;
         height: 100px;
         top: -25px;      /* Half in/half out on mobile */
-        left: 0px;       /* Flush left on mobile */
+        left: -15px;     /* Negative - extends into left margin */
     }
     
     .nav-logo {
-        width: 100px !important;    /* Fills circle completely */
+        width: 100px !important;    /* Same as container - fills completely */
         height: 100px !important;
         max-width: 100px !important;
         max-height: 100px !important;
