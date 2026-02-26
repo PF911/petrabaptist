@@ -143,34 +143,43 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 20px;
+    padding: 1rem 20px 1rem 180px;  /* Extra left padding for logo */
+}
+
+.nav-brand {
+    position: relative;
+    z-index: 100;
 }
 
 .nav-brand a {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
+    justify-content: center;
+}
+
+/* Hanging Logo Container */
+.nav-logo-container {
+    position: absolute;
+    top: -35px;        /* Half in/half out - PERFECT */
+    left: 0px;         /* Flush left - at edge */
+    width: 150px;
+    height: 150px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1001;
+    overflow: hidden;   /* Clean circular edge */
 }
 
 .nav-logo {
-    height: 50px !important;
-    max-height: 50px !important;
-    width: auto !important;
-    max-width: 200px !important;
-    object-fit: contain;
-    transition: var(--transition-smooth);
-}
-
-.nav-logo:hover {
-    transform: scale(1.05);
-}
-
-.nav-brand i {
-    font-size: 1.8rem;
+    width: 150px !important;        /* Fills circle completely */
+    height: 150px !important;
+    max-width: 150px !important;
+    max-height: 150px !important;
+    object-fit: cover;              /* Fills entire space */
 }
 
 .nav-toggle {
@@ -912,22 +921,27 @@ p {
     h1 { font-size: 2.2rem; }
     h2 { font-size: 1.8rem; }
     
+    .nav-container {
+        padding: 1rem 20px 1rem 120px;  /* Adjusted for mobile logo */
+    }
+    
     .nav-toggle {
         display: flex;
     }
     
     /* Mobile logo adjustments */
+    .nav-logo-container {
+        width: 100px;
+        height: 100px;
+        top: -25px;      /* Half in/half out on mobile */
+        left: 0px;       /* Flush left on mobile */
+    }
+    
     .nav-logo {
-        height: 40px !important;  /* Slightly smaller on mobile */
-        max-height: 40px !important;
-    }
-    
-    .nav-brand a {
-        font-size: 1.2rem;  /* Smaller text on mobile */
-    }
-    
-    .nav-brand span {
-        display: none;  /* Hide text on mobile, show only logo */
+        width: 100px !important;    /* Fills circle completely */
+        height: 100px !important;
+        max-width: 100px !important;
+        max-height: 100px !important;
     }
     
     .nav-menu {
