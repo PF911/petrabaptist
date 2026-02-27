@@ -331,9 +331,13 @@ p {
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
-    font-weight: 300;
+    font-family: var(--font-body);   /* Montserrat */
+    font-size: 1.9rem;
+    font-weight: 500;                /* 300 is too thin for Montserrat */
+    letter-spacing: 1px;             /* subtle spacing */
+    text-transform: none;            /* keep sentence case */
     margin-bottom: 2.5rem;
+    color: var(--white);
     opacity: 0.95;
 }
 
