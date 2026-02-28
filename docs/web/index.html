@@ -37,14 +37,14 @@
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-menu" id="navMenu">
+               <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#ministries" class="nav-link">Ministries</a></li>
                 <li><a href="#events" class="nav-link">Events</a></li>
                 <li><a href="#sermons" class="nav-link">Sermons</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
-                <li><a href="#giving" class="btn btn-primary btn-nav">Give</a></li>
+                <li><a href="#giving" class="nav-link">Give</a></li>
             </ul>
         </div>
     </nav>
@@ -218,64 +218,40 @@
     <section class="sermons section section-alt" id="sermons">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Recent Sermons</h2>
+                <h2 class="section-title">Watch Our Sermons</h2>
                 <div class="section-divider"></div>
+                <p class="section-subtitle">Access our full library of sermons and Bible studies</p>
             </div>
-            <div class="sermons-grid">
-                <div class="sermon-card">
-                    <div class="sermon-image">
-                        <div class="play-overlay">
-                            <i class="fas fa-play"></i>
-                        </div>
+            <div class="sermon-playlists">
+                <a href="https://www.youtube.com/playlist?list=PLw2qfRFieARtMUKDzo5JV42m22JBnp_Ya" 
+                   class="playlist-card" 
+                   style="background-image: url('images/sunday-services.jpg')"
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <div class="playlist-overlay">
+                        <span class="playlist-cta">Watch Playlist <i class="fas fa-play-circle"></i></span>
                     </div>
-                    <div class="sermon-content">
-                        <span class="sermon-date">January 28, 2026</span>
-                        <h3>Walking by Faith</h3>
-                        <p class="sermon-speaker">Pastor [Name]</p>
-                        <p class="sermon-series">Series: Living the Christian Life</p>
-                        <div class="sermon-actions">
-                            <a href="#" class="sermon-link"><i class="fas fa-play"></i> Watch</a>
-                            <a href="#" class="sermon-link"><i class="fas fa-headphones"></i> Listen</a>
-                        </div>
+                </a>
+                
+                <a href="https://www.youtube.com/playlist?list=PLw2qfRFieARvd5oS_rA-qa4q9Au5M4ft0" 
+                   class="playlist-card"
+                   style="background-image: url('images/wednesday-bible-studies.jpg')"
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <div class="playlist-overlay">
+                        <span class="playlist-cta">Watch Playlist <i class="fas fa-play-circle"></i></span>
                     </div>
-                </div>
-                <div class="sermon-card">
-                    <div class="sermon-image">
-                        <div class="play-overlay">
-                            <i class="fas fa-play"></i>
-                        </div>
+                </a>
+                
+                <a href="https://www.youtube.com/playlist?list=PLw2qfRFieARuaIVDu9vIK3TuMuqTZBOuQ" 
+                   class="playlist-card"
+                   style="background-image: url('images/special-services.jpg')"
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <div class="playlist-overlay">
+                        <span class="playlist-cta">Watch Playlist <i class="fas fa-play-circle"></i></span>
                     </div>
-                    <div class="sermon-content">
-                        <span class="sermon-date">January 21, 2026</span>
-                        <h3>The Power of Prayer</h3>
-                        <p class="sermon-speaker">Pastor [Name]</p>
-                        <p class="sermon-series">Series: Living the Christian Life</p>
-                        <div class="sermon-actions">
-                            <a href="#" class="sermon-link"><i class="fas fa-play"></i> Watch</a>
-                            <a href="#" class="sermon-link"><i class="fas fa-headphones"></i> Listen</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="sermon-card">
-                    <div class="sermon-image">
-                        <div class="play-overlay">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <div class="sermon-content">
-                        <span class="sermon-date">January 14, 2026</span>
-                        <h3>God's Unchanging Love</h3>
-                        <p class="sermon-speaker">Pastor [Name]</p>
-                        <p class="sermon-series">Series: Living the Christian Life</p>
-                        <div class="sermon-actions">
-                            <a href="#" class="sermon-link"><i class="fas fa-play"></i> Watch</a>
-                            <a href="#" class="sermon-link"><i class="fas fa-headphones"></i> Listen</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="section-cta">
-                <a href="#" class="btn btn-primary">View All Sermons</a>
+                </a>
             </div>
         </div>
     </section>
@@ -391,4 +367,73 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 Petra Baptist Church. All rights reserved.</p>
-   
+               </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll spy - highlights active section
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function setActiveNav() {
+            let scrollY = window.pageYOffset;
+
+            sections.forEach(section => {
+                const sectionHeight = section.offsetHeight;
+                const sectionTop = section.offsetTop - 100; // Offset for navbar height
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        // Run on scroll
+        window.addEventListener('scroll', setActiveNav);
+        
+        // Run on page load
+        setActiveNav();
+
+        // Mobile menu toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (navToggle) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // Close mobile menu when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll for navigation links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const offsetTop = targetSection.offsetTop - 80; // Account for fixed nav
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
