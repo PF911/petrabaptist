@@ -22,9 +22,11 @@ navToggle.addEventListener('click', () => {
     }
 });
 
-// Close mobile menu when clicking on a link
+// Close mobile menu when clicking on an internal link
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
+        const href = link.getAttribute('href');
+        if (!href || !href.startsWith('#')) return; // skip external links
         navMenu.classList.remove('active');
         
         // Reset hamburger icon
