@@ -213,12 +213,9 @@ const sermonCards = document.querySelectorAll('.sermon-card');
 
 sermonCards.forEach(card => {
     card.addEventListener('click', function(e) {
-        // Only trigger if clicking the card itself or the play overlay
-        if (e.target.closest('.sermon-link')) {
-            return; // Let the link handle it
-        }
+        // Get the sermon data
+        const sermonTitle = this.querySelector('h3').textContent;
         
-        // Here you would typically open a video player modal
         // For now, we'll just log it
         console.log('Sermon card clicked - would open video player');
         
@@ -294,64 +291,58 @@ const ministryData = {
     'petra-men': {
         icon: 'fa-user-tie',
         title: 'Petra Men',
-        description: '[Brief description of men\'s ministry activities and purpose]',
-        time: '[Meeting day and time]',
-        contact: '[Contact email or phone]'
+        description: 'Our Men\'s Ministry is committed to empowering men to live out their God-given purpose with strength, integrity, and courage. Through fellowship and biblical teaching, men are encouraged to grow spiritually and build lasting connections.',
+        time: 'Last Saturday of each month at 8:00AM (Bible Breakfast & Fellowship)',
+        leader: 'Brian Lee - Associate Pastor'
     },
     'petra-women': {
         icon: 'fa-heart',
         title: 'Petra Women',
-        externalLink: 'https://petrawomen.net/',
-        description: 'Visit our dedicated women\'s ministry website for events, resources, and community.'
+        description: 'The Women\'s Ministry exists to encourage, enlighten, equip, and energize women to walk in their God-given purpose through His power. Gatherings focus on spiritual growth, meaningful connection, and uplifting fellowship.',
+        time: '3rd Saturday of each month at 9:30AM (Table Talk with Carol Brunch)',
+        leader: 'Carol Cooke',
+        externalLink: 'https://petrawomen.net/'
     },
     'petra-teens': {
         icon: 'fa-user-friends',
         title: 'Petra Teens',
-        description: '[Brief description of teen ministry activities and purpose]',
-        time: '[Meeting day and time]',
-        contact: '[Contact email or phone]'
+        description: 'Our Teen Ministry invites students in 6th-12th grade to dive into Scripture, explore real-life applications, and grow in their faith alongside a strong community. Using The Gospel Project curriculum, students journey through the Bible chronologically, discovering how every story points to Jesus.',
+        time: 'Wednesday Nights at 6PM',
+        leaders: 'Tobias & Andrea Wilson'
     },
     'petra-seniors': {
         icon: 'fa-hands-helping',
         title: 'Petra Senior Saints',
-        description: '[Brief description of senior saints ministry activities and purpose]',
-        time: '[Meeting day and time]',
-        contact: '[Contact email or phone]'
+        description: 'Senior Saints is a vibrant ministry dedicated to encouraging, equipping, and engaging senior adults as vital members of the body of Christ. We believe every season of life has purpose, and we strive to help seniors grow spiritually, build meaningful community, and serve with joy.',
+        time: '3rd Thursday of each month',
+        leader: 'Debby Emerson'
     },
     'petra-kids': {
         icon: 'fa-child',
         title: 'Petra Kids',
-        description: '[Brief description of children\'s ministry activities and purpose]',
-        time: '[Meeting day and time]',
-        contact: '[Contact email or phone]'
+        description: 'Our Kids Ministry provides a fun and engaging environment where children from Pre-K through 5th grade can grow in God\'s Word, build friendships, and develop a strong foundation in their faith. Through the AWANA curriculum, kids learn biblical truths, discover Jesus, and practice Christian living through interactive activities and games.',
+        time: 'Wednesday Nights at 6PM',
+        leader: 'Stephanie Owens'
     },
     'petra-couples': {
         icon: 'fa-ring',
         title: 'Petra Couples',
-        description: '[Brief description of couples ministry activities and purpose]',
-        time: '[Meeting day and time]',
-        contact: '[Contact email or phone]'
+        description: 'The Couples Ministry is designed to help couples strengthen their relationship with Jesus Christ and one another. Through events and small groups, couples are encouraged to grow in their faith, deepen their connection, and build strong, Christ-centered marriages.',
+        time: 'As Scheduled (see Flocknotes or Events)',
+        leaders: 'Brian & Cheri Lee'
     },
     'petra-grief': {
         icon: 'fa-dove',
         title: 'Petra Grief Share',
-        description: '[Brief description of grief share support group and purpose]',
-        time: '[Meeting day and time]',
-        contact: '[Contact email or phone]'
+        description: 'GriefShare is a caring and supportive weekly group designed to help individuals navigate the pain of losing a loved one. Through expert-led videos, group discussion, and personal reflection, participants find comfort, understanding, and practical tools for healing and rebuilding their lives.',
+        time: 'Sundays from 3-5PM',
+        leader: 'Carol Cooke'
     },
     'bible-fellowship': {
         icon: 'fa-book-open',
         title: 'Bible Fellowship Groups',
-        description: '[Brief description of Bible fellowship groups and study opportunities]',
-        time: '[Meeting day and time]',
-        contact: '[Contact email or phone]'
-    },
-    'cove-counseling': {
-        icon: 'fa-user-md',
-        title: 'Cove Christian Counseling',
-        description: '[Brief description of Christian counseling services and approach]',
-        time: '[Available times/by appointment]',
-        contact: '[Contact email or phone]'
+        description: 'The Bible Fellowship Group is designed to help you dig deeper into God\'s Word and grow in your faith through meaningful study and discussion. Each gathering provides an opportunity to explore Scripture, gain practical insight, and connect with others in fellowship.',
+        time: 'Sundays at 8:00AM'
     }
 };
 
@@ -388,7 +379,18 @@ function openMinistryModal(ministry) {
         // Special case for Petra Women with external link
         content = `
             <div class="ministry-modal-section">
+                <h3><i class="fas fa-info-circle"></i> About</h3>
                 <p>${ministry.description}</p>
+            </div>
+            <div class="ministry-modal-section">
+                <h3><i class="fas fa-clock"></i> When We Meet</h3>
+                <p>${ministry.time}</p>
+            </div>
+            <div class="ministry-modal-section">
+                <h3><i class="fas fa-user"></i> ${ministry.leaders ? 'Leaders' : 'Leader'}</h3>
+                <p>${ministry.leader || ministry.leaders}</p>
+            </div>
+            <div class="ministry-modal-section">
                 <a href="${ministry.externalLink}" target="_blank" rel="noopener noreferrer" class="ministry-external-link">
                     <i class="fas fa-external-link-alt"></i>
                     Visit PetraWomen.net
@@ -397,6 +399,13 @@ function openMinistryModal(ministry) {
         `;
     } else {
         // Standard ministry content
+        const leaderSection = (ministry.leader || ministry.leaders) ? `
+            <div class="ministry-modal-section">
+                <h3><i class="fas fa-user"></i> ${ministry.leaders ? 'Leaders' : 'Leader'}</h3>
+                <p>${ministry.leader || ministry.leaders}</p>
+            </div>
+        ` : '';
+        
         content = `
             <div class="ministry-modal-section">
                 <h3><i class="fas fa-info-circle"></i> About</h3>
@@ -406,10 +415,7 @@ function openMinistryModal(ministry) {
                 <h3><i class="fas fa-clock"></i> When We Meet</h3>
                 <p>${ministry.time}</p>
             </div>
-            <div class="ministry-modal-section">
-                <h3><i class="fas fa-envelope"></i> Contact</h3>
-                <p>${ministry.contact}</p>
-            </div>
+            ${leaderSection}
         `;
     }
     
@@ -435,48 +441,5 @@ modalOverlay.addEventListener('click', closeMinistryModal);
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && ministryModal.classList.contains('active')) {
         closeMinistryModal();
-    }
-});
-
-// ===================================
-// Mobile App Modal Handling
-// ===================================
-const appModal = document.getElementById('appModal');
-const getAppBtn = document.getElementById('getAppBtn');
-const appModalClose = document.querySelector('.app-modal-close');
-const appModalOverlay = document.querySelector('.app-modal-overlay');
-
-// Open app modal
-if (getAppBtn) {
-    getAppBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        openAppModal();
-    });
-}
-
-function openAppModal() {
-    appModal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-}
-
-function closeAppModal() {
-    appModal.classList.remove('active');
-    document.body.style.overflow = ''; // Re-enable scrolling
-}
-
-// Close app modal on X button click
-if (appModalClose) {
-    appModalClose.addEventListener('click', closeAppModal);
-}
-
-// Close app modal on overlay click
-if (appModalOverlay) {
-    appModalOverlay.addEventListener('click', closeAppModal);
-}
-
-// Close app modal on Escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && appModal && appModal.classList.contains('active')) {
-        closeAppModal();
     }
 });

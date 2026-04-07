@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>links</title>
+    <style>
+        /* Resetting margin and padding for body */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+
+            /* >>> NEW GRADIENT BACKGROUND <<< */
+            background: linear-gradient(
+                to bottom,
+                #0C63BD,  /* top deep blue (sampled from your image) */
+                #1976D2,
+                #1E88E5,
+                #42A5F5,  /* mid-tone blues */
+                #64B5F6,
+                #90CAF9,
+                #BBDEFB  /* lighter bottom blue */
+            );
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Responsive image styling */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Media query for smaller screens */
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>
+                <img src="imagespetra/logo2.png" alt="Banner Image" width="718" height="189">
+            </h1>
+
+            <div>
+                <p><br><br>
+                    <a href="https://play.google.com/store/apps/details?id=com.petrachurch.app">
+                        <img src="images/google.png" alt="Google Play Store" width="423" height="132">
+                    </a>
+                </p>
+                <p>
+                    <a href="https://apps.apple.com/us/app/petra-baptist-church/id6754943166">
+                        <img src="images/apple.png" alt="Apple App Store" width="423" height="132">
+                    </a>
+                    <br><br>
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <footer>
+        <!-- Add footer content or links here -->
+    </footer>
+</body>
+</html>
