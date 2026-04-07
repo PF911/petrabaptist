@@ -381,6 +381,26 @@ p {
     margin: 0;
 }
 
+/* Logo card in service times */
+.logo-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: transparent !important;
+}
+
+.logo-card:hover {
+    transform: none;
+    background-color: transparent !important;
+}
+
+.service-logo {
+    width: 120px;
+    height: auto;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
 /* ===================================
    Section Headers
    =================================== */
