@@ -287,6 +287,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===================================
 // Ministry Modal Handling
 // ===================================
+// Wrap in DOMContentLoaded to ensure DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
 const ministryData = {
     'petra-men': {
         icon: 'fa-user-tie',
@@ -443,3 +445,5 @@ document.addEventListener('keydown', function(e) {
         closeMinistryModal();
     }
 });
+
+}); // End DOMContentLoaded for ministry modals
