@@ -56,8 +56,6 @@ html {
 }
 
 body {
-    opacity: 0;
-    transition: opacity 0.4s ease;
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.7;
@@ -326,7 +324,7 @@ p {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/church.png');
     background-size: cover;
     background-position: center;
-    background-attachment: scroll;
+    background-attachment: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
