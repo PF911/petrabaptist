@@ -1,180 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Petra Baptist Church</title>
-
-<style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #2e6aa9, #338cd0);
-    color: white;
-    overflow: hidden;
-  }
-
-  .app-frame {
-    position: relative;
-    width: 100%;
-    max-width: 420px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-bottom: 80px;
-  }
-
-  img.logo {
-    width: 75%;
-    max-width: 320px;
-    height: auto;
-    margin: 0 auto 20px auto;
-  }
-
-  img.tags {
-    width: 70%;
-    max-width: 260px;
-    height: auto;
-  }
-
-  /* Footer banner */
-  .footer-banner {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 420px;
-    background: #1d4f7a;
-    box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-    z-index: 100;
-  }
-
-  .banner-row {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin: 4px 0;
-  }
-
-  .banner-row div {
-    background: rgba(255,255,255,0.15);
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-    transition: background 0.3s, box-shadow 0.3s;
-  }
-
-  .banner-row div:hover {
-    background: rgba(255,255,255,0.3);
-  }
-
-  .banner-row div.active {
-    background: rgba(255,255,255,0.6);
-    color: #1d4f7a;
-    box-shadow: 0 0 12px rgba(255,255,255,0.9);
-  }
-
-  @media (max-width: 480px) {
-    .banner-row div {
-      font-size: 14px;
-      padding: 8px 10px;
-    }
-  }
-
-  /* Splash */
-  #splash {
-    position: fixed;
-    inset: 0;
-    background: #2e6aa9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 0.8s ease;
-  }
-
-  #splash.fade-out {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  #splash img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Petra Baptist Church - A community of faith in St. Augustine, Florida">
+    <meta name="keywords" content="church, baptist, St. Augustine, worship, community, faith">
+    <title>Petra Baptist Church - St. Augustine, FL</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="nav-brand">
+                <a href="#home">
+                    <div class="nav-logo-container">
+                        <img src="images/petra-logo.png" alt="Petra Baptist Church" class="nav-logo">
+                    </div>
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+               <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#ministries" class="nav-link">Ministries</a></li>
+                <li><a href="#events" class="nav-link">Events</a></li>
+                <li><a href="#sermons" class="nav-link">Sermons</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="https://petrabaptistchurch.flocknote.com/give" class="nav-link" target="_blank" rel="noopener noreferrer">Give</a></li>
+                <li class="nav-dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">Mobile App</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://apps.apple.com/us/app/petra-baptist-church/id6754943166" target="_blank" rel="noopener noreferrer">Apple</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=com.petrachurch.app" target="_blank" rel="noopener noreferrer">Google</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-<div id="splash">
-  <img src="res/splash.png" alt="Splash">
-</div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome</h1>
+            <p class="hero-subtitle">CONNECT - GROW - SERVE - REACH</p>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
 
-<div class="app-frame">
+    <!-- Service Times Banner -->
+    <section class="service-times">
+        <div class="container">
+            <div class="service-times-grid">
+                <div class="service-time-card">
+                    <i class="fas fa-sun"></i>
+                    <h3>Sunday Worship</h3>
+                    <p>9:00 AM & 10:30 AM</p>
+                </div>
+                <div class="service-time-card logo-card">
+                    <img src="images/logo.png" alt="Petra Baptist Church" class="service-logo">
+                </div>
+                <div class="service-time-card">
+                    <i class="fas fa-book-bible"></i>
+                    <h3>Wednesday Night Bible Study</h3>
+                    <p>6:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="main-content">
-    <img src="img/home.png" class="logo" alt="Petra Baptist Church">
-    <img src="img/tags.png" class="tags" alt="Tagline">
-  </div>
+    <!-- About Section -->
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Petra Baptist Church</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Mission</h3>
+                    <p>Petra Baptist Church is a community of believers dedicated to knowing Christ and making Him known. We are built on the solid rock of God's Word, committed to worship, fellowship, discipleship, and service.</p>
+                    
+                    <h3>What We Believe</h3>
+                    <p>We believe in the authority of Scripture, the deity of Christ, salvation by grace through faith, and the transforming power of the Holy Spirit. Our desire is to see lives changed by the Gospel and communities transformed by God's love.</p>
+                    
+                    <h3>Our History</h3>
+                    <p>Located in beautiful St. Augustine, Florida, Petra Baptist Church has been serving our community for years, providing a place where people can encounter God, grow in their faith, and serve others with joy.</p>
+                </div>
+                <div class="about-image">
+                    <div class="image-wrapper">
+                        <img src="images/church.png" alt="Petra Baptist Church Building">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- UPDATED FOOTER NAV ONLY -->
-  <div class="footer-banner">
+    <!-- Ministries Section -->
+    <section class="ministries section section-alt" id="ministries">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Ministries</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="ministries-grid">
+                <!-- Petra Men -->
+                <div class="ministry-card-compact" data-ministry="petra-men">
+                    <div class="ministry-icon-compact">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Petra Men</h3>
+                </div>
 
-    <div class="banner-row">
-      <div onclick="window.location.href='sermons.html'">Sermons</div>
-      <div onclick="window.location.href='prayer.html'">Prayer</div>
-      <div onclick="window.location.href='bibles.html'">Bibles</div>
+                <!-- Petra Women -->
+                <div class="ministry-card-compact" data-ministry="petra-women">
+                    <div class="ministry-icon-compact">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Petra Women</h3>
+                </div>
+
+                <!-- Petra Teens -->
+                <div class="ministry-card-compact" data-ministry="petra-teens">
+                    <div class="ministry-icon-compact">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>Petra Teens</h3>
+                </div>
+
+                <!-- Petra Senior Saints -->
+                <div class="ministry-card-compact" data-ministry="petra-seniors">
+                    <div class="ministry-icon-compact">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Petra Senior Saints</h3>
+                </div>
+
+                <!-- Petra Kids -->
+                <div class="ministry-card-compact" data-ministry="petra-kids">
+                    <div class="ministry-icon-compact">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>Petra Kids</h3>
+                </div>
+
+                <!-- Petra Couples -->
+                <div class="ministry-card-compact" data-ministry="petra-couples">
+                    <div class="ministry-icon-compact">
+                        <i class="fas fa-ring"></i>
+                    </div>
+                    <h3>Petra Couples</h3>
+                </div>
+
+                <!-- Petra Grief Share -->
+                <div class="ministry-card-compact" data-ministry="petra-grief">
+                    <div class="ministry-icon-compact">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <h3>Petra Grief Share</h3>
+                </div>
+
+                <!-- Bible Fellowship Groups -->
+                <div class="ministry-card-compact" data-ministry="bible-fellowship">
+                    <div class="ministry-icon-compact">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Bible Fellowship Groups</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ministry Details Modal -->
+    <div id="ministryModal" class="ministry-modal">
+        <div class="ministry-modal-overlay"></div>
+        <div class="ministry-modal-content">
+            <button class="ministry-modal-close" aria-label="Close">&times;</button>
+            <div class="ministry-modal-header">
+                <div class="ministry-modal-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2 id="modalTitle">Ministry Name</h2>
+            </div>
+            <div class="ministry-modal-body">
+                <div id="modalContent">
+                    <!-- Dynamic content loaded here -->
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="banner-row">
-      <div onclick="window.location.href='facebook.html'">Facebook</div>
-      <div class="active" onclick="window.location.href='index.html'">Home</div>
-      <div onclick="window.location.href='website.html'">Website</div>
-    </div>
+    <!-- Events Section -->
+    <section class="events section" id="events">
+        <div class="container">
+            <div class="calendar-wrapper">
+                <iframe
+                    class="calendar-embed"
+                    src="https://petrabaptist.space/calendar.html"
+                    frameborder="0"
+                    scrolling="yes"
+                    title="Petra Baptist Church Events Calendar">
+                </iframe>
+            </div>
+        </div>
+    </section>
 
-    <div class="banner-row">
-      <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
-      <div onclick="window.location.href='contact.html'">Contact</div>
-      <div onclick="window.location.href='events.html'">Events</div>
-      <div onclick="window.location.href='songs.html'">Songs</div>
-    </div>
+    <!-- Sermons Section -->
+    <section class="sermons section section-alt" id="sermons">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Watch Our Sermons</h2>
+                <div class="section-divider"></div>
+    
+            </div>
+            <div class="sermon-playlists">
+                <!-- Row 1 -->
+                <a href="https://www.youtube.com/playlist?list=PLw2qfRFieARtMUKDzo5JV42m22JBnp_Ya" 
+                   class="playlist-card" 
+                   style="background-image: url('images/sunday-services.jpg')"
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <div class="playlist-overlay">
+                        <span class="playlist-cta">Watch Playlist <i class="fas fa-play-circle"></i></span>
+                    </div>
+                </a>
+                
+                <a href="https://www.youtube.com/playlist?list=PLw2qfRFieARvd5oS_rA-qa4q9Au5M4ft0" 
+                   class="playlist-card"
+                   style="background-image: url('images/wednesday-bible-studies.jpg')"
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <div class="playlist-overlay">
+                        <span class="playlist-cta">Watch Playlist <i class="fas fa-play-circle"></i></span>
+                    </div>
+                </a>
 
-  </div>
-</div>
+                <!-- Row 2 -->
+                <a href="https://www.youtube.com/playlist?list=PLw2qfRFieARtD8TSPWUfCjbDFsxfmwkCq" 
+                   class="playlist-card"
+                   style="background-image: url('images/Bible-teachings.jpg')"
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <div class="playlist-overlay">
+                        <span class="playlist-cta">Watch Playlist <i class="fas fa-play-circle"></i></span>
+                    </div>
+                </a>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => document.getElementById("splash").classList.add("fade-out"), 600);
-  });
-</script>
+                <a href="https://www.youtube.com/playlist?list=PLw2qfRFieARuaIVDu9vIK3TuMuqTZBOuQ" 
+                   class="playlist-card"
+                   style="background-image: url('images/special-services.jpg')"
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    <div class="playlist-overlay">
+                        <span class="playlist-cta">Watch Playlist <i class="fas fa-play-circle"></i></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
 
+    <!-- Contact Section -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Visit Us</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>5845 State Road 16<br>St. Augustine, FL 32092</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>(904) 217-7543</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="/cdn-cgi/l/email-protection#7c3f1312081d1f083c0c19080e1d1e1d0c08150f08521f1311"><span class="__cf_email__" data-cfemail="e6a5898892878592a69683929487848796928f9592c885898b">[email&#160;protected]</span></a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Office Hours</h4>
+                            <p>Monday - Friday<br>9:00 AM - 4:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/petrabaptistchurch" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com/@petrabaptistchurch947" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <h3>Send Us a Message</h3>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Your Phone (Optional)">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Petra Baptist Church</h3>
+                    <p>Building faith, family, and community together in St. Augustine, Florida.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/petrabaptistchurch" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com/@petrabaptistchurch947" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#ministries">Ministries</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#sermons">Sermons</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="leadership.html">Leadership</a></li>
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdVt6bPviAZq5XNZAMkM0XPrd0uL0I458Y89QQKDNAkzV4W9A/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Prayer Requests</a></li>
+                        <li><a href="https://petrabaptistchurch.flocknote.com/give" target="_blank" rel="noopener noreferrer">Give Online</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Petra Baptist Church. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
