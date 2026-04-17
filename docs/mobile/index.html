@@ -153,7 +153,7 @@ img.tags {
 <script>
 /* 🔥 Fix: if index loads inside iframe → force Events page */
 if (window.self !== window.top) {
-  window.location.replace('events.html');
+  window.top.location.replace('events.html');
 }
 
 document.addEventListener("DOMContentLoaded", () => {
