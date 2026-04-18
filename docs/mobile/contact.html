@@ -6,84 +6,126 @@
 <title>Contact | Petra Baptist Church</title>
 
 <style>
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  color:white;
-  text-align:center;
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
 }
 
-/* Background */
-.page-background{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(to bottom,#2e6aa9,#338cd0);
-  z-index:0;
+.page-background {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+  z-index: 0;
 }
 
-/* App frame */
-.app-frame{
-  position:relative;
-  z-index:1;
-  width:100%;
-  max-width:420px;
-  margin:0 auto;
-  height:100vh;
+.app-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  height: 100vh;
 }
 
-/* Logo */
-.logo-bar{
-  position:absolute;
-  top:10px;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
-  max-width:420px;
+.logo-bar {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
 }
 
-.logo-bar img{
-  width:80%;
-  max-width:300px;
-  height:auto;
+.logo-bar img {
+  width: 80%;
+  max-width: 300px;
+  height: auto;
 }
 
-/* CONTENT – ANCHORED */
-.content-area{
-  position:absolute;
-  top:110px;
-  bottom:170px;
-  left:10px;
-  right:10px;
-  overflow-y:auto;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  padding-top:10px;
+.content-area {
+  position: absolute;
+  top: 110px;
+  bottom: 170px;
+  left: 10px;
+  right: 10px;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 10px;
 }
 
-.contact-card{
-  background:rgba(255,255,255,0.15);
-  border-radius:12px;
-  padding:18px;
-  width:90%;
-  max-width:360px;
-  text-align:left;
-  line-height:1.6em;
-  color:white;
+.contact-card {
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 18px;
+  width: 90%;
+  max-width: 360px;
+  text-align: left;
+  line-height: 1.6em;
+  color: white;
 }
 
-.contact-card img{
-  width:100%;
-  border-radius:10px;
-  margin-bottom:16px;
-  box-shadow:0 3px 10px rgba(0,0,0,0.3);
+.contact-card img.church-photo {
+  width: 100%;
+  max-height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 
-.contact-card p{
-  margin:12px 0;
+.contact-card h2 {
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: 18px;
 }
 
-/* Footer banner */
+.contact-card p { margin: 6px 0; font-size: 14px; }
+
+.action-btn {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  margin: 7px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-primary { background: #1d4f7a; color: white; }
+.btn-primary:active { background: #163d60; }
+
+.btn-secondary {
+  background: rgba(255,255,255,0.25);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+.btn-secondary:active { background: rgba(255,255,255,0.4); }
+
+.btn-contact {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  text-decoration: none;
+}
+.btn-contact:active { background: rgba(255,255,255,0.3); }
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  margin: 10px 0;
+}
+
 .footer-banner {
   position: fixed;
   bottom: 0;
@@ -119,9 +161,7 @@ body{
   transition: background 0.3s, box-shadow 0.3s;
 }
 
-.banner-row div:hover {
-  background: rgba(255,255,255,0.3);
-}
+.banner-row div:hover { background: rgba(255,255,255,0.3); }
 
 .banner-row div.active {
   background: rgba(255,255,255,0.6);
@@ -129,11 +169,14 @@ body{
   box-shadow: 0 0 12px rgba(255,255,255,0.9);
 }
 
+.banner-row div.home-btn {
+  flex: 2.2;
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
 @media (max-width: 480px) {
-  .banner-row div {
-    font-size: 14px;
-    padding: 8px 10px;
-  }
+  .banner-row div { font-size: 14px; padding: 8px 10px; }
 }
 </style>
 </head>
@@ -144,61 +187,97 @@ body{
 
 <div class="app-frame">
 
-  <!-- Logo -->
   <div class="logo-bar">
     <img src="img/logo2.png" alt="Petra Baptist Church Logo">
   </div>
 
-  <!-- Contact Content -->
   <div class="content-area">
     <div class="contact-card">
-      <img src="img/church.png" alt="Petra Baptist Church Building">
+
+      <img class="church-photo" src="img/church.png" alt="Petra Baptist Church Building">
+
       <h2>Petra Baptist Church</h2>
 
-      <p><strong>Address:</strong><br>
-        5845 State Road 16<br>
-        St. Augustine, FL 32092<br>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=5845+State+Road+16,+St.+Augustine,+FL+32092"
-           style="color:#fff;text-decoration:underline;">
-          📍 Get Directions
-        </a>
+      <p>
+        <strong>Address:</strong><br>
+        5845 State Road 16, St. Augustine, FL 32092
       </p>
+      <a class="action-btn btn-primary"
+         href="https://www.google.com/maps/dir/?api=1&destination=5845+State+Road+16,+St.+Augustine,+FL+32092">
+        📍 Get Directions
+      </a>
 
-      <p><strong>Email:</strong><br>
-        Pastor@PetraBaptist.com
-      </p>
+      <hr class="divider">
 
-      <p><strong>Phone:</strong><br>
-        (904) 813-9520
-      </p>
+      <a class="action-btn btn-contact" href="tel:+19048139520">
+        📞 (904) 813-9520
+      </a>
+
+      <a class="action-btn btn-contact" href="mailto:Pastor@PetraBaptist.com">
+        ✉️ Pastor@PetraBaptist.com
+      </a>
+
+      <a class="action-btn btn-contact" href="https://PetraBaptist.com" target="_blank" rel="noopener noreferrer">
+        🌐 PetraBaptist.com
+      </a>
+
+      <hr class="divider">
+
+      <button class="action-btn btn-secondary" onclick="saveContact()">
+        👤 Save Contact
+      </button>
+
+      <a class="action-btn btn-secondary" href="leadership.html">
+        ✝️ Meet Our Leadership
+      </a>
+
     </div>
   </div>
 
 </div>
 
-<!-- FOOTER NAV -->
+<!-- Footer Nav -->
 <div class="footer-banner">
-
   <div class="banner-row">
     <div onclick="window.location.href='sermons.html'">Sermons</div>
-    <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div class="home-btn" onclick="window.location.href='index.html'">Home</div>
     <div onclick="window.location.href='bibles.html'">Bibles</div>
   </div>
-
+  <div class="banner-row">
+    <div onclick="window.location.href='ministries.html'">Ministries</div>
+    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div onclick="window.location.href='give.html'">Give</div>
+  </div>
   <div class="banner-row">
     <div onclick="window.location.href='facebook.html'">Facebook</div>
-    <div onclick="window.location.href='index.html'">Home</div>
-    <div onclick="window.location.href='website.html'">Website</div>
-  </div>
-
-  <div class="banner-row">
-    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
     <div class="active" onclick="window.location.href='contact.html'">Contact</div>
     <div onclick="window.location.href='events.html'">Events</div>
     <div onclick="window.location.href='songs.html'">Songs</div>
   </div>
-
 </div>
+
+<script>
+function saveContact() {
+  const vcf = `BEGIN:VCARD
+VERSION:3.0
+FN:Petra Baptist Church
+ORG:Petra Baptist Church
+TEL;TYPE=CELL:+19048139520
+EMAIL:Pastor@PetraBaptist.com
+ADR;TYPE=WORK:;;5845 State Road 16;St. Augustine;FL;32092;USA
+URL:https://PetraBaptist.com
+END:VCARD`;
+
+  const blob = new Blob([vcf], { type: 'text/vcard' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'petra-baptist.vcf';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
 
 </body>
 </html>

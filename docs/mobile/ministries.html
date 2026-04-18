@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ministries | Petra Baptist Church</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #2e6aa9, #338cd0);
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* App frame */
+.app-frame {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 160px;
+}
+
+/* Logo */
+.logo-bar {
+  padding: 10px 0 6px;
+  width: 100%;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.logo-bar img {
+  width: 80%;
+  max-width: 300px;
+  height: auto;
+}
+
+/* Page title */
+.page-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 4px 0 12px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Ministry grid */
+.ministry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 14px;
+}
+
+.ministry-card {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 14px;
+  padding: 18px 10px 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ministry-card:active {
+  background: rgba(255,255,255,0.28);
+  transform: scale(0.97);
+}
+
+.ministry-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.ministry-card h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1.3;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* ── Modal ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 200;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-sheet {
+  background: #fff;
+  color: #1d4f7a;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 22px 22px 0 0;
+  padding: 20px 20px 30px;
+  max-height: 75vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #1d4f7a;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-right: 30px;
+}
+
+.modal-header-icon {
+  font-size: 28px;
+  color: #2e6aa9;
+  flex-shrink: 0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #1d4f7a;
+}
+
+.modal-section {
+  margin-bottom: 14px;
+}
+
+.modal-section h4 {
+  margin: 0 0 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #2e6aa9;
+}
+
+.modal-section p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.external-btn {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  padding: 13px;
+  background: #2e6aa9;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ── Footer nav ── */
+.footer-banner {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+  background: #1d4f7a;
+  box-shadow: 0 -3px 8px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  z-index: 100;
+}
+
+.banner-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.banner-row div {
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.banner-row div:hover  { background: rgba(255,255,255,0.3); }
+
+.banner-row div.active {
+  background: rgba(255,255,255,0.6);
+  color: #1d4f7a;
+  box-shadow: 0 0 12px rgba(255,255,255,0.9);
+}
+
+.banner-row div.home-btn {
+  flex: 2.2;
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+@media (max-width: 480px) {
+  .banner-row div { font-size: 14px; padding: 8px 10px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app-frame">
+
+  <div class="logo-bar">
+    <img src="img/logo2.png" alt="Petra Baptist Church Logo" onerror="this.style.display='none'">
+  </div>
+
+  <div class="page-title">Our Ministries</div>
+
+  <div class="ministry-grid">
+
+    <div class="ministry-card" onclick="openModal('petra-men')">
+      <div class="ministry-icon">👔</div>
+      <h3>Petra Men</h3>
+    </div>
+
+    <div class="ministry-card" onclick="openModal('petra-women')">
+      <div class="ministry-icon">🤍</div>
+      <h3>Petra Women</h3>
+    </div>
+
+    <div class="ministry-card" onclick="openModal('petra-teens')">
+      <div class="ministry-icon">🙌</div>
+      <h3>Petra Teens</h3>
+    </div>
+
+    <div class="ministry-card" onclick="openModal('petra-seniors')">
+      <div class="ministry-icon">🕊️</div>
+      <h3>Petra Senior Saints</h3>
+    </div>
+
+    <div class="ministry-card" onclick="openModal('petra-kids')">
+      <div class="ministry-icon">⭐</div>
+      <h3>Petra Kids</h3>
+    </div>
+
+    <div class="ministry-card" onclick="openModal('petra-couples')">
+      <div class="ministry-icon">💍</div>
+      <h3>Petra Couples</h3>
+    </div>
+
+    <div class="ministry-card" onclick="openModal('petra-grief')">
+      <div class="ministry-icon">🕊️</div>
+      <h3>Petra Grief Share</h3>
+    </div>
+
+    <div class="ministry-card" onclick="openModal('bible-fellowship')">
+      <div class="ministry-icon">📖</div>
+      <h3>Bible Fellowship Groups</h3>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal-sheet" id="modalSheet">
+    <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+    <div class="modal-header">
+      <div class="modal-header-icon" id="modalIcon">👔</div>
+      <h2 id="modalTitle">Ministry</h2>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- Footer Nav -->
+<div class="footer-banner">
+  <div class="banner-row">
+    <div onclick="window.location.href='sermons.html'">Sermons</div>
+    <div onclick="window.location.href='index.html'" class="home-btn">Home</div>
+    <div onclick="window.location.href='bibles.html'">Bibles</div>
+  </div>
+  <div class="banner-row">
+    <div class="active" onclick="window.location.href='ministries.html'">Ministries</div>
+    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div onclick="window.location.href='give.html'">Give</div>
+  </div>
+  <div class="banner-row">
+    <div onclick="window.location.href='facebook.html'">Facebook</div>
+    <div onclick="window.location.href='contact.html'">Contact</div>
+    <div onclick="window.location.href='events.html'">Events</div>
+    <div onclick="window.location.href='songs.html'">Songs</div>
+  </div>
+</div>
+
+<script>
+const ministryData = {
+  'petra-men': {
+    icon: '👔',
+    title: 'Petra Men',
+    description: "Our Men's Ministry is committed to empowering men to live out their God-given purpose with strength, integrity, and courage. Through fellowship and biblical teaching, men are encouraged to grow spiritually and build lasting connections.",
+    time: 'Last Saturday of each month at 8:00 AM (Bible Breakfast & Fellowship)',
+    leader: 'Brian Lee — Associate Pastor'
+  },
+  'petra-women': {
+    icon: '🤍',
+    title: 'Petra Women',
+    description: "The Women's Ministry exists to encourage, enlighten, equip, and energize women to walk in their God-given purpose through His power. Gatherings focus on spiritual growth, meaningful connection, and uplifting fellowship.",
+    time: '3rd Saturday of each month at 9:30 AM (Table Talk with Carol Brunch)',
+    leader: 'Carol Cooke',
+    externalLink: 'https://petrawomen.net/'
+  },
+  'petra-teens': {
+    icon: '🙌',
+    title: 'Petra Teens',
+    description: 'Our Teen Ministry invites students in 6th–12th grade to dive into Scripture, explore real-life applications, and grow in their faith alongside a strong community. Using The Gospel Project curriculum, students journey through the Bible chronologically, discovering how every story points to Jesus.',
+    time: 'Wednesday Nights at 6:00 PM',
+    leader: 'Tobias & Andrea Wilson'
+  },
+  'petra-seniors': {
+    icon: '🕊️',
+    title: 'Petra Senior Saints',
+    description: 'Senior Saints is a vibrant ministry dedicated to encouraging, equipping, and engaging senior adults as vital members of the body of Christ. We believe every season of life has purpose, and we strive to help seniors grow spiritually, build meaningful community, and serve with joy.',
+    time: '3rd Thursday of each month',
+    leader: 'Debby Emerson'
+  },
+  'petra-kids': {
+    icon: '⭐',
+    title: 'Petra Kids',
+    description: "Our Kids Ministry provides a fun and engaging environment where children from Pre-K through 5th grade can grow in God's Word, build friendships, and develop a strong foundation in their faith. Through the AWANA curriculum, kids learn biblical truths, discover Jesus, and practice Christian living through interactive activities and games.",
+    time: 'Wednesday Nights at 6:00 PM',
+    leader: 'Stephanie Owens'
+  },
+  'petra-couples': {
+    icon: '💍',
+    title: 'Petra Couples',
+    description: 'The Couples Ministry is designed to help couples strengthen their relationship with Jesus Christ and one another. Through events and small groups, couples are encouraged to grow in their faith, deepen their connection, and build strong, Christ-centered marriages.',
+    time: 'As Scheduled — see Flocknotes or Events',
+    leader: 'Brian & Cheri Lee'
+  },
+  'petra-grief': {
+    icon: '🕊️',
+    title: 'Petra Grief Share',
+    description: 'GriefShare is a caring and supportive weekly group designed to help individuals navigate the pain of losing a loved one. Through expert-led videos, group discussion, and personal reflection, participants find comfort, understanding, and practical tools for healing and rebuilding their lives.',
+    time: 'Sundays from 3:00–5:00 PM',
+    leader: 'Carol Cooke'
+  },
+  'bible-fellowship': {
+    icon: '📖',
+    title: 'Bible Fellowship Groups',
+    description: "The Bible Fellowship Group is designed to help you dig deeper into God's Word and grow in your faith through meaningful study and discussion. Each gathering provides an opportunity to explore Scripture, gain practical insight, and connect with others in fellowship.",
+    time: 'Sundays at 8:00 AM'
+  }
+};
+
+function openModal(id) {
+  const m = ministryData[id];
+  if (!m) return;
+
+  document.getElementById('modalIcon').textContent  = m.icon;
+  document.getElementById('modalTitle').textContent = m.title;
+
+  let html = `
+    <div class="modal-section">
+      <h4>About</h4>
+      <p>${m.description}</p>
+    </div>
+    <div class="modal-section">
+      <h4>When We Meet</h4>
+      <p>${m.time}</p>
+    </div>`;
+
+  if (m.leader) {
+    html += `
+    <div class="modal-section">
+      <h4>Leader${m.leader.includes('&') ? 's' : ''}</h4>
+      <p>${m.leader}</p>
+    </div>`;
+  }
+
+  if (m.externalLink) {
+    html += `<a class="external-btn" href="${m.externalLink}" target="_blank" rel="noopener noreferrer">Visit PetraWomen.net ↗</a>`;
+  }
+
+  document.getElementById('modalBody').innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+
+</body>
+</html>

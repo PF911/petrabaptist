@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Events | Petra Baptist Church</title>
+<title>Give | Petra Baptist Church</title>
 
 <style>
 * { box-sizing: border-box; }
@@ -11,33 +11,24 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  overflow: hidden;
-}
-
-/* Background */
-.page-background {
-  position: fixed;
-  inset: 0;
   background: linear-gradient(to bottom, #2e6aa9, #338cd0);
-  z-index: 0;
+  min-height: 100vh;
+  color: #fff;
 }
 
-/* App frame */
 .app-frame {
-  position: relative;
-  z-index: 1;
   width: 100%;
   max-width: 420px;
   margin: 0 auto;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding-bottom: 160px;
 }
 
 /* Logo */
 .logo-bar {
-  padding-top: 10px;
-  width: 100%;
+  padding: 10px 0 6px;
   text-align: center;
   flex-shrink: 0;
 }
@@ -48,22 +39,62 @@ body {
   height: auto;
 }
 
-/* Calendar container */
-.calendar-container {
+/* Center content */
+.wrapper {
   flex: 1;
-  padding: 10px;
-  padding-bottom: 175px;
-  overflow: hidden;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-.calendar-frame {
-  flex: 1;
+.card {
+  background: #fff;
+  color: #2e6aa9;
   width: 100%;
+  max-width: 360px;
+  border-radius: 18px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  color: #1d4f7a;
+}
+
+.card p {
+  margin: 0 0 28px;
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.give-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: #2e6aa9;
+  color: #fff;
   border: none;
   border-radius: 12px;
-  background: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.give-btn:active {
+  background: #1d4f7a;
+}
+
+.note {
+  margin-top: 16px;
+  font-size: 12px;
+  color: #999;
 }
 
 /* Footer banner */
@@ -124,22 +155,21 @@ body {
 
 <body>
 
-<div class="page-background"></div>
-
 <div class="app-frame">
 
   <div class="logo-bar">
     <img src="img/logo2.png" alt="Petra Baptist Church Logo" onerror="this.style.display='none'">
   </div>
 
-  <div class="calendar-container">
-    <iframe
-      class="calendar-frame"
-      src="https://calendar.google.com/calendar/embed?src=c_7aa6dfe390e9df1454e5c362bf7c909b0b08e8bc8d4991d2f80028f69ef9ea67%40group.calendar.google.com&ctz=America%2FNew_York&mode=AGENDA&showTitle=0&showNav=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0"
-      frameborder="0"
-      scrolling="yes"
-      referrerpolicy="no-referrer">
-    </iframe>
+  <div class="wrapper">
+    <div class="card">
+      <h2>Support Petra Baptist</h2>
+      <p>Your generosity makes a difference. Thank you for giving to the ministry of Petra Baptist Church.</p>
+      <a class="give-btn" href="https://petrabaptistchurch.flocknote.com/give" target="_blank" rel="noopener noreferrer">
+        Give Online
+      </a>
+      <div class="note">Opens securely in your browser</div>
+    </div>
   </div>
 
 </div>
@@ -155,12 +185,12 @@ body {
     <div onclick="window.location.href='ministries.html'">Ministries</div>
     <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
     <div onclick="window.location.href='prayer.html'">Prayer</div>
-    <div onclick="window.location.href='give.html'">Give</div>
+    <div class="active" onclick="window.location.href='give.html'">Give</div>
   </div>
   <div class="banner-row">
     <div onclick="window.location.href='facebook.html'">Facebook</div>
     <div onclick="window.location.href='contact.html'">Contact</div>
-    <div class="active" onclick="window.location.href='events.html'">Events</div>
+    <div onclick="window.location.href='events.html'">Events</div>
     <div onclick="window.location.href='songs.html'">Songs</div>
   </div>
 </div>

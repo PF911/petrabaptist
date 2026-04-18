@@ -148,6 +148,12 @@ body{
     padding: 8px 10px;
   }
 }
+
+.banner-row div.home-btn {
+  flex: 2.2;
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.5);
+}
 </style>
 </head>
 
@@ -179,14 +185,26 @@ body{
 
 </div>
 
-<!-- FOOTER NAV -->
+<!-- Footer Nav -->
 <div class="footer-banner">
-
   <div class="banner-row">
     <div onclick="window.location.href='sermons.html'">Sermons</div>
-    <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div class="home-btn" onclick="window.location.href='index.html'">Home</div>
     <div onclick="window.location.href='bibles.html'">Bibles</div>
   </div>
+  <div class="banner-row">
+    <div onclick="window.location.href='ministries.html'">Ministries</div>
+    <div class="active" onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="window.location.href='prayer.html'">Prayer</div>
+    <div onclick="window.location.href='give.html'">Give</div>
+  </div>
+  <div class="banner-row">
+    <div onclick="window.location.href='facebook.html'">Facebook</div>
+    <div onclick="window.location.href='contact.html'">Contact</div>
+    <div onclick="window.location.href='events.html'">Events</div>
+    <div onclick="window.location.href='songs.html'">Songs</div>
+  </div>
+</div>
 
   <div class="banner-row">
     <div onclick="window.location.href='facebook.html'">Facebook</div>

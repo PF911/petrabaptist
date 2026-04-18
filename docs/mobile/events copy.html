@@ -6,64 +6,60 @@
 <title>Events | Petra Baptist Church</title>
 
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  overflow:hidden;
 }
 
 /* Background */
-.page-background {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(to bottom, #2e6aa9, #338cd0);
-  z-index: 0;
+.page-background{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(to bottom,#2e6aa9,#338cd0);
+  z-index:0;
 }
 
 /* App frame */
-.app-frame {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+.app-frame{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:420px;
+  margin:0 auto;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
 /* Logo */
-.logo-bar {
-  padding-top: 10px;
-  width: 100%;
-  text-align: center;
-  flex-shrink: 0;
+.logo-bar{
+  padding-top:10px;
+  width:100%;
+  text-align:center;
+  flex-shrink:0;
 }
 
-.logo-bar img {
-  width: 80%;
-  max-width: 300px;
-  height: auto;
+.logo-bar img{
+  width:80%;
+  max-width:300px;
+  height:auto;
 }
 
-/* Calendar container */
-.calendar-container {
-  flex: 1;
-  padding: 10px;
-  padding-bottom: 175px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+/* Calendar iframe */
+.calendar-container{
+  flex:1;
+  padding:10px;
+  padding-bottom:180px;
+  overflow:hidden;
 }
 
-.calendar-frame {
-  flex: 1;
-  width: 100%;
-  border: none;
-  border-radius: 12px;
-  background: white;
+.calendar-frame{
+  width:100%;
+  height:100%;
+  border:none;
+  border-radius:12px;
+  background:white;
 }
 
 /* Footer banner */
@@ -102,7 +98,9 @@ body {
   transition: background 0.3s, box-shadow 0.3s;
 }
 
-.banner-row div:hover { background: rgba(255,255,255,0.3); }
+.banner-row div:hover {
+  background: rgba(255,255,255,0.3);
+}
 
 .banner-row div.active {
   background: rgba(255,255,255,0.6);
@@ -110,14 +108,11 @@ body {
   box-shadow: 0 0 12px rgba(255,255,255,0.9);
 }
 
-.banner-row div.home-btn {
-  flex: 2.2;
-  background: rgba(255,255,255,0.25);
-  border: 1px solid rgba(255,255,255,0.5);
-}
-
 @media (max-width: 480px) {
-  .banner-row div { font-size: 14px; padding: 8px 10px; }
+  .banner-row div {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
 }
 </style>
 </head>
@@ -137,32 +132,33 @@ body {
       class="calendar-frame"
       src="https://calendar.google.com/calendar/embed?src=c_7aa6dfe390e9df1454e5c362bf7c909b0b08e8bc8d4991d2f80028f69ef9ea67%40group.calendar.google.com&ctz=America%2FNew_York&mode=AGENDA&showTitle=0&showNav=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0"
       frameborder="0"
-      scrolling="yes"
-      referrerpolicy="no-referrer">
+      scrolling="yes">
     </iframe>
   </div>
 
 </div>
 
-<!-- Footer Nav -->
 <div class="footer-banner">
+
   <div class="banner-row">
     <div onclick="window.location.href='sermons.html'">Sermons</div>
-    <div class="home-btn" onclick="window.location.href='index.html'">Home</div>
+    <div onclick="window.location.href='prayer.html'">Prayer</div>
     <div onclick="window.location.href='bibles.html'">Bibles</div>
   </div>
-  <div class="banner-row">
-    <div onclick="window.location.href='ministries.html'">Ministries</div>
-    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
-    <div onclick="window.location.href='prayer.html'">Prayer</div>
-    <div onclick="window.location.href='give.html'">Give</div>
-  </div>
+
   <div class="banner-row">
     <div onclick="window.location.href='facebook.html'">Facebook</div>
+    <div onclick="window.location.href='index.html'">Home</div>
+    <div onclick="window.location.href='website.html'">Website</div>
+  </div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
     <div onclick="window.location.href='contact.html'">Contact</div>
     <div class="active" onclick="window.location.href='events.html'">Events</div>
     <div onclick="window.location.href='songs.html'">Songs</div>
   </div>
+
 </div>
 
 </body>
