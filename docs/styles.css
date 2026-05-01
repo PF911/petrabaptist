@@ -925,6 +925,115 @@ p {
 }
 
 /* ===================================
+   Live Stream Section
+   =================================== */
+.live-stream {
+    background-color: var(--white);
+}
+
+/* Inline badge in heading */
+.live-badge-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #c0392b;
+}
+
+.live-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #c0392b;
+    border-radius: 50%;
+    animation: livePulse 1.4s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.3; transform: scale(0.8); }
+}
+
+/* Responsive 16:9 video embed */
+.live-player-wrapper {
+    max-width: 860px;
+    margin: 0 auto 1.5rem;
+}
+
+.live-video-frame {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+    background: #000;
+}
+
+.live-video-frame iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+}
+
+/* Row below player */
+.live-footer-row {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.live-note {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--dark-gray);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.live-note i {
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.live-yt-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #c0392b;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    white-space: nowrap;
+}
+
+.live-yt-btn:hover {
+    background: #a93226;
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 600px) {
+    .live-footer-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ===================================
    Contact Section
    =================================== */
 .contact-content {
