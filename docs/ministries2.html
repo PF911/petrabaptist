@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore the ministries of Petra Baptist Church in St. Augustine, Florida.">
+    <title>Ministries - Petra Baptist Church</title>
+
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+
+        /* ── Hero Section ── */
+        .min-hero-section {
+            min-height: 100vh;
+            background: linear-gradient(rgba(10,18,40,0.72), rgba(10,18,40,0.72)),
+                        url('images/church.png') center/cover no-repeat scroll;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 1.5rem 80px;
+        }
+
+        /* ── Page heading ── */
+        .min-page-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 600;
+            color: #f0e6c8;
+            letter-spacing: 0.05em;
+            text-align: center;
+            margin-bottom: 0.6rem;
+        }
+        .min-gold-rule {
+            width: 52px;
+            height: 2px;
+            background: #c8a84b;
+            border-radius: 1px;
+            margin: 0 auto 1.5rem;
+        }
+        .min-page-intro {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.1rem;
+            color: rgba(240,230,200,0.80);
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.75;
+            margin-bottom: 3rem;
+        }
+
+        /* ── Ministry Card Grid ── */
+        .min-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
+        }
+        @media (max-width: 860px) {
+            .min-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        }
+        @media (max-width: 420px) {
+            .min-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        }
+
+        /* ── Ministry Card ── */
+        .min-card {
+            background: rgba(255,255,255,0.96);
+            border: 1px solid rgba(200,168,75,0.25);
+            border-radius: 14px;
+            padding: 1.75rem 1.25rem 1.5rem;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            transition: border-color 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease;
+        }
+        .min-card:hover {
+            border-color: #c8a84b;
+            transform: translateY(-5px);
+            box-shadow: 0 14px 32px rgba(10,18,40,0.35);
+        }
+        .min-card-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 2px solid #c8a84b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a2a4a;
+            color: #e8d5a0;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        .min-card-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a2a4a;
+            line-height: 1.3;
+        }
+
+        /* ── Loading / Error States ── */
+        .min-status {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.1rem;
+            color: rgba(240,230,200,0.70);
+            text-align: center;
+            padding: 2rem 0;
+            letter-spacing: 0.03em;
+            grid-column: 1 / -1;
+        }
+        .min-status.error { color: #e8a0a0; }
+        .min-status i { margin-right: 8px; }
+
+        /* ── Scroll chevron ── */
+        .min-scroll-down {
+            margin-top: 2.5rem;
+            color: rgba(200,168,75,0.7);
+            font-size: 1.4rem;
+            animation: minBounce 2s infinite;
+        }
+        @keyframes minBounce {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(6px); }
+        }
+
+        /* ── Modal Backdrop ── */
+        .min-backdrop {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(10,18,35,0.65);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .min-backdrop.open { display: flex; }
+
+        /* ── Modal ── */
+        .min-modal {
+            background: #ffffff;
+            border-radius: 16px;
+            width: 100%; max-width: 560px; max-height: 88vh;
+            display: flex; flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 28px 70px rgba(10,18,35,0.35);
+            animation: minSlideUp 0.25s ease;
+        }
+        @keyframes minSlideUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Modal Header ── */
+        .min-modal-header {
+            background: #1a2a4a;
+            padding: 1.6rem 1.5rem 1.4rem;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 10px;
+            flex-shrink: 0; position: relative;
+        }
+        .min-close {
+            position: absolute; top: 14px; right: 16px;
+            background: rgba(255,255,255,0.1); border: none;
+            color: #e8d5a0; font-size: 16px;
+            width: 30px; height: 30px; border-radius: 50%;
+            cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+            transition: background 0.15s;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .min-close:hover { background: rgba(200,168,75,0.3); }
+        .min-modal-icon-wrap {
+            width: 60px; height: 60px; border-radius: 50%;
+            border: 2px solid #c8a84b;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.08);
+            font-size: 24px; color: #e8d5a0;
+        }
+        .min-modal-divider { width: 40px; height: 2px; background: #c8a84b; border-radius: 1px; }
+        .min-modal-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.55rem; font-weight: 600;
+            color: #f0e6c8; text-align: center; line-height: 1.2;
+        }
+
+        /* ── Modal Body & Sections ── */
+        .min-modal-body { padding: 1.6rem; overflow-y: auto; flex: 1; }
+        .min-modal-section { margin-bottom: 1.25rem; }
+        .min-modal-section:last-child { margin-bottom: 0; }
+        .min-modal-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10.5px; font-weight: 600;
+            color: #c8a84b; text-transform: uppercase;
+            letter-spacing: 0.1em; margin-bottom: 0.45rem;
+        }
+        .min-modal-section h3 i { margin-right: 6px; }
+        .min-modal-section p {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.05rem; color: #3a3020;
+            line-height: 1.78; margin: 0;
+        }
+        .min-external-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px; font-weight: 600;
+            color: #ffffff; background: #1a2a4a;
+            padding: 0.65rem 1.25rem; border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.18s ease;
+            letter-spacing: 0.04em;
+        }
+        .min-external-link:hover { background: #c8a84b; color: #1a2a4a; }
+
+        /* ── Responsive modal ── */
+        @media (max-width: 480px) {
+            .min-modal { max-height: 92vh; border-radius: 16px 16px 0 0; align-self: flex-end; }
+            .min-backdrop { align-items: flex-end; padding: 0; }
+            .min-hero-section { padding: 100px 1rem 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <div class="nav-logo-container">
+                        <img src="images/petra-logo.png" alt="Petra Baptist Church" class="nav-logo">
+                    </div>
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="ministries2.html" class="nav-link">Ministries</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="index.html#sermons" class="nav-link">Sermons</a></li>
+                <li><a href="index.html#live" class="nav-link">Live</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="https://petrabaptistchurch.flocknote.com/give" class="nav-link" target="_blank" rel="noopener noreferrer">Give</a></li>
+                <li class="nav-dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">Mobile App</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://apps.apple.com/us/app/petra-baptist-church/id6754943166" target="_blank" rel="noopener noreferrer">Apple</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=com.petrachurch.app" target="_blank" rel="noopener noreferrer">Google</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero + Ministry Cards -->
+    <section class="min-hero-section">
+        <h1 class="min-page-title">Our Ministries</h1>
+        <div class="min-gold-rule"></div>
+        <p class="min-page-intro">
+            Petra Baptist Church offers a variety of ministries to help you grow in faith,
+            build meaningful relationships, and serve alongside your church family.
+            Select any ministry below to learn more.
+        </p>
+        <div class="min-grid" id="minGrid">
+            <div class="min-status"><i class="fas fa-circle-notch fa-spin"></i> Loading ministries&hellip;</div>
+        </div>
+        <div class="min-scroll-down"><i class="fas fa-chevron-down"></i></div>
+    </section>
+
+    <!-- Modal -->
+    <div class="min-backdrop" id="minBackdrop">
+        <div class="min-modal" role="dialog" aria-modal="true" aria-labelledby="minModalTitle">
+            <div class="min-modal-header">
+                <button class="min-close" id="minCloseBtn" aria-label="Close">&#x2715;</button>
+                <div class="min-modal-icon-wrap"><i id="minModalIcon" class="fas fa-church"></i></div>
+                <div class="min-modal-divider"></div>
+                <div class="min-modal-title" id="minModalTitle"></div>
+            </div>
+            <div class="min-modal-body" id="minModalBody"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Petra Baptist Church</h3>
+                    <p>Building faith, family, and community together in St. Augustine, Florida.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/petrabaptistchurch" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com/@petrabaptistchurch947" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="ministries2.html">Ministries</a></li>
+                        <li><a href="index.html#events">Events</a></li>
+                        <li><a href="index.html#sermons">Sermons</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="leadership2.html">Leadership</a></li>
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdVt6bPviAZq5XNZAMkM0XPrd0uL0I458Y89QQKDNAkzV4W9A/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Prayer Requests</a></li>
+                        <li><a href="https://petrabaptistchurch.flocknote.com/give" target="_blank" rel="noopener noreferrer">Give Online</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Petra Baptist Church. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        /* ============================================================
+           GOOGLE SHEET SETUP
+           ---------------------------------------------------------------
+           1. Create a Google Sheet with these EXACT column headers in Row 1:
+                icon | title | description | time | leader | leaders | externalLink | externalLinkText
+
+              Column guide:
+                icon           — Font Awesome class, e.g.  fa-user-tie
+                title          — Display name, e.g.  Petra Men
+                description    — The "About" paragraph for this ministry
+                time           — When they meet, e.g.  Last Saturday at 8:00AM
+                leader         — Single leader name (or blank)
+                leaders        — Multiple leaders, e.g.  Tobias & Andrea Wilson (or blank)
+                externalLink   — Full URL if there's a website to link (or blank)
+                externalLinkText — Button label, e.g.  Visit PetraWomen.net (or blank)
+
+           2. Publish the sheet:
+              File → Share → Publish to web
+              → "Entire Document" → "Comma-separated values (.csv)"
+              → click Publish → copy the URL
+
+           3. Paste that URL below, replacing the placeholder.
+
+           NOTE: Changes in the sheet can take a few minutes to appear
+           on the live site due to Google's caching.
+        ============================================================ */
+        const SHEET_URL = "PASTE_YOUR_PUBLISHED_SHEET_CSV_URL_HERE";
+
+        /* ── Robust CSV Parser (handles commas inside quoted fields) ── */
+        function parseCSV(text) {
+            const rows = [];
+            const lines = text.split(/\r?\n/);
+            for (const line of lines) {
+                if (!line.trim()) continue;
+                const row = [];
+                let inQuote = false, field = '';
+                for (let i = 0; i < line.length; i++) {
+                    const c = line[i];
+                    if (c === '"') {
+                        if (inQuote && line[i + 1] === '"') { field += '"'; i++; }
+                        else { inQuote = !inQuote; }
+                    } else if (c === ',' && !inQuote) {
+                        row.push(field.trim()); field = '';
+                    } else {
+                        field += c;
+                    }
+                }
+                row.push(field.trim());
+                rows.push(row);
+            }
+            return rows;
+        }
+
+        /* ── Build Ministry Cards ── */
+        function buildCards(ministries) {
+            const grid = document.getElementById("minGrid");
+            grid.innerHTML = "";
+
+            if (!ministries.length) {
+                grid.innerHTML = '<div class="min-status error"><i class="fas fa-exclamation-circle"></i> No ministries found in the sheet.</div>';
+                return;
+            }
+
+            ministries.forEach((m, i) => {
+                const card = document.createElement("div");
+                card.className = "min-card";
+                card.setAttribute("aria-label", "Learn more about " + m.title);
+                card.innerHTML = `
+                    <div class="min-card-icon"><i class="fas ${m.icon || 'fa-church'}"></i></div>
+                    <div class="min-card-name">${m.title}</div>
+                `;
+                card.onclick = () => openModal(i, ministries);
+                grid.appendChild(card);
+            });
+        }
+
+        /* ── Open Modal ── */
+        function openModal(idx, ministries) {
+            const m = ministries[idx];
+
+            document.getElementById("minModalIcon").className = `fas ${m.icon || 'fa-church'}`;
+            document.getElementById("minModalTitle").textContent = m.title;
+
+            let html = '';
+
+            if (m.description) {
+                html += `<div class="min-modal-section">
+                    <h3><i class="fas fa-info-circle"></i> About</h3>
+                    <p>${m.description}</p>
+                </div>`;
+            }
+
+            if (m.time) {
+                html += `<div class="min-modal-section">
+                    <h3><i class="fas fa-clock"></i> When We Meet</h3>
+                    <p>${m.time}</p>
+                </div>`;
+            }
+
+            const leaderValue = m.leaders || m.leader;
+            const leaderLabel = m.leaders ? 'Leaders' : 'Leader';
+            if (leaderValue) {
+                html += `<div class="min-modal-section">
+                    <h3><i class="fas fa-user"></i> ${leaderLabel}</h3>
+                    <p>${leaderValue}</p>
+                </div>`;
+            }
+
+            if (m.externalLink) {
+                const linkText = m.externalLinkText || 'Visit Website';
+                html += `<div class="min-modal-section">
+                    <a href="${m.externalLink}" target="_blank" rel="noopener noreferrer" class="min-external-link">
+                        <i class="fas fa-external-link-alt"></i> ${linkText}
+                    </a>
+                </div>`;
+            }
+
+            document.getElementById("minModalBody").innerHTML = html;
+            document.getElementById("minBackdrop").classList.add("open");
+            document.body.style.overflow = "hidden";
+        }
+
+        /* ── Close Modal ── */
+        function closeModal() {
+            document.getElementById("minBackdrop").classList.remove("open");
+            document.body.style.overflow = "";
+        }
+
+        document.getElementById("minCloseBtn").onclick = closeModal;
+        document.getElementById("minBackdrop").addEventListener("click", function(e) {
+            if (e.target === this) closeModal();
+        });
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") closeModal();
+        });
+
+        /* ── Fetch & Parse Sheet ── */
+        async function loadFromSheet() {
+            const grid = document.getElementById("minGrid");
+
+            if (SHEET_URL === "PASTE_YOUR_PUBLISHED_SHEET_CSV_URL_HERE") {
+                grid.innerHTML = '<div class="min-status error"><i class="fas fa-wrench"></i> Sheet URL not configured yet. See setup instructions in the page source.</div>';
+                return;
+            }
+
+            try {
+                const response = await fetch(SHEET_URL);
+                if (!response.ok) throw new Error("Network response was not ok");
+                const text = await response.text();
+                const rows = parseCSV(text);
+
+                if (rows.length < 2) {
+                    grid.innerHTML = '<div class="min-status error"><i class="fas fa-exclamation-circle"></i> Sheet appears empty.</div>';
+                    return;
+                }
+
+                const headers = rows[0].map(h => h.toLowerCase());
+                const col = name => headers.indexOf(name);
+
+                const ministries = rows.slice(1).map(row => ({
+                    icon:             (row[col('icon')]             || '').trim(),
+                    title:            (row[col('title')]            || '').trim(),
+                    description:      (row[col('description')]      || '').trim(),
+                    time:             (row[col('time')]             || '').trim(),
+                    leader:           (row[col('leader')]           || '').trim() || null,
+                    leaders:          (row[col('leaders')]          || '').trim() || null,
+                    externalLink:     (row[col('externallink')]     || '').trim() || null,
+                    externalLinkText: (row[col('externallinktext')] || '').trim() || null,
+                })).filter(m => m.title);
+
+                buildCards(ministries);
+
+            } catch (err) {
+                console.error("Ministries sheet load error:", err);
+                grid.innerHTML = '<div class="min-status error"><i class="fas fa-exclamation-circle"></i> Could not load ministries data. Please check the sheet URL and that it is published publicly.</div>';
+            }
+        }
+
+        loadFromSheet();
+    </script>
+
+</body>
+</html>

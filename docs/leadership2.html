@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meet the leadership team of Petra Baptist Church in St. Augustine, Florida.">
+    <title>Leadership - Petra Baptist Church</title>
+
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+
+        /* ── Full-page hero background ── */
+        .ldr-hero-section {
+            min-height: 100vh;
+            background: linear-gradient(rgba(10,18,40,0.70), rgba(10,18,40,0.70)),
+                        url('images/church.png') center/cover no-repeat scroll;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 1.5rem 80px;
+        }
+
+        /* ── Page heading ── */
+        .ldr-page-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 600;
+            color: #f0e6c8;
+            letter-spacing: 0.05em;
+            text-align: center;
+            margin-bottom: 0.6rem;
+        }
+        .ldr-gold-rule {
+            width: 52px;
+            height: 2px;
+            background: #c8a84b;
+            border-radius: 1px;
+            margin: 0 auto 1.5rem;
+        }
+        .ldr-page-intro {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.1rem;
+            color: rgba(240,230,200,0.80);
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.75;
+            margin-bottom: 3rem;
+        }
+
+        /* ── Card Grid ── */
+        .ldr-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
+        }
+        @media (max-width: 860px) {
+            .ldr-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        }
+        @media (max-width: 420px) {
+            .ldr-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        }
+
+        /* ── Card ── */
+        .ldr-card {
+            background: rgba(255,255,255,0.96);
+            border: 1px solid rgba(200,168,75,0.25);
+            border-radius: 14px;
+            padding: 1.75rem 1.25rem 1.5rem;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            transition: border-color 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease;
+        }
+        .ldr-card:hover {
+            border-color: #c8a84b;
+            transform: translateY(-5px);
+            box-shadow: 0 14px 32px rgba(10,18,40,0.35);
+        }
+        .ldr-card-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2.5px solid #c8a84b;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a2a4a;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: #e8d5a0;
+            flex-shrink: 0;
+        }
+        .ldr-card-avatar img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+        }
+        .ldr-card-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a2a4a;
+            line-height: 1.3;
+        }
+        .ldr-card-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 13px;
+            color: #7a6a4a;
+            line-height: 1.4;
+            margin-top: 1px;
+        }
+
+        /* ── Scroll chevron ── */
+        .ldr-scroll-down {
+            margin-top: 2.5rem;
+            color: rgba(200,168,75,0.7);
+            font-size: 1.4rem;
+            animation: ldrBounce 2s infinite;
+        }
+        @keyframes ldrBounce {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(6px); }
+        }
+
+        /* ── Loading / Error States ── */
+        .ldr-status {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.1rem;
+            color: rgba(240,230,200,0.70);
+            text-align: center;
+            padding: 2rem 0;
+            letter-spacing: 0.03em;
+        }
+        .ldr-status.error {
+            color: #e8a0a0;
+        }
+        .ldr-status i {
+            margin-right: 8px;
+        }
+
+        /* ── Modal Backdrop ── */
+        .ldr-backdrop {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(10,18,35,0.65);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .ldr-backdrop.open { display: flex; }
+
+        /* ── Modal ── */
+        .ldr-modal {
+            background: #ffffff;
+            border-radius: 16px;
+            width: 100%; max-width: 580px; max-height: 88vh;
+            display: flex; flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 28px 70px rgba(10,18,35,0.35);
+            animation: ldrSlideUp 0.25s ease;
+        }
+        @keyframes ldrSlideUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Modal Header ── */
+        .ldr-modal-header {
+            background: #1a2a4a;
+            padding: 1.6rem 1.5rem 1.85rem;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 10px;
+            flex-shrink: 0; position: relative;
+        }
+        .ldr-close {
+            position: absolute; top: 14px; right: 16px;
+            background: rgba(255,255,255,0.1); border: none;
+            color: #e8d5a0; font-size: 16px;
+            width: 30px; height: 30px; border-radius: 50%;
+            cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+            transition: background 0.15s;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .ldr-close:hover { background: rgba(200,168,75,0.3); }
+        .ldr-modal-avatar {
+            width: 84px; height: 84px; border-radius: 50%;
+            border: 2.5px solid #c8a84b; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.1);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 26px; font-weight: 600; color: #e8d5a0;
+        }
+        .ldr-modal-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .ldr-modal-divider { width: 40px; height: 2px; background: #c8a84b; border-radius: 1px; }
+        .ldr-modal-name {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.6rem; font-weight: 600;
+            color: #f0e6c8; text-align: center; line-height: 1.2;
+        }
+        .ldr-modal-role {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10.5px; color: #c8a84b;
+            text-align: center; text-transform: uppercase; letter-spacing: 0.1em;
+        }
+
+        /* ── Modal Body ── */
+        .ldr-modal-body { padding: 1.75rem; overflow-y: auto; flex: 1; }
+        .ldr-portrait-wrap { display: none; float: left; margin: 0 1.35rem 0.5rem 0; }
+        .ldr-portrait-wrap img,
+        .ldr-portrait-placeholder {
+            width: 130px; height: 162px;
+            object-fit: cover; border-radius: 8px;
+            border: 2px solid #c8a84b; display: block;
+        }
+        .ldr-portrait-placeholder {
+            background: #1a2a4a; display: flex;
+            align-items: center; justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px; font-weight: 600; color: #e8d5a0;
+        }
+        .ldr-portrait-caption {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px; color: #a09070;
+            text-align: center; margin-top: 6px; max-width: 130px;
+        }
+        .ldr-modal-body p {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.08rem; color: #3a3020;
+            line-height: 1.82; margin-bottom: 0.9rem;
+        }
+        .ldr-modal-body p:last-child { margin-bottom: 0; }
+        .ldr-clearfix::after { content: ""; display: table; clear: both; }
+
+        /* ── Responsive modal ── */
+        @media (max-width: 480px) {
+            .ldr-modal { max-height: 92vh; border-radius: 16px 16px 0 0; align-self: flex-end; }
+            .ldr-backdrop { align-items: flex-end; padding: 0; }
+            .ldr-portrait-wrap img,
+            .ldr-portrait-placeholder { width: 90px; height: 112px; }
+            .ldr-hero-section { padding: 100px 1rem 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <div class="nav-logo-container">
+                        <img src="images/petra-logo.png" alt="Petra Baptist Church" class="nav-logo">
+                    </div>
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#ministries" class="nav-link">Ministries</a></li>
+                <li><a href="index.html#events" class="nav-link">Events</a></li>
+                <li><a href="index.html#sermons" class="nav-link">Sermons</a></li>
+                <li><a href="index.html#live" class="nav-link">Live</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="https://petrabaptistchurch.flocknote.com/give" class="nav-link" target="_blank" rel="noopener noreferrer">Give</a></li>
+                <li class="nav-dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">Mobile App</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://apps.apple.com/us/app/petra-baptist-church/id6754943166" target="_blank" rel="noopener noreferrer">Apple</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=com.petrachurch.app" target="_blank" rel="noopener noreferrer">Google</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero + Cards -->
+    <section class="ldr-hero-section">
+        <h1 class="ldr-page-title">Our Leadership</h1>
+        <div class="ldr-gold-rule"></div>
+        <p class="ldr-page-intro">
+            Petra Baptist Church is blessed to have a leadership team truly dedicated
+            to Christ and accomplishing His will. Select any member to learn more about
+            their heart for ministry and their story.
+        </p>
+        <div class="ldr-grid" id="ldrGrid">
+            <div class="ldr-status"><i class="fas fa-circle-notch fa-spin"></i> Loading leadership team&hellip;</div>
+        </div>
+        <div class="ldr-scroll-down"><i class="fas fa-chevron-down"></i></div>
+    </section>
+
+    <!-- Modal -->
+    <div class="ldr-backdrop" id="ldrBackdrop">
+        <div class="ldr-modal" role="dialog" aria-modal="true" aria-labelledby="ldrName">
+            <div class="ldr-modal-header">
+                <button class="ldr-close" id="ldrCloseBtn" aria-label="Close">&#x2715;</button>
+                <div class="ldr-modal-avatar" id="ldrAvatar"></div>
+                <div class="ldr-modal-divider"></div>
+                <div class="ldr-modal-name" id="ldrName"></div>
+                <div class="ldr-modal-role" id="ldrRole"></div>
+            </div>
+            <div class="ldr-modal-body ldr-clearfix" id="ldrBody"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Petra Baptist Church</h3>
+                    <p>Building faith, family, and community together in St. Augustine, Florida.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/petrabaptistchurch" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com/@petrabaptistchurch947" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#ministries">Ministries</a></li>
+                        <li><a href="index.html#events">Events</a></li>
+                        <li><a href="index.html#sermons">Sermons</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="leadership.html">Leadership</a></li>
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdVt6bPviAZq5XNZAMkM0XPrd0uL0I458Y89QQKDNAkzV4W9A/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Prayer Requests</a></li>
+                        <li><a href="https://petrabaptistchurch.flocknote.com/give" target="_blank" rel="noopener noreferrer">Give Online</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Petra Baptist Church. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        /* ============================================================
+           LAYOUT MODE
+           "portrait" — photo floats beside bio text in the popup
+           "circle"   — small circular photo in the navy popup header
+        ============================================================ */
+        const ldrLayoutMode = "portrait";
+
+        /* ============================================================
+           GOOGLE SHEET SETUP
+           ---------------------------------------------------------------
+           1. Create a Google Sheet with these EXACT column headers in Row 1:
+                initials | name | role | photo | bio1 | bio2 | bio3 | bio4
+
+           2. Fill in one row per person. Leave "photo" blank to use
+              initials. If using a photo, paste the full image URL.
+              Bio columns (bio1–bio4) are separate paragraphs — leave
+              unused ones blank.
+
+           3. Publish the sheet:
+              File → Share → Publish to web
+              → "Entire Document" → "Comma-separated values (.csv)"
+              → click Publish → copy the URL
+
+           4. Paste that URL below, replacing the placeholder.
+        ============================================================ */
+        const SHEET_URL = "PASTE_YOUR_PUBLISHED_SHEET_CSV_URL_HERE";
+
+        /* ── Robust CSV Parser (handles commas inside quoted fields) ── */
+        function parseCSV(text) {
+            const rows = [];
+            const lines = text.split(/\r?\n/);
+            for (const line of lines) {
+                if (!line.trim()) continue;
+                const row = [];
+                let inQuote = false, field = '';
+                for (let i = 0; i < line.length; i++) {
+                    const c = line[i];
+                    if (c === '"') {
+                        if (inQuote && line[i + 1] === '"') { field += '"'; i++; }
+                        else { inQuote = !inQuote; }
+                    } else if (c === ',' && !inQuote) {
+                        row.push(field.trim()); field = '';
+                    } else {
+                        field += c;
+                    }
+                }
+                row.push(field.trim());
+                rows.push(row);
+            }
+            return rows;
+        }
+
+        /* ── Build Cards from data array ── */
+        function buildCards(ldrTeam) {
+            const grid = document.getElementById("ldrGrid");
+            grid.innerHTML = ""; // clear loading message
+
+            if (!ldrTeam.length) {
+                grid.innerHTML = '<div class="ldr-status error"><i class="fas fa-exclamation-circle"></i> No team members found in the sheet.</div>';
+                return;
+            }
+
+            ldrTeam.forEach((p, i) => {
+                const card = document.createElement("div");
+                card.className = "ldr-card";
+                card.setAttribute("aria-label", "View bio for " + p.name);
+                const avatarHTML = p.photo
+                    ? `<img src="${p.photo}" alt="${p.name}" loading="lazy">`
+                    : p.initials;
+                card.innerHTML = `
+                    <div class="ldr-card-avatar">${avatarHTML}</div>
+                    <div>
+                        <div class="ldr-card-name">${p.name}</div>
+                        <div class="ldr-card-title">${p.role}</div>
+                    </div>
+                `;
+                card.onclick = () => ldrOpen(i, ldrTeam);
+                grid.appendChild(card);
+            });
+        }
+
+        /* ── Open Modal ── */
+        function ldrOpen(idx, ldrTeam) {
+            const p = ldrTeam[idx];
+            const avatar = document.getElementById("ldrAvatar");
+
+            if (ldrLayoutMode === "circle") {
+                avatar.style.display = "flex";
+                avatar.innerHTML = p.photo
+                    ? `<img src="${p.photo}" alt="${p.name}">`
+                    : p.initials;
+            } else {
+                avatar.style.display = "none";
+            }
+
+            document.getElementById("ldrName").textContent = p.name;
+            document.getElementById("ldrRole").textContent = p.role;
+
+            let bodyHTML = "";
+            if (ldrLayoutMode === "portrait") {
+                const imgContent = p.photo
+                    ? `<img src="${p.photo}" alt="${p.name}">`
+                    : `<div class="ldr-portrait-placeholder">${p.initials}</div>`;
+                bodyHTML += `
+                    <div class="ldr-portrait-wrap" style="display:block;">
+                        ${imgContent}
+                        <div class="ldr-portrait-caption">${p.name}</div>
+                    </div>`;
+            }
+            bodyHTML += p.bio.map(b => `<p>${b}</p>`).join("");
+            document.getElementById("ldrBody").innerHTML = bodyHTML;
+
+            document.getElementById("ldrBackdrop").classList.add("open");
+            document.body.style.overflow = "hidden";
+        }
+
+        /* ── Close Modal ── */
+        function ldrCloseModal() {
+            document.getElementById("ldrBackdrop").classList.remove("open");
+            document.body.style.overflow = "";
+        }
+
+        document.getElementById("ldrCloseBtn").onclick = ldrCloseModal;
+        document.getElementById("ldrBackdrop").addEventListener("click", function(e) {
+            if (e.target === this) ldrCloseModal();
+        });
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") ldrCloseModal();
+        });
+
+        /* ── Fetch & Parse Sheet ── */
+        async function loadFromSheet() {
+            const grid = document.getElementById("ldrGrid");
+
+            if (SHEET_URL === "PASTE_YOUR_PUBLISHED_SHEET_CSV_URL_HERE") {
+                grid.innerHTML = '<div class="ldr-status error"><i class="fas fa-wrench"></i> Sheet URL not configured yet. See setup instructions in the page source.</div>';
+                return;
+            }
+
+            try {
+                const response = await fetch(SHEET_URL);
+                if (!response.ok) throw new Error("Network response was not ok");
+                const text = await response.text();
+                const rows = parseCSV(text);
+
+                if (rows.length < 2) {
+                    grid.innerHTML = '<div class="ldr-status error"><i class="fas fa-exclamation-circle"></i> Sheet appears empty.</div>';
+                    return;
+                }
+
+                // Row 0 = headers, rows 1+ = data
+                const headers = rows[0].map(h => h.toLowerCase());
+                const col = name => headers.indexOf(name);
+
+                const ldrTeam = rows.slice(1).map(row => {
+                    // Gather bio paragraphs from bio1, bio2, bio3, bio4
+                    const bio = ['bio1','bio2','bio3','bio4']
+                        .map(key => (row[col(key)] || '').trim())
+                        .filter(Boolean);
+
+                    return {
+                        initials: (row[col('initials')] || '').trim(),
+                        name:     (row[col('name')]     || '').trim(),
+                        role:     (row[col('role')]     || '').trim(),
+                        photo:    (row[col('photo')]    || '').trim() || null,
+                        bio:      bio
+                    };
+                }).filter(p => p.name); // skip blank rows
+
+                buildCards(ldrTeam);
+
+            } catch (err) {
+                console.error("Leadership sheet load error:", err);
+                grid.innerHTML = '<div class="ldr-status error"><i class="fas fa-exclamation-circle"></i> Could not load leadership data. Please check the sheet URL and that it is published publicly.</div>';
+            }
+        }
+
+        loadFromSheet();
+    </script>
+
+</body>
+</html>
