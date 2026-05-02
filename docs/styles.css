@@ -953,6 +953,90 @@ p {
     50%       { opacity: 0.3; transform: scale(0.8); }
 }
 
+/* Countdown Clock */
+.countdown-wrapper {
+    text-align: center;
+    margin: 0 auto 2.5rem;
+    max-width: 640px;
+}
+
+.countdown-label {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.countdown-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--primary-dark);
+    border-radius: 10px;
+    padding: 1rem 1.4rem;
+    min-width: 80px;
+}
+
+.countdown-num {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.02em;
+}
+
+.countdown-tag {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+}
+
+.countdown-sep {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 1.2rem;
+    line-height: 1;
+}
+
+.countdown-service-name {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--dark-gray);
+    margin: 0;
+    font-style: italic;
+}
+
+@media (max-width: 480px) {
+    .countdown-unit {
+        min-width: 60px;
+        padding: 0.8rem 0.9rem;
+    }
+    .countdown-num {
+        font-size: 2rem;
+    }
+    .countdown-sep {
+        font-size: 1.8rem;
+    }
+}
+
 .live-player-wrapper {
     max-width: 80%;
     margin: 0 auto 1.5rem;
