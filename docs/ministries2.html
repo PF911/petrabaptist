@@ -246,6 +246,26 @@
         }
         .min-clearfix::after { content: ""; display: table; clear: both; }
 
+        /* ── Additional photo gallery strip (photos 2–5) ── */
+        .min-photo-gallery {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 0.85rem;
+        }
+        .min-photo-gallery img {
+            width: calc(25% - 6px);
+            aspect-ratio: 3 / 2;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 2px solid #c8a84b;
+            display: block;
+            min-width: 80px;
+        }
+        @media (max-width: 480px) {
+            .min-photo-gallery img { width: calc(50% - 4px); }
+        }
+
         /* ── External link button ── */
         .min-external-link {
             display: inline-flex; align-items: center; gap: 8px;
@@ -374,11 +394,12 @@
         /* ============================================================
            SHEET COLUMN HEADERS (Row 1) — must be exact:
              icon | title | description | time | leader | leaders |
-             externalLink | externalLinkText | photo
+             externalLink | externalLinkText | photo | photo2 | photo3 | photo4 | photo5
 
-           photo column: paste a full image URL, or leave blank to
-           show the icon only. Recommended size: 800×533px (3:2).
-           Displays as 130px tall banner on card, 155×115px in modal.
+           photo  = main image, floats beside description in popup
+           photo2–photo5 = additional images in a strip below (optional)
+           All photos must be 800×533px (3:2 landscape). Max 5 total.
+           Leave unused photo columns blank.
 
            Changes take 5–10 min to appear due to Google's cache.
         ============================================================ */
@@ -448,10 +469,20 @@
                            <div class="min-modal-photo-caption">${m.title}</div>
                        </div>`
                     : '';
+
+                // Additional photos 2–5 in a gallery strip
+                const extraPhotos = [m.photo2, m.photo3, m.photo4, m.photo5].filter(Boolean);
+                const galleryHTML = extraPhotos.length
+                    ? `<div class="min-photo-gallery">
+                           ${extraPhotos.map(p => `<img src="${p}" alt="${m.title}" loading="lazy">`).join('')}
+                       </div>`
+                    : '';
+
                 html += `<div class="min-modal-section">
                     <h3><i class="fas fa-info-circle"></i> About</h3>
                     ${photoHTML}
                     <p>${m.description}</p>
+                    ${galleryHTML}
                 </div>`;
             }
 
@@ -521,6 +552,10 @@
                     externalLink:     (row[col('externallink')]     || '').trim() || null,
                     externalLinkText: (row[col('externallinktext')] || '').trim() || null,
                     photo:            (row[col('photo')]            || '').trim() || null,
+                    photo2:           (row[col('photo2')]           || '').trim() || null,
+                    photo3:           (row[col('photo3')]           || '').trim() || null,
+                    photo4:           (row[col('photo4')]           || '').trim() || null,
+                    photo5:           (row[col('photo5')]           || '').trim() || null,
                 })).filter(m => m.title);
 
                 buildCards(ministries);
