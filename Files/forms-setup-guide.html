@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petra Baptist Church — Google Forms Setup Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background: #f4f1eb;
+        color: #2a2018;
+        line-height: 1.6;
+    }
+
+    .page {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 3rem 2rem 5rem;
+    }
+
+    /* ── Header ── */
+    .doc-header {
+        background: #1a2a4a;
+        border-radius: 16px;
+        padding: 2.5rem 2.5rem 2rem;
+        margin-bottom: 2.5rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+    .doc-header-icon {
+        width: 56px; height: 56px;
+        background: rgba(200,168,75,0.15);
+        border: 2px solid #c8a84b;
+        border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 24px; flex-shrink: 0; margin-top: 4px;
+    }
+    .doc-header h1 {
+        font-family: 'Crimson Pro', serif;
+        font-size: 2rem; font-weight: 700;
+        color: #f0e6c8; line-height: 1.15;
+        margin-bottom: 0.4rem;
+    }
+    .doc-header p {
+        font-size: 12px; color: rgba(240,230,200,0.65);
+        letter-spacing: 0.04em;
+    }
+    .gold-rule {
+        width: 40px; height: 2px;
+        background: #c8a84b; border-radius: 1px;
+        margin: 0.6rem 0 0.8rem;
+    }
+
+    /* ── Section ── */
+    .section {
+        background: #fff;
+        border-radius: 14px;
+        border: 1px solid #e0d8c8;
+        margin-bottom: 1.75rem;
+        overflow: hidden;
+    }
+    .section-header {
+        background: #1a2a4a;
+        padding: 1rem 1.5rem;
+        display: flex; align-items: center; gap: 10px;
+    }
+    .section-header .num {
+        width: 28px; height: 28px;
+        background: #c8a84b; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 12px; font-weight: 700; color: #1a2a4a;
+        flex-shrink: 0;
+    }
+    .section-header h2 {
+        font-family: 'Crimson Pro', serif;
+        font-size: 1.3rem; font-weight: 600;
+        color: #f0e6c8;
+    }
+    .section-body { padding: 1.5rem; }
+
+    /* ── Steps ── */
+    .steps { list-style: none; }
+    .steps li {
+        display: flex; gap: 12px;
+        padding: 0.65rem 0;
+        border-bottom: 1px solid #f0ebe0;
+        font-size: 13px; color: #3a3020;
+        line-height: 1.55;
+    }
+    .steps li:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-num {
+        width: 22px; height: 22px;
+        background: #1a2a4a; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 10px; font-weight: 700; color: #e8d5a0;
+        flex-shrink: 0; margin-top: 1px;
+    }
+    .steps li b { color: #1a2a4a; }
+    code {
+        background: #f0ebe0; border-radius: 4px;
+        padding: 1px 6px; font-size: 11.5px;
+        font-family: 'Courier New', monospace;
+        color: #7a4a1a; border: 1px solid #e0d0b0;
+    }
+
+    /* ── Field table ── */
+    .field-table {
+        width: 100%; border-collapse: collapse;
+        font-size: 12px; margin-top: 0.5rem;
+    }
+    .field-table thead tr {
+        background: #1a2a4a;
+        color: #e8d5a0;
+    }
+    .field-table th {
+        padding: 0.6rem 0.85rem;
+        text-align: left; font-weight: 600;
+        letter-spacing: 0.04em; font-size: 10.5px;
+        text-transform: uppercase;
+    }
+    .field-table td {
+        padding: 0.6rem 0.85rem;
+        border-bottom: 1px solid #f0ebe0;
+        color: #3a3020; vertical-align: top;
+        line-height: 1.5;
+    }
+    .field-table tr:last-child td { border-bottom: none; }
+    .field-table tr:nth-child(even) td { background: #faf8f4; }
+    .req { color: #c8a84b; font-weight: 700; }
+    .opt { color: #aaa; }
+    .type-pill {
+        display: inline-block;
+        background: #eef0f6; color: #1a2a4a;
+        border-radius: 4px; padding: 1px 7px;
+        font-size: 10px; font-weight: 600;
+        white-space: nowrap;
+    }
+    .type-pill.para { background: #f0f6ee; color: #2a4a2a; }
+
+    /* ── Icon cheat sheet ── */
+    .icon-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 8px; margin-top: 0.75rem;
+    }
+    .icon-item {
+        background: #faf8f4;
+        border: 1px solid #e0d8c8;
+        border-radius: 8px;
+        padding: 0.6rem 0.75rem;
+        display: flex; align-items: center; gap: 10px;
+        font-size: 11.5px;
+    }
+    .icon-item i {
+        color: #1a2a4a; font-size: 16px;
+        width: 20px; text-align: center; flex-shrink: 0;
+    }
+    .icon-item .icon-code { font-family: 'Courier New', monospace; font-size: 11px; color: #7a4a1a; }
+
+    /* ── Note box ── */
+    .note {
+        background: #fff8e8;
+        border-left: 3px solid #c8a84b;
+        border-radius: 0 8px 8px 0;
+        padding: 0.85rem 1rem;
+        font-size: 12px; color: #5a4a20;
+        margin-top: 1rem; line-height: 1.6;
+    }
+    .note strong { color: #1a2a4a; }
+
+    /* ── Link section ── */
+    .link-box {
+        background: #1a2a4a;
+        border-radius: 10px;
+        padding: 1rem 1.25rem;
+        font-size: 12px; color: #e8d5a0;
+        margin-top: 0.75rem;
+        word-break: break-all;
+        line-height: 1.7;
+    }
+    .link-box span { color: #c8a84b; font-weight: 600; display: block; margin-bottom: 3px; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* ── Workflow summary ── */
+    .workflow {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px; margin-top: 0.5rem;
+    }
+    .workflow-box {
+        border-radius: 10px;
+        padding: 1rem 1.1rem;
+        font-size: 12px; line-height: 1.6;
+    }
+    .workflow-box.add { background: #eef6ee; border: 1px solid #b0d0b0; }
+    .workflow-box.edit { background: #eef0f8; border: 1px solid #b0b8d8; }
+    .workflow-box h4 {
+        font-size: 11px; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.06em;
+        margin-bottom: 0.4rem;
+    }
+    .workflow-box.add h4 { color: #2a5a2a; }
+    .workflow-box.edit h4 { color: #1a2a6a; }
+    .workflow-box ul { list-style: none; }
+    .workflow-box ul li::before { content: "→ "; font-weight: 700; }
+
+    @media print {
+        body { background: white; }
+        .page { padding: 1rem; }
+    }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="page">
+
+    <!-- Header -->
+    <div class="doc-header">
+        <div class="doc-header-icon">📋</div>
+        <div>
+            <h1>Google Forms Setup Guide</h1>
+            <div class="gold-rule"></div>
+            <p>PETRA BAPTIST CHURCH — WEBSITE CONTENT MANAGEMENT</p>
+            <p style="margin-top:4px;">How to build the Ministries and Leadership submission forms</p>
+        </div>
+    </div>
+
+    <!-- Workflow Summary -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num">→</div>
+            <h2>How It All Works Together</h2>
+        </div>
+        <div class="section-body">
+            <div class="workflow">
+                <div class="workflow-box add">
+                    <h4>📝 Adding New Content</h4>
+                    <ul>
+                        <li>Use the Google Form</li>
+                        <li>Fill out the fields</li>
+                        <li>Submit — done</li>
+                        <li>Site updates in ~10 min</li>
+                    </ul>
+                </div>
+                <div class="workflow-box edit">
+                    <h4>✏️ Editing Existing Content</h4>
+                    <ul>
+                        <li>Open the Google Sheet</li>
+                        <li>Click the cell to change</li>
+                        <li>Type the new value</li>
+                        <li>Site updates in ~10 min</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="note">
+                <strong>Important:</strong> Forms are for adding new entries only. To change a meeting time, update a bio, or fix a typo on an existing entry — go directly to the sheet and edit that cell. Do not submit a duplicate form entry.
+            </div>
+        </div>
+    </div>
+
+    <!-- MINISTRIES FORM -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num">1</div>
+            <h2>Build the Ministries Form</h2>
+        </div>
+        <div class="section-body">
+
+            <p style="font-size:13px; margin-bottom:1rem; color:#5a4a30;">Create this form at <strong>forms.google.com</strong>. Title it <strong>"Add a Ministry — Petra Baptist Church"</strong>.</p>
+
+            <table class="field-table">
+                <thead>
+                    <tr>
+                        <th>Question Label (exact)</th>
+                        <th>Type</th>
+                        <th>Required?</th>
+                        <th>Notes / Help Text to Add</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>icon</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="req">Yes</span></td>
+                        <td>Font Awesome icon class — see icon list below. e.g. <code>fa-user-tie</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>title</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="req">Yes</span></td>
+                        <td>Ministry display name, e.g. <em>Petra Men</em></td>
+                    </tr>
+                    <tr>
+                        <td><code>description</code></td>
+                        <td><span class="type-pill para">Paragraph</span></td>
+                        <td><span class="req">Yes</span></td>
+                        <td>The "About" paragraph shown in the popup</td>
+                    </tr>
+                    <tr>
+                        <td><code>time</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="req">Yes</span></td>
+                        <td>When the ministry meets, e.g. <em>Last Saturday at 8:00AM</em></td>
+                    </tr>
+                    <tr>
+                        <td><code>leader</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Single leader name. Leave blank if using "leaders" field instead.</td>
+                    </tr>
+                    <tr>
+                        <td><code>leaders</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Multiple leaders, e.g. <em>Brian &amp; Cheri Lee</em>. Use either this OR "leader" — not both.</td>
+                    </tr>
+                    <tr>
+                        <td><code>externalLink</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Full website URL if the ministry has its own site, e.g. <em>https://petrawomen.net/</em></td>
+                    </tr>
+                    <tr>
+                        <td><code>externalLinkText</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Button label for the link above, e.g. <em>Visit PetraWomen.net</em></td>
+                    </tr>
+                    <tr>
+                        <td><code>photo</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Full image URL. Must be 800×533px. Leave blank if no photo.</td>
+                    </tr>
+                    <tr>
+                        <td><code>photo2</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Additional photo URL. 800×533px. Leave blank if not needed.</td>
+                    </tr>
+                    <tr>
+                        <td><code>photo3</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Additional photo URL. 800×533px. Leave blank if not needed.</td>
+                    </tr>
+                    <tr>
+                        <td><code>photo4</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Additional photo URL. 800×533px. Leave blank if not needed.</td>
+                    </tr>
+                    <tr>
+                        <td><code>photo5</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Additional photo URL. 800×533px. Leave blank if not needed.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="note" style="margin-top:1.25rem;">
+                <strong>Linking to the existing sheet:</strong> After creating the form, go to the <strong>Responses</strong> tab → click the Google Sheets icon → choose <strong>"Select existing spreadsheet"</strong> → select the <strong>Petra Ministries</strong> sheet. Form submissions will add rows directly to that sheet automatically.
+            </div>
+        </div>
+    </div>
+
+    <!-- LEADERSHIP FORM -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num">2</div>
+            <h2>Build the Leadership Form</h2>
+        </div>
+        <div class="section-body">
+
+            <p style="font-size:13px; margin-bottom:1rem; color:#5a4a30;">Create this form at <strong>forms.google.com</strong>. Title it <strong>"Add a Leadership Member — Petra Baptist Church"</strong>.</p>
+
+            <table class="field-table">
+                <thead>
+                    <tr>
+                        <th>Question Label (exact)</th>
+                        <th>Type</th>
+                        <th>Required?</th>
+                        <th>Notes / Help Text to Add</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>initials</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="req">Yes</span></td>
+                        <td>2–3 letters shown on the avatar circle, e.g. <em>TO</em> for Ted Owens</td>
+                    </tr>
+                    <tr>
+                        <td><code>name</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="req">Yes</span></td>
+                        <td>Full display name as it should appear on the site</td>
+                    </tr>
+                    <tr>
+                        <td><code>role</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="req">Yes</span></td>
+                        <td>Title or role, e.g. <em>Women's Ministry Director</em></td>
+                    </tr>
+                    <tr>
+                        <td><code>photo</code></td>
+                        <td><span class="type-pill">Short answer</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Full image URL. Must be 400×500px. Leave blank to show initials instead.</td>
+                    </tr>
+                    <tr>
+                        <td><code>bio1</code></td>
+                        <td><span class="type-pill para">Paragraph</span></td>
+                        <td><span class="req">Yes</span></td>
+                        <td>First bio paragraph</td>
+                    </tr>
+                    <tr>
+                        <td><code>bio2</code></td>
+                        <td><span class="type-pill para">Paragraph</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Second bio paragraph — leave blank if not needed</td>
+                    </tr>
+                    <tr>
+                        <td><code>bio3</code></td>
+                        <td><span class="type-pill para">Paragraph</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Third bio paragraph — leave blank if not needed</td>
+                    </tr>
+                    <tr>
+                        <td><code>bio4</code></td>
+                        <td><span class="type-pill para">Paragraph</span></td>
+                        <td><span class="opt">No</span></td>
+                        <td>Fourth bio paragraph — leave blank if not needed</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="note" style="margin-top:1.25rem;">
+                <strong>Linking to the existing sheet:</strong> After creating the form, go to the <strong>Responses</strong> tab → click the Google Sheets icon → choose <strong>"Select existing spreadsheet"</strong> → select the <strong>Petra Leadership</strong> sheet. Form submissions will add rows directly to that sheet automatically.
+            </div>
+        </div>
+    </div>
+
+    <!-- ICON CHEAT SHEET -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num">3</div>
+            <h2>Icon Cheat Sheet — Ministries</h2>
+        </div>
+        <div class="section-body">
+            <p style="font-size:12px; color:#5a4a30; margin-bottom:0.75rem;">When adding a new ministry, enter one of these codes exactly in the <code>icon</code> field. To find more icons, visit <strong>fontawesome.com/icons</strong> and use the Free filter.</p>
+            <div class="icon-grid">
+                <div class="icon-item"><i class="fas fa-user-tie"></i><span class="icon-code">fa-user-tie</span></div>
+                <div class="icon-item"><i class="fas fa-heart"></i><span class="icon-code">fa-heart</span></div>
+                <div class="icon-item"><i class="fas fa-user-friends"></i><span class="icon-code">fa-user-friends</span></div>
+                <div class="icon-item"><i class="fas fa-hands-helping"></i><span class="icon-code">fa-hands-helping</span></div>
+                <div class="icon-item"><i class="fas fa-child"></i><span class="icon-code">fa-child</span></div>
+                <div class="icon-item"><i class="fas fa-ring"></i><span class="icon-code">fa-ring</span></div>
+                <div class="icon-item"><i class="fas fa-dove"></i><span class="icon-code">fa-dove</span></div>
+                <div class="icon-item"><i class="fas fa-book-open"></i><span class="icon-code">fa-book-open</span></div>
+                <div class="icon-item"><i class="fas fa-church"></i><span class="icon-code">fa-church</span></div>
+                <div class="icon-item"><i class="fas fa-cross"></i><span class="icon-code">fa-cross</span></div>
+                <div class="icon-item"><i class="fas fa-pray"></i><span class="icon-code">fa-pray</span></div>
+                <div class="icon-item"><i class="fas fa-bible"></i><span class="icon-code">fa-bible</span></div>
+                <div class="icon-item"><i class="fas fa-music"></i><span class="icon-code">fa-music</span></div>
+                <div class="icon-item"><i class="fas fa-guitar"></i><span class="icon-code">fa-guitar</span></div>
+                <div class="icon-item"><i class="fas fa-users"></i><span class="icon-code">fa-users</span></div>
+                <div class="icon-item"><i class="fas fa-hand-holding-heart"></i><span class="icon-code">fa-hand-holding-heart</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IMPORTANT NOTES -->
+    <div class="section">
+        <div class="section-header">
+            <div class="num">4</div>
+            <h2>Important Rules to Follow</h2>
+        </div>
+        <div class="section-body">
+            <ul class="steps">
+                <li>
+                    <div class="step-num">!</div>
+                    <div><b>Question labels must match exactly.</b> The question text in the form (e.g. <code>icon</code>, <code>title</code>, <code>bio1</code>) must be typed exactly as shown — lowercase, no spaces. These labels become the column headers in the sheet, which is how the website finds the data.</div>
+                </li>
+                <li>
+                    <div class="step-num">!</div>
+                    <div><b>Do not add a "Timestamp" column to the sheet manually.</b> Google Forms adds this automatically. Leave it alone — the website ignores it.</div>
+                </li>
+                <li>
+                    <div class="step-num">!</div>
+                    <div><b>Photo dimensions are fixed.</b> Ministry photos must be <code>800×533px</code>. Leadership headshots must be <code>400×500px</code>. No exceptions — wrong sizes will display incorrectly.</div>
+                </li>
+                <li>
+                    <div class="step-num">!</div>
+                    <div><b>Changes take 5–10 minutes to appear on the site</b> due to Google's publishing cache. This is normal — not a bug.</div>
+                </li>
+                <li>
+                    <div class="step-num">!</div>
+                    <div><b>To edit existing content, use the sheet — not the form.</b> Submitting the form again creates a duplicate entry. Open the sheet, find the row, click the cell, and type the correction.</div>
+                </li>
+                <li>
+                    <div class="step-num">!</div>
+                    <div><b>To remove a ministry or leader</b>, delete their entire row from the sheet. Do not just clear the cells — delete the whole row so there is no blank entry.</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <p style="text-align:center; font-size:11px; color:#aaa; margin-top:2rem;">Petra Baptist Church · petrabaptist.com · Internal reference document</p>
+
+</div>
+</body>
+</html>
