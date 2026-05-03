@@ -98,23 +98,6 @@
             width: 100%;
         }
 
-        /* ── Facebook-style banner photo ── */
-        .min-card-banner {
-            width: 100%;
-            height: 130px;
-            object-fit: cover;
-            display: block;
-            flex-shrink: 0;
-        }
-        /* When photo is present, pull icon up to overlap the banner */
-        .min-card--photo .min-card-body {
-            padding-top: 0;
-            margin-top: -28px;
-        }
-        .min-card--photo .min-card-icon {
-            box-shadow: 0 2px 10px rgba(10,18,40,0.30);
-        }
-
         /* ── Card icon circle ── */
         .min-card-icon {
             width: 56px;
@@ -437,22 +420,14 @@
             }
 
             ministries.forEach((m, i) => {
-                const hasPhoto = !!m.photo;
                 const card = document.createElement("div");
-                card.className = "min-card" + (hasPhoto ? " min-card--photo" : "");
+                card.className = "min-card";
                 card.setAttribute("aria-label", "Learn more about " + m.title);
-
-                let inner = "";
-                if (hasPhoto) {
-                    inner += `<img class="min-card-banner" src="${m.photo}" alt="${m.title}" loading="lazy">`;
-                }
-                inner += `
+                card.innerHTML = `
                     <div class="min-card-body">
                         <div class="min-card-icon"><i class="fas ${m.icon || 'fa-church'}"></i></div>
                         <div class="min-card-name">${m.title}</div>
                     </div>`;
-
-                card.innerHTML = inner;
                 card.onclick = () => openModal(i, ministries);
                 grid.appendChild(card);
             });
