@@ -291,42 +291,34 @@
             
                 <p class="section-subtitle">Watch our services live </p>
             </div>
-            <!-- Countdown Clock -->
-            <div class="countdown-wrapper" id="countdownWrapper">
-                <p class="countdown-label">Next Service In</p>
-                <div class="countdown-grid">
-                    <div class="countdown-unit">
-                        <span class="countdown-num" id="cdDays">00</span>
-                        <span class="countdown-tag">Days</span>
-                    </div>
-                    <div class="countdown-sep">:</div>
-                    <div class="countdown-unit">
-                        <span class="countdown-num" id="cdHours">00</span>
-                        <span class="countdown-tag">Hours</span>
-                    </div>
-                    <div class="countdown-sep">:</div>
-                    <div class="countdown-unit">
-                        <span class="countdown-num" id="cdMinutes">00</span>
-                        <span class="countdown-tag">Minutes</span>
-                    </div>
-                    <div class="countdown-sep">:</div>
-                    <div class="countdown-unit">
-                        <span class="countdown-num" id="cdSeconds">00</span>
-                        <span class="countdown-tag">Seconds</span>
-                    </div>
-                </div>
-                <p class="countdown-service-name" id="cdServiceName"></p>
-            </div>
-
             <div class="live-player-wrapper">
-                <div class="live-video-frame">
-                    <iframe
-                        src="https://www.youtube.com/embed/live_stream?channel=UCbZSSD3T2kcpnFOKaGl-crw&autoplay=0"
-                        title="Petra Baptist Church Live Stream"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
-                </div>
+                <div id="boxcast-widget-jjhoacs7fyyyceqho0ct"></div>
+                <script type="text/javascript" charset="utf-8">
+                (function(d, s, c, o) {
+                    var js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
+                    js.src = '//js.boxcast.com/v3.min.js';
+                    js.onload = function() {
+                        boxcast.noConflict()('#boxcast-widget-' + c).loadChannel(c, o);
+                    };
+                    js.charset = 'utf-8';
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'jjhoacs7fyyyceqho0ct', {
+                    "showTitle": 0,
+                    "showDescription": 0,
+                    "showHighlights": 0,
+                    "showRelated": false,
+                    "defaultVideo": "next",
+                    "playInline": false,
+                    "dvr": true,
+                    "market": "house-of-worship",
+                    "showCountdown": true,
+                    "showDonations": false,
+                    "showDocuments": false,
+                    "showIndex": false,
+                    "showChat": false,
+                    "hidePreBroadcastTextOverlay": false
+                }));
+                </script>
             </div>
             <div class="live-footer-row">
             
