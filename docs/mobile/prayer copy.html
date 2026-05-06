@@ -13,6 +13,7 @@ body {
   text-align: center;
 }
 
+/* Background */
 .page-background {
   position: fixed;
   inset: 0;
@@ -20,6 +21,7 @@ body {
   z-index: 0;
 }
 
+/* App frame */
 .app-frame {
   position: relative;
   z-index: 1;
@@ -29,6 +31,7 @@ body {
   height: 100vh;
 }
 
+/* Logo */
 .logo-bar {
   position: absolute;
   top: 10px;
@@ -44,10 +47,11 @@ body {
   height: auto;
 }
 
+/* CONTENT – ANCHORED BETWEEN LOGO AND FOOTER */
 .content-area {
   position: absolute;
-  top: 110px;
-  bottom: 170px;
+  top: 110px;          /* below logo */
+  bottom: 170px;       /* above footer */
   left: 10px;
   right: 10px;
 }
@@ -60,6 +64,7 @@ iframe {
   background: white;
 }
 
+/* Footer banner - MATCHED TO INDEX */
 .footer-banner {
   position: fixed;
   bottom: 0;
@@ -105,17 +110,17 @@ iframe {
   box-shadow: 0 0 12px rgba(255,255,255,0.9);
 }
 
-.banner-row div.home-btn {
-  flex: 2.2;
-  background: rgba(255,255,255,0.25);
-  border: 1px solid rgba(255,255,255,0.5);
-}
-
 @media (max-width: 480px) {
   .banner-row div {
     font-size: 14px;
     padding: 8px 10px;
   }
+}
+
+.banner-row div.home-btn {
+  flex: 2.2;
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.5);
 }
 </style>
 </head>
@@ -126,20 +131,23 @@ iframe {
 
 <div class="app-frame">
 
+  <!-- Logo -->
   <div class="logo-bar">
     <img src="img/logo2.png" alt="Petra Baptist Church Logo">
   </div>
 
+  <!-- Prayer Form -->
   <div class="content-area">
     <iframe
-      title="Prayer Request Form"
-      src="https://tally.so/embed/lbVEdB?alignLeft=1&hideTitle=1&transparentBackground=1"
-      loading="lazy">
-    </iframe>
+  title="Prayer Request Form"
+  src="https://docs.google.com/forms/d/e/1FAIpQLSdwyKNC7KHl3KT4ZFZikxe-_CqB44zwFE70Y1KRv-zT7R2MZg/viewform?embedded=true"
+  sandbox="allow-scripts allow-same-origin allow-forms allow-popups">
+</iframe>
   </div>
 
 </div>
 
+<!-- Footer Nav -->
 <div class="footer-banner">
   <div class="banner-row">
     <div onclick="window.location.href='sermons.html'">Sermons</div>
@@ -158,6 +166,21 @@ iframe {
     <div onclick="window.location.href='events.html'">Events</div>
     <div onclick="window.location.href='songs.html'">Songs</div>
   </div>
+</div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='facebook.html'">Facebook</div>
+    <div onclick="window.location.href='index.html'">Home</div>
+    <div onclick="window.location.href='website.html'">Website</div>
+  </div>
+
+  <div class="banner-row">
+    <div onclick="window.location.href='flocknotes.html'">Flocknotes</div>
+    <div onclick="window.location.href='contact.html'">Contact</div>
+    <div onclick="window.location.href='events.html'">Events</div>
+    <div onclick="window.location.href='songs.html'">Songs</div>
+  </div>
+
 </div>
 
 </body>
