@@ -193,17 +193,18 @@ p {
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.3rem;
 }
 
 .nav-link {
     font-weight: 500;
     color: var(--darker-gray);
-    padding: 0.7rem 0.9rem;
+    padding: 0.7rem 0.65rem;
     position: relative;
     border-radius: 25px;
     transition: all 0.3s ease;
     white-space: nowrap;
+    font-size: 0.92rem;
 }
 
 .nav-link:hover,
