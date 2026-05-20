@@ -353,11 +353,67 @@
         const ldrLayoutMode = "portrait";
 
         /* ============================================================
-           TEAM DATA
-           To add a headshot, uncomment the photo line and set the path.
-           Recommended: 400×400px square, JPG or WebP.
+           GOOGLE SHEET CSV URL
+           After running createLeadershipForm.gs and publishing the
+           sheet to web as CSV, paste that URL here.
         ============================================================ */
-        const ldrTeam = [
+        const SHEET_CSV_URL = 'PASTE_YOUR_CSV_URL_HERE';
+
+        /* ============================================================
+           UTILITY: Convert Google Drive share link → embeddable URL
+        ============================================================ */
+        function driveToEmbed(url) {
+            if (!url || !url.trim()) return null;
+            const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+            if (match) return `https://lh3.googleusercontent.com/d/${match[1]}`;
+            if (url.startsWith('http')) return url;
+            return null;
+        }
+
+        /* ============================================================
+           CSV PARSER
+        ============================================================ */
+        function parseCSV(text) {
+            const rows = [];
+            let row = [], field = '', inQuotes = false;
+            for (let i = 0; i < text.length; i++) {
+                const ch = text[i], next = text[i + 1];
+                if (inQuotes) {
+                    if (ch === '"' && next === '"') { field += '"'; i++; }
+                    else if (ch === '"') { inQuotes = false; }
+                    else { field += ch; }
+                } else {
+                    if (ch === '"') { inQuotes = true; }
+                    else if (ch === ',') { row.push(field); field = ''; }
+                    else if (ch === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+                    else if (ch !== '\r') { field += ch; }
+                }
+            }
+            if (row.length || field) { row.push(field); rows.push(row); }
+            return rows;
+        }
+
+        // Columns from form: Timestamp, Full Name, Role/Title, Initials, Email, Photo Link, Bio1-4
+        function csvToTeam(rows) {
+            if (rows.length < 2) return [];
+            return rows.slice(1).map(r => {
+                const bio = [r[6], r[7], r[8], r[9]].filter(p => p && p.trim());
+                return {
+                    initials: (r[3] || '').trim(),
+                    name:     (r[1] || '').trim(),
+                    role:     (r[2] || '').trim(),
+                    photo:    driveToEmbed((r[5] || '').trim()),
+                    bio:      bio.length ? bio : ['No bio provided.']
+                };
+            }).filter(p => p.name);
+        }
+
+        /* ============================================================
+           FALLBACK TEAM DATA
+           Used when the Google Sheet is not yet configured.
+           Update SHEET_CSV_URL above to go fully sheet-driven.
+        ============================================================ */
+        const ldrFallback = [
             {
                 initials: "TO",
                 name: "Ted Owens",
@@ -451,31 +507,40 @@
                     "United in their desire to strengthen and support the body of Christ, they humbly point others to Jesus through faithful service."
                 ]
             }
-        ];
+        ]; // end ldrFallback
+
+        /* ============================================================
+           CURRENT TEAM — set by renderTeam(), referenced by ldrOpen()
+        ============================================================ */
+        let currentTeam = [];
 
         /* ── Build Cards ── */
-        const grid = document.getElementById("ldrGrid");
-        ldrTeam.forEach((p, i) => {
-            const card = document.createElement("div");
-            card.className = "ldr-card";
-            card.setAttribute("aria-label", "View bio for " + p.name);
-            const avatarHTML = p.photo
-                ? `<img src="${p.photo}" alt="${p.name}" loading="lazy">`
-                : p.initials;
-            card.innerHTML = `
-                <div class="ldr-card-avatar">${avatarHTML}</div>
-                <div>
-                    <div class="ldr-card-name">${p.name}</div>
-                    <div class="ldr-card-title">${p.role}</div>
-                </div>
-            `;
-            card.onclick = () => ldrOpen(i);
-            grid.appendChild(card);
-        });
+        function renderTeam(team) {
+            currentTeam = team;
+            const grid = document.getElementById("ldrGrid");
+            grid.innerHTML = '';
+            team.forEach((p, i) => {
+                const card = document.createElement("div");
+                card.className = "ldr-card";
+                card.setAttribute("aria-label", "View bio for " + p.name);
+                const avatarHTML = p.photo
+                    ? `<img src="${p.photo}" alt="${p.name}" loading="lazy">`
+                    : p.initials;
+                card.innerHTML = `
+                    <div class="ldr-card-avatar">${avatarHTML}</div>
+                    <div>
+                        <div class="ldr-card-name">${p.name}</div>
+                        <div class="ldr-card-title">${p.role}</div>
+                    </div>
+                `;
+                card.onclick = () => ldrOpen(i);
+                grid.appendChild(card);
+            });
+        }
 
         /* ── Open Modal ── */
         function ldrOpen(idx) {
-            const p = ldrTeam[idx];
+            const p = currentTeam[idx];
             const avatar = document.getElementById("ldrAvatar");
 
             if (ldrLayoutMode === "circle") {
@@ -521,6 +586,31 @@
         document.addEventListener("keydown", function(e) {
             if (e.key === "Escape") ldrCloseModal();
         });
+
+        /* ============================================================
+           INITIALIZE
+           Tries to load team data from Google Sheet CSV.
+           Falls back to ldrFallback if sheet URL is not set or fails.
+        ============================================================ */
+        async function init() {
+            let team = ldrFallback;
+
+            if (SHEET_CSV_URL && !SHEET_CSV_URL.includes('PASTE_YOUR')) {
+                try {
+                    const resp = await fetch(SHEET_CSV_URL);
+                    const text = await resp.text();
+                    const rows = parseCSV(text);
+                    const sheetTeam = csvToTeam(rows);
+                    if (sheetTeam.length > 0) team = sheetTeam;
+                } catch(e) {
+                    console.warn('Could not load sheet data — using fallback.', e);
+                }
+            }
+
+            renderTeam(team);
+        }
+
+        init();
     </script>
 
 </body>
