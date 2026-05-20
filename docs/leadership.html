@@ -203,6 +203,16 @@
             font-size: 10.5px; color: #c8a84b;
             text-align: center; text-transform: uppercase; letter-spacing: 0.1em;
         }
+        .ldr-modal-email {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px; color: rgba(255,255,255,0.6);
+            text-align: center; margin-top: 0.35rem;
+        }
+        .ldr-modal-email a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+        }
+        .ldr-modal-email a:hover { color: #c8a84b; }
 
         /* ── Modal Body ── */
         .ldr-modal-body { padding: 1.75rem; overflow-y: auto; flex: 1; }
@@ -299,6 +309,7 @@
                 <div class="ldr-modal-divider"></div>
                 <div class="ldr-modal-name" id="ldrName"></div>
                 <div class="ldr-modal-role" id="ldrRole"></div>
+                <div class="ldr-modal-email" id="ldrEmail"></div>
             </div>
             <div class="ldr-modal-body ldr-clearfix" id="ldrBody"></div>
         </div>
@@ -402,6 +413,7 @@
                     initials: (r[3] || '').trim(),
                     name:     (r[1] || '').trim(),
                     role:     (r[2] || '').trim(),
+                    email:    (r[4] || '').trim(),
                     photo:    driveToEmbed((r[5] || '').trim()),
                     bio:      bio.length ? bio : ['No bio provided.']
                 };
@@ -554,6 +566,13 @@
 
             document.getElementById("ldrName").textContent = p.name;
             document.getElementById("ldrRole").textContent = p.role;
+            const emailEl = document.getElementById("ldrEmail");
+            if (p.email) {
+                emailEl.innerHTML = `<a href="mailto:${p.email}">${p.email}</a>`;
+                emailEl.style.display = 'block';
+            } else {
+                emailEl.style.display = 'none';
+            }
 
             let bodyHTML = "";
             if (ldrLayoutMode === "portrait") {
